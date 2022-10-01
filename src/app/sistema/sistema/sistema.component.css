@@ -1,0 +1,57 @@
+mat-drawer-container{
+    height: 100vh;
+}
+
+mat-drawer{
+    background-color: #263238;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.toogle-nav{
+    display: flex;
+    justify-content: space-between;
+    transition: all .9s ease;
+    min-height: 60px;
+}
+
+.toogle-nav button{
+    font-size: 1.3em;
+    font-weight: 100;
+}
+
+.btn-close i{
+    font-size: 1.1em;
+    padding: 5px;
+}
+
+.item-menu-link{
+    padding: 10px;
+}
+
+a i{
+    font-size: 1.5em;
+}
+a span{
+    margin-left: 20px;
+}
+a{
+    display: block;
+    border-left: 5px solid transparent;
+    margin-top: 5px;
+}
+
+a:hover{
+    border-left: 5px solid orange;
+    /* background: linear-gradient(to right, #263238 20%, #263238 40%, #CCCCCC); */
+    background: linear-gradient(to right, #263238, #b8b8b8);
+}
+a{
+    padding: 5px;
+}
+
+.link-ativo{
+    border-left: 5px solid red;
+    /* background: linear-gradient(to right, #263238 20%, #263238 40%, #CCCCCC); */
+    background: linear-gradient(to right, #263238, #b8b8b8);
+}

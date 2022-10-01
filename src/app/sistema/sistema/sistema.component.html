@@ -1,0 +1,23 @@
+<mat-drawer-container autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+        <div class="toogle-nav">
+            <button mat-button *ngIf="menuCollapsed" (click)="toogleNav()">Menu</button>
+            <button mat-button *ngIf="menuCollapsed" class="btn-close" (click)="closeNav()" @rotate><i class="fal fa-times"></i></button>
+            <button mat-button *ngIf="!menuCollapsed" (click)="toogleNav()"><i class="fas fa-ellipsis-h"></i></button>
+        </div>
+        <ul class="barra-navegacao">
+            <li class="navegacao-item" *ngFor="let data of menu">
+                <a [routerLink]="data.routelink" class="item-menu-link" routerLinkActive="link-ativo">
+                    <i class="icon-menu" [class]="data.icone"></i>
+                    <span class="legenda-menu" *ngIf="menuCollapsed">{{data.legenda}}</span>
+                </a>
+            </li>
+        </ul>
+    </mat-drawer>
+
+    <div>
+        <!-- <button type="button" mat-button (click)="drawer.toggle()">Abrir / Fechar</button>-->
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-drawer-container>
