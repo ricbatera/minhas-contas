@@ -23,3 +23,8 @@ mat-card-header{
 mat-form-field{
     width: 99%;
 }
+
+/* tabela */
+table{
+    width: 80%;
+}
