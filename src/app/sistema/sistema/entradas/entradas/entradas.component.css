@@ -1,0 +1,30 @@
+.container{
+  margin: 10px;
+  display: flex;
+  gap: 20px;
+}
+.lado-a{
+  flex: 1;
+}
+.lado-b{
+  flex: 2;
+}
+
+mat-card-header{
+  position: relative;
+}
+.icone{
+  position: absolute;
+  font-size: 3em;
+  color: rgba(0, 0 , 0, .5);
+  right: 10px;
+}
+
+mat-form-field{
+  width: 99%;
+}
+
+/* tabela */
+table{
+  width: 80%;
+}
