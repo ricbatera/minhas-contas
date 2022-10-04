@@ -14,6 +14,11 @@ import {MatTableModule} from '@angular/material/table';
 import { NovaSaidaComponent } from './nova-saida/nova-saida.component';
 import { ListaSaidasComponent } from './lista-saidas/lista-saidas.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
+
+// outras libs
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+
 
 
 @NgModule({
@@ -31,7 +36,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatFormFieldModule,
     MatButtonModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule,
+    CurrencyMaskModule
   ]
 })
 export class SaidasModule { }
