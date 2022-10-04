@@ -24,7 +24,18 @@ mat-form-field{
   width: 99%;
 }
 
+button i{
+  margin-right: 5px;
+}
+
+button{
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
 /* tabela */
 table{
   width: 80%;
 }
+
+
