@@ -32,8 +32,10 @@ export class NovaEntradaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  salvar(){
+  salvar(){}
 
+  navigateToSalvarEntrada(): void {
+    console.log('Sua Despesa Foi Salva')
   }
 
   toogleComboCartoes(){
