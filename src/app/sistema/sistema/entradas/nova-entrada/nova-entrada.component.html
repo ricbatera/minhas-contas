@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-header>
+      <mat-card-title>Cadastro de Entradas </mat-card-title>
+      <mat-card-subtitle>Cadastre Sua Entrada</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="linha">
+          <mat-form-field appearance="outline">
+              <mat-label>Descrição</mat-label>
+              <input matInput formControlName="nome">
+              <mat-error *ngIf="!form.controls['nome'].valid">Campo <strong>obrigatório</strong></mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Quantidade de Parcelas</mat-label>
+              <input type="number" matInput formControlName="qtdeParcelas">
+              <mat-error *ngIf="!form.controls['qtdeParcelas'].valid">
+                  Campo <strong>obrigatório</strong>
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Valor</mat-label>
+              <input type="text" matInput currencyMask formControlName="valor">
+              <mat-error *ngIf="!form.controls['valor'].valid">
+                  Campo <strong>obrigatório</strong>
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Vencimento</mat-label>
+              <input type="date" matInput formControlName="dataVencimento">
+              <mat-error *ngIf="!form.controls['dataVencimento'].valid">
+                  Campo <strong>obrigatório</strong>
+              </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="linha">
+          <mat-form-field appearance="outline">
+              <mat-label>Observações</mat-label>
+              <input matInput formControlName="obs">
+              <mat-error *ngIf="!form.controls['obs'].valid">Campo <strong>obrigatório</strong></mat-error>
+          </mat-form-field>
+      </div>
+      <div class="linha">
+          <mat-form-field appearance="outline">
+              <mat-label>Formas de Pagamento</mat-label>
+              <mat-select formControlName="meioPagto" (selectionChange)="toogleComboCartoes()">
+                  <mat-option value="cartao">Cartão de Crédito</mat-option>
+                  <mat-option value="debito">Débito / Boleto</mat-option>
+              </mat-select>
+              <mat-error *ngIf="!form.controls['meioPagto'].valid">Campo <strong>obrigatório</strong></mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+              <mat-label>Formas de Pagamento</mat-label>
+              <mat-select formControlName="cartaoSelecionado" [disabled]="isCartao">
+                  <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.conta}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+
+      <div class="linha">
+          <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"></i> Salvar nova Entrada</button>
+      </div>
+  </form>
+</mat-card>

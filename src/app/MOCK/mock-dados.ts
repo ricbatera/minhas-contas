@@ -12,7 +12,12 @@ export const mockDados = {
         return[
             {id:1, descricao: "Conta  de Luz", obs: "Conta de luz anual.", parcela: {id: 1, dataVencimento: "2022-10-28", dataPagamento: null, status: "Aberto", meioPagto: "Boleto / Débito",  valor:321.15, valorPago: null}},
             {id:2, descricao: "Internet", obs: "Live TIM internet e telefone.", parcela: {id: 10, dataVencimento: "2022-10-28", dataPagamento: null, status: "Aberto", meioPagto: "Boleto / Débito",  valor:199.3, valorPago: null}},
-            
+
         ]
+    },
+
+    getListaEntrada(){[
+      {}
+    ]
     }
 }
