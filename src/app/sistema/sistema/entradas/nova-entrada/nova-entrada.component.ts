@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mockCartoes } from 'src/app/MOCK/mock-cartoes';
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-nova-entrada',
@@ -15,6 +16,7 @@ export class NovaEntradaComponent implements OnInit {
   form: FormGroup;
 
   constructor(
+    private router: Router ,
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
@@ -35,7 +37,7 @@ export class NovaEntradaComponent implements OnInit {
   salvar(){}
 
   navigateToSalvarEntrada(): void {
-    console.log('Sua Despesa Foi Salva')
+this.router.navigate(['/src/app/sistema/sistema/entradas/lista-entradas'])
   }
 
   toogleComboCartoes(){
