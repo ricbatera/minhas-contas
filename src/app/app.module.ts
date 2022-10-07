@@ -20,7 +20,7 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     BrowserAnimationsModule,
     SistemaModule,
-    
+
   ],
   providers: [
     {provide: LOCALE_ID, useValue:'pt'}

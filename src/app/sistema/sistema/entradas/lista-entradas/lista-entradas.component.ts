@@ -19,7 +19,7 @@ throw new Error('Method not implemented.');
 }
   mock = mockDados; // dados mockados para testes
   form: FormGroup;
-  colunasTabela: string[] = ['id', 'descricao', 'valor', 'parcela','prvisaoPagto', 'observacao', 'acoes'];
+  colunasTabela: string[] = ['id', 'valor', 'descricao', 'parcela','prvisaoPagto', 'observacao', ''];
   fonteListaEntradas = new MatTableDataSource(this.mock.getListaEntrada());
 
   @ViewChild(MatSort) sort!: MatSort;
