@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { mockCartoes } from './../../../../MOCK/mock-cartoes';
+import { mockDados } from './../../../../MOCK/mock-dados';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { MatSort, Sort } from '@angular/material/sort';
@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./entradas.component.css']
 })
 export class EntradasComponent implements OnInit {
-  mock = mockCartoes; // dados mockados para testes
+  mock = mockDados; // dados mockados para testes
     form: FormGroup;
     colunasTabela: string[] = ['conta', 'descricao', 'acao'];
     fonteCartoes = new MatTableDataSource(this.mock.getCartoes());

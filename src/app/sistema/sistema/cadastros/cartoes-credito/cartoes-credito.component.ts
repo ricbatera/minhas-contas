@@ -1,4 +1,4 @@
-import { mockCartoes } from './../../../../MOCK/mock-cartoes';
+import { mockDados } from './../../../../MOCK/mock-dados';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
@@ -11,9 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./cartoes-credito.component.css']
 })
 export class CartoesCreditoComponent implements OnInit {
-    mock = mockCartoes; // dados mockados para testes
+    mock = mockDados; // dados mockados para testes
     form: FormGroup;
-    colunasTabela: string[] = ['conta', 'descricao', 'acao'];
+    colunasTabela: string[] = ['id', 'descricao', 'obs'];
     fonteCartoes = new MatTableDataSource(this.mock.getCartoes());
 
     @ViewChild(MatSort) sort!: MatSort;

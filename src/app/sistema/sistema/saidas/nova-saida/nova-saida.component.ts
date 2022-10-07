@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { mockCartoes } from 'src/app/MOCK/mock-cartoes';
+import { mockDados } from 'src/app/MOCK/mock-dados';
 
 @Component({
   selector: 'app-nova-saida',
@@ -9,14 +9,14 @@ import { mockCartoes } from 'src/app/MOCK/mock-cartoes';
 })
 export class NovaSaidaComponent implements OnInit {
 
-  listaCartoes = mockCartoes.getCartoes();
+  listaCartoes = mockDados.getCartoes();
   isCartao = true;
 
   form: FormGroup;
 
   constructor(
     private fb: FormBuilder
-  ) { 
+  ) {
     this.form = this.fb.group({
       id:[null],
       nome:[null, Validators.required],
@@ -33,17 +33,8 @@ export class NovaSaidaComponent implements OnInit {
   }
 
   salvar(){
-    
+
   }
 
-  toogleComboCartoes(){
-    console.log('foi')
-    if(this.form.controls['meioPagto'].value != "cartao"){
-      this.isCartao = true;
-      this.form.controls['cartaoSelecionado'].reset();
-    }else{
-      this.isCartao = false
-    }
-  }
-
+  toogleComboCartoes(){}
 }

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { EntradasComponent } from './entradas/entradas.component';
 
 //Angular material
@@ -14,6 +14,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { NovaEntradaComponent } from './nova-entrada/nova-entrada.component';
 import { ListaEntradasComponent } from './lista-entradas/lista-entradas.component';
+
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+
+
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import { ListaEntradasComponent } from './lista-entradas/lista-entradas.componen
     MatTableModule,
     MatDividerModule,
     MatSelectModule,
+    CurrencyMaskModule
   ]
 })
 export class EntradasModule { }
