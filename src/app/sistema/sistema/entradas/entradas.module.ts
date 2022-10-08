@@ -46,7 +46,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     FormsModule,
     HttpClientModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class EntradasModule { }
