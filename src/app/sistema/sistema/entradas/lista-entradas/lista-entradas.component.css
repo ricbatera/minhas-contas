@@ -45,3 +45,15 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description-attribution {
   opacity: 0.5;
 }
+
+.edit {
+  margin-right: 10px;
+}
+
+.edit > i{
+  color: #d9cd26;
+}
+
+.delete > i {
+  color: #e35e6b;
+}

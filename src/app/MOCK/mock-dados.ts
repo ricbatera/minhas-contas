@@ -22,12 +22,20 @@ export const mockDados = {
       { id: 2, descricao: "Internet", obs: "Live TIM internet e telefone.", parcela: { id: 10, dataVencimento: "2022-10-28", dataPagamento: null, status: "Aberto", meioPagto: "Boleto / Débito", valor: 199.3, valorPago: null } },
     ]
   },
-  getListaEntrada(){
-    return[
-      {id: 1, descricao:"Faculade", observacao:"faculdade mês de Outubro", valor: "99,99", prvisaoPagto: "2022-10-28",  parcela:"1 de 12"},
-      {id: 2, descricao:"Faculade", observacao:"faculdade mês de Novembro", valor: "99,99",  prvisaoPagto: "2022-11-28", parcela:"2 de 12"}
-    ]
+    getListaEntrada() {
+      return [
+        { id: 1, descricao: "Faculade", observacao: "faculdade mês de Outubro", valor: "99,99", prvisaoPagto: "2022-10-28", parcela: "1 de 12" },
+        { id: 2, descricao: "Casas Baiha", observacao: "faculdade mês de Novembro", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "2 de 12" },
+        { id: 3, descricao: "Boleto Bradesco", observacao: "faculdade mês de Novembro", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "3 de 12" },
+        { id: 4, descricao: "Boleto Lojas Cem", observacao: "faculdade mês de Novembro", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "4 de 12" },
+        { id: 5, descricao: "Conta Mensal", observacao: "Conta de Internet", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "5 de 12" },
+        { id: 6, descricao: "Conta Mensal", observacao: "Conta de Agúas", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "6 de 12" },
+        { id: 7, descricao: "Conta Mensal", observacao: "Conta de Luz", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "7 de 12" },
+        { id: 8, descricao: "Mercado Livre", observacao: "Compra de uma Jaqueta", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "8 de 12" },
+        { id: 9, descricao: "Mercado Livre", observacao: "Compra de um Fone de Ouvido", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "9 de 12" },
+        { id: 10, descricao: "Mercado Livre", observacao: "Compra de um Teclado", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "10 de 12" },
+      ]
+    }
   }
-}
 
 
