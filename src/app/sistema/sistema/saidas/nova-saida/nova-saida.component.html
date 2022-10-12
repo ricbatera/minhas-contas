@@ -57,7 +57,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Formas de Pagamento</mat-label>
                 <mat-select formControlName="cartaoSelecionado" [disabled]="isCartao">
-                    <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.conta}}</mat-option>
+                    <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.cartao}}</mat-option>
                 </mat-select>
                 <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->
             </mat-form-field>

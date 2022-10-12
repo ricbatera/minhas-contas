@@ -5,6 +5,12 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { mockDados } from 'src/app/MOCK/mock-dados';
 
+export interface conta{
+  id:any,
+  conta: string,
+  descricao: string
+}
+
 @Component({
   selector: 'app-contas-bancarias',
   templateUrl: './contas-bancarias.component.html',
@@ -13,17 +19,16 @@ import { mockDados } from 'src/app/MOCK/mock-dados';
 export class ContasBancariasComponent implements OnInit {
   mock = mockDados; // dados mockados para testes
   form: FormGroup;
-  colunasTabela: string[] = ['conta', 'descricao', 'acao'];
-  fonteDados = new MatTableDataSource(this.mock.getContas());
-
+  colunasTabela: string[] = ["id",'conta', 'descricao', 'acao'];
+  fonteDados = new MatTableDataSource<conta>(this.mock.getContas());
+  
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
-    private _liveAnnouncer: LiveAnnouncer
-  ) { 
+  ) {    
     this.form = this.fb.group({
-      id:[null],
+      id1:[null],
       nome:[null, Validators.required],
       descricao:[null, Validators.required]
     })
@@ -32,8 +37,9 @@ export class ContasBancariasComponent implements OnInit {
   ngAfterViewInit() {
     this.fonteDados.sort = this.sort;
   }
-
+  
   ngOnInit(): void {
+    console.log(this.fonteDados);
   }
 
   salvar(){
@@ -46,17 +52,6 @@ export class ContasBancariasComponent implements OnInit {
     console.log(this.mock.getContas())
   
   }
-
-  announceSortChange(sortState: any) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Ordenando ${sortState.direction}fim`);
-    } else {
-      this._liveAnnouncer.announce('Ordenação limpa');
-    }
-  }
+  
 
 }

@@ -24,7 +24,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 export class ListaEntradasComponent {
   mock = mockDados;
   form: FormGroup;
-  columnsToDisplay: string[] = ['id', 'descricao', 'valor', 'parcela', 'observacao', ];
+  columnsToDisplay: string[] = ['descricao', 'valor', 'parcela', 'observacao', 'id'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: null | undefined;
   fonteListaEntradas = new MatTableDataSource(this.mock.getListaEntrada());
