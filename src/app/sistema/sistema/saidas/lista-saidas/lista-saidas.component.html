@@ -1,1 +1,71 @@
-<p>lista-saidas works!</p>
+<table mat-table [dataSource]="lista" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Descrição
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Status
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.parcela.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Data Pagamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Data do Vencimento
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.parcela.dataVencimento | date: 'fullDate'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="colunasTabela.length">
+            <div class="element-detalhes" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="icone-grande">
+                    <i class="fal fa-box-check" *ngIf="element.parcela.status === 'Pago'" style="color: #00b248;"></i>
+                    <i class="fal fa-box-usd" *ngIf="element.parcela.status === 'Aberto'" style="color: #3f51b5;"></i>
+                    <i class="fal fa-box-fragile" *ngIf="element.parcela.status === 'Atrasado'"
+                        style="color: #f44336;"></i>
+                    <span>{{element.parcela.parcela}}</span>
+                </div>
+                <div class="descricao-detalhes">
+                    <div class="lado-a">
+                        <h2 style="margin-bottom: 0;">{{element.descricao}}</h2>
+                        <p>{{element.obs}}</p>
+                    </div>
+                    <div class="lado-b">
+                        <h2 style="margin-bottom: 0;"><strong>Detalhes do Vencimento</strong></h2>
+                        <h4 style="margin-bottom: 0;">Vencimento: <strong>{{element.parcela.dataVencimento | date:
+                                'shortDate'}}</strong></h4>
+                        <h4 style="margin-bottom: 0;">Valor: <strong>{{element.parcela.valor | currency:'BRL'}}</strong>
+                        </h4>
+                    </div>
+                    <div>
+                        <h2 style="margin-bottom: 0;"><strong>Detalhes do Pagamento</strong></h2>
+                        <h4 style="margin-bottom: 0;">Pago em: <strong>{{element.parcela.dataPagamento | date:
+                                'shortDate'}}</strong></h4>
+                        <h4 style="margin-bottom: 0;">Valor: <strong>{{element.parcela.valorPago |
+                                currency:'BRL'}}</strong></h4>
+                    </div>
+                </div>
+                <div class="descricao-acoes">
+                    <div>
+                        <h2 style="margin-bottom: 0;"><strong>Ações</strong></h2>
+                    </div>
+                    <div class="botoes-acao">
+                        <button mat-raised-button>Pagar</button>
+                        <button mat-raised-button color="primary">Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
+    <tr mat-row *matRowDef="let element; columns: colunasTabela;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
