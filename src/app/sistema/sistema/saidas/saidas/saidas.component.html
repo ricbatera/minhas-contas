@@ -1,8 +1,22 @@
-<mat-tab-group mat-align-tabs="start">
+<!-- <mat-tab-group mat-align-tabs="start">
     <mat-tab label="Nova Saída">
         <app-nova-saida></app-nova-saida>
     </mat-tab>
     <mat-tab label="Lista de Saídas">
         <app-lista-saidas></app-lista-saidas>
+    </mat-tab>    
+    <mat-tab label="Detalhes">
+        Detalhes
+    </mat-tab>    
+</mat-tab-group> -->
+<mat-tab-group mat-align-tabs="start" [selectedIndex]="tab$ |async " (selectedIndexChange)="setaTab($event)">
+    <mat-tab label="Nova Saída">
+        <app-nova-saida></app-nova-saida>
+    </mat-tab>
+    <mat-tab label="Lista de Saídas">
+        <app-lista-saidas></app-lista-saidas>
+    </mat-tab>    
+    <mat-tab label="Detalhes">
+        Detalhes
     </mat-tab>    
 </mat-tab-group>

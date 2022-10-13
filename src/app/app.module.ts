@@ -8,6 +8,8 @@ import { SistemaModule } from './sistema/sistema.module';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.reducer';
 
 registerLocaleData(ptBr);
 
@@ -20,6 +22,7 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     BrowserAnimationsModule,
     SistemaModule,
+    StoreModule.forRoot({app: appReducer}, {}),
 
   ],
   providers: [

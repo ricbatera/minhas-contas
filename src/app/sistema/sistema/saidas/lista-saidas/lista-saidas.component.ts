@@ -1,6 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { mockDados } from 'src/app/MOCK/mock-dados';
+import { IAppState, indiceTab } from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-lista-saidas',
@@ -19,9 +21,15 @@ export class ListaSaidasComponent implements OnInit {
   colunasTabela = ['descricao', 'status', 'Data Pagamento'];
   expandedElement!: dados | null;
 
-  constructor() { }
+  constructor(
+    private store:Store<{app: IAppState}>
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  abreDetalhes(){
+    this.store.dispatch(indiceTab({payload: 2}))
   }
 
 }
