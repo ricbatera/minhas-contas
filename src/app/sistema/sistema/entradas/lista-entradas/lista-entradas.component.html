@@ -25,7 +25,7 @@
           <div class="element-detalhes" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
               <div class="icone-grande">
                   <i class="fas fa-usd-square" *ngIf="element.parcela.status === 'Recebido'" style="color: #00b248;"></i>
-                  <i class="fas fa-sad-tear" *ngIf="element.parcela.status === 'Pendente'" style="color: #fc0000;"></i>
+                  <i class="fas fa-sad-tear" *ngIf="element.parcela.status === 'Pendente'" style="color: #0015fc;"></i>
                   <i class="fas fa-sad-cry" *ngIf="element.parcela.status === 'Atrasado'" style="color: #000000;"></i>
                   <span>{{element.parcela.parcela}}</span>
               </div>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="botoes-acao">
                     <button mat-raised-button  *ngIf="element.parcela.status !=  'Recebido'"   >Pagar</button>
-                    <button mat-raised-button color="primary">Detalhes</button>
+                    <button mat-raised-button color="primary" (click)="abreDetalhes(element.id)">Detalhes</button>
                   </div>
               </div>
           </div>

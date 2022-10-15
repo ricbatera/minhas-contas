@@ -1,0 +1,31 @@
+mat-card{
+    width: 95%;
+    margin: 10px auto;
+  }
+  
+  mat-form-field{
+    width: 100%;
+  }
+  
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .linha{
+    display: flex;
+    gap: 10px;
+  }
+  .linha button i{
+    margin-right: 5px;
+  }
+  
+  .linha button{
+    font-size: 1.2em;
+    font-weight: 400;
+  }
+  
+  .ul > li{
+    font-size: 1,2rem ;
+  }
