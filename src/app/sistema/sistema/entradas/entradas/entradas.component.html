@@ -1,4 +1,4 @@
-  <mat-tab-group mat-align-tabs="start">
+  <mat-tab-group  mat-align-tabs="start" [selectedIndex]="tab$ | async " (selectedIndexChange)="setaTab($event)">
     <mat-tab label="Nova Entrada">
 <app-nova-entrada></app-nova-entrada>
     </mat-tab>

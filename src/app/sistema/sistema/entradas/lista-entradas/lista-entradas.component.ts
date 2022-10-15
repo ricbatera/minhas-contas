@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { mockDados } from 'src/app/MOCK/mock-dados';
-import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
+import { IAppState, indiceTab, indiceTabEntrada, setaIdEntrada, setaIdSaida } from 'src/app/store/app.reducer';
 import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
 
 
@@ -29,6 +29,11 @@ export class ListaEntradasComponent {
     private store:Store<{app: IAppState}>
   ) { }
   ngOnInit(): void {
+  }
+
+  abreDetalhes(idEntrada: number){
+    this.store.dispatch(indiceTabEntrada({payload: 2}));
+    this.store.dispatch(setaIdEntrada({payload:idEntrada}));
   }
 }
 

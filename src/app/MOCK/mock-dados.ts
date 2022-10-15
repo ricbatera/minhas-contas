@@ -1,3 +1,4 @@
+import { EntradaDetalhes } from "../model/entrada-detalhes"
 import { SaidaDetalhes } from "../model/saida-detalhes"
 
 export const mockDados = {
@@ -44,6 +45,18 @@ export const mockDados = {
       { id: 1, descricao: "Faculdade", observacao: "Faculdade", parcela: { id: 1, previsoaRecebimento: "2022-12-30", valoReceber: 100.00, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Pendente", conta: null } },
       { id: 1, descricao: "Notebook Mac Pro", observacao: "Compra de um note pelas lojas Casa Bahia ", parcela: { id: 1, previsoaRecebimento: "2022-8-30", valoReceber: 11210.34, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Atrasado", conta: null } },
     ]
+  },
+  getEntradaDetalhes(){
+    const  payload: EntradaDetalhes = 
+    {
+      id: 1, descricao: "Guarda Roupa", observacao: "Guarda roupa compradado de presente de casamento", parcela:[
+       { id: 1, status: "Pago", previsoaRecebimento: new Date ('2022-11-15'), dataRecebida: new Date ('2022-11-20'), valorRecebido: 2000.00, valoReceber: 7000.00, conta: { id: 2, conta: "Santander", descricao: "Conta Santander", ativo: true } },
+       { id: 2, status: "Pendente", previsoaRecebimento: new Date ('2022-12-15'), dataRecebida:null, valorRecebido: null, valoReceber: 7000.00, conta: null},
+       { id: 3, status: "Pendente", previsoaRecebimento: new Date ('2022-13-15'), dataRecebida:null, valorRecebido: null, valoReceber: 7000.00, conta: null},
+     
+      ]
+      
+    }
+    return payload;
   }
-
 }
