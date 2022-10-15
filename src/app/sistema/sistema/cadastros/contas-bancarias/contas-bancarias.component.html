@@ -49,7 +49,7 @@
                     </th>
                     <td mat-cell *matCellDef="let item"> {{item.conta}} </td>
                 </ng-container>
-                
+
                 <ng-container matColumnDef="descricao">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Descrição
@@ -61,10 +61,23 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Ação
                     </th>
-                    <td mat-cell *matCellDef="let item"> {{item.acao}} </td>
+                    <td mat-cell *matCellDef="let item"> {{item.acao}}
+                      <div class="acao">
+                        <a routerLink="" class="edit">
+                          <i class="material-icons ">
+                            edit
+                          </i>
+                        </a>
+                        <a routerLink="" class="delete">
+                          <i class="material-icons ">
+                            delete
+                          </i>
+                        </a>
+                    </div>
+                    </td>
                 </ng-container>
 
-                
+
 
                 <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>

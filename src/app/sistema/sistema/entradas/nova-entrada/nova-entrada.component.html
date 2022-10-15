@@ -22,14 +22,14 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Valor</mat-label>
-            <input type="text" matInput currencyMask  formControlName="valor">
+            <input type="text" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }" formControlName="valor">
             <mat-error *ngIf="!form.controls['valor'].valid">
                 Campo <strong>obrigatório</strong>
             </mat-error>
         </mat-form-field>
 
           <mat-form-field appearance="outline">
-              <mat-label>Data Prevista De Recebimento</mat-label>
+              <mat-label>Prevista De Recebimento</mat-label>
               <input type="date" matInput formControlName="dataRecebimento">
               <mat-error *ngIf="!form.controls['dataRecebimento'].valid">
                   Campo <strong>obrigatório</strong>

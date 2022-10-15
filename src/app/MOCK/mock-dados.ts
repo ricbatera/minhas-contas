@@ -4,10 +4,10 @@ export const mockDados = {
   getContas() {
     return [
       { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true },
-      { id: 2, conta: "Santander", descricao: "Conta Santander" , ativo: true},
-      { id: 3, conta: "Nubank", descricao: "Conta Itaú Nubank" , ativo: true},
-      { id: 4, conta: "C6Bank", descricao: "Conta C6Bank" , ativo: true},
-      { id: 5, conta: "bala", descricao: "Bala doce" , ativo: true},
+      { id: 2, conta: "Santander", descricao: "Conta Santander", ativo: true },
+      { id: 3, conta: "Nubank", descricao: "Conta Itaú Nubank", ativo: true },
+      { id: 4, conta: "C6Bank", descricao: "Conta C6Bank", ativo: true },
+      { id: 5, conta: "bala", descricao: "Bala doce", ativo: true },
     ]
   },
   getCartoes() {
@@ -25,28 +25,25 @@ export const mockDados = {
       { id: 3, descricao: "Celular", obs: "Contade celular claro.", parcela: { id: 11, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", status: "Pago", meioPagto: "Boleto / Débito", valor: 199.3, valorPago: 200, parcela: "2 de 3" } },
     ]
   },
+
+  getSaidaDetalhes() {
+    const payload: SaidaDetalhes =
+    {
+      id: 1, nome: 'Game Stick', obs: 'Compra de game stick no Aliexpress', meioPagamento: 'cartao', cartao: { id: 2, cartao: "NuBank", descricao: "Cartão Credito", ativo: true },
+      parcela: [
+        { id: 1, dataPagamento: new Date(2022 - 10 - 15), dataVencimento: new Date(2022 - 10 - 15), situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null },
+        { id: 2, dataPagamento: null, dataVencimento: new Date(2022 - 11 - 15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
+        { id: 3, dataPagamento: null, dataVencimento: new Date(2022 - 12 - 15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
+      ]
+    }
+    return payload;
+  },
   getListaEntrada() {
     return [
-      { id: 1, descricao: "Salário", observacao: "salario da Alma Viva", valor: 1121.35, prvisaoPagto: "2022-10-28", parcela: "1 de 12" },
-      { id: 2, descricao: "Concerto Note Bia", observacao: "troca de memória do note da bianca", valor: 399.99, prvisaoPagto: "2022-11-28", parcela: "2 de 12" },
-      { id: 3, descricao: "Ponto Nivelo", observacao: "Pontos referente ao mês de setembro", valor: 899.80, prvisaoPagto: "2022-11-28", parcela: "3 de 12" },
-      { id: 4, descricao: "Bob", observacao: "dineiro que emprestei pro BOB", valor: 99.99, prvisaoPagto: "2022-11-28", parcela: "4 de 12" },
-      { id: 5, descricao: "Geladeira Mãe", observacao: "Parcela da geladeira que tirei pra mãe", valor: 239, prvisaoPagto: "2022-11-28", parcela: "5 de 12" },
-      // { id: 6, descricao: "Conta Mensal", observacao: "Conta de Agúas", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "6 de 12" },
-      // { id: 7, descricao: "Conta Mensal", observacao: "Conta de Luz", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "7 de 12" },
-      // { id: 8, descricao: "Mercado Livre", observacao: "Compra de uma Jaqueta", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "8 de 12" },
-      // { id: 9, descricao: "Mercado Livre", observacao: "Compra de um Fone de Ouvido", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "9 de 12" },
-      // { id: 10, descricao: "Mercado Livre", observacao: "Compra de um Teclado", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "10 de 12" },
+      { id: 1, descricao: "Salário", observacao: "Salario AlmaViva", parcela: { id: 1, previsoaRecebimento: "2022-10-30", valoReceber: 1121.35, dataRecebida: "2022-10-29", valorRecebido: 1121.35, parcela: "1 de 24", status: "Recebido", conta: "Santander" } },
+      { id: 1, descricao: "Faculdade", observacao: "Faculdade", parcela: { id: 1, previsoaRecebimento: "2022-12-30", valoReceber: 100.00, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Pendente", conta: null } },
+      { id: 1, descricao: "Notebook Mac Pro", observacao: "Compra de um note pelas lojas Casa Bahia ", parcela: { id: 1, previsoaRecebimento: "2022-8-30", valoReceber: 11210.34, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Atrasado", conta: null } },
     ]
-  },
-  getSaidaDetalhes(){
-    const payload : SaidaDetalhes = 
-      {id: 1, nome: 'Game Stick', obs: 'Compra de game stick no Aliexpress', meioPagamento: 'cartao', cartao: { id: 2, cartao: "NuBank", descricao: "Cartão Credito", ativo: true } ,
-    parcela:[
-      {id: 1, dataPagamento: new Date(2022-10-15), dataVencimento: new Date(2022-10-15), situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null},
-      {id: 2, dataPagamento: null, dataVencimento: new Date(2022-11-15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null},
-      {id: 3, dataPagamento: null, dataVencimento: new Date(2022-12-15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null},
-    ]}
-    return payload;
   }
+
 }

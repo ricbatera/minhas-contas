@@ -31,7 +31,14 @@ export class NovaEntradaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  salvar() { }
+  salvar() {  if (this.form.valid) {
+    alert("Salvando...")
+  } else {
+    alert('há erros no formulário')
+  }
+  // console.log(this.form.value)
+
+}
 
   toogleComboCartoes() {
     console.log('foi')
