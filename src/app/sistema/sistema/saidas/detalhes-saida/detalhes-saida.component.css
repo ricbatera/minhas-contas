@@ -21,3 +21,28 @@ mat-card{
 mat-form-field{
     width: 100%;
 }
+
+mat-card-subtitle{
+    font-weight: 900;
+}
+
+.content-detalhes{
+    width: 100%;
+}
+.content-detalhes ul{
+   font-size: 1.1em;
+   display: flex;
+   gap: 10px;
+   justify-content: space-between;
+}
+.content-detalhes ul i{
+   font-size: 1.5em;   
+}
+
+.subtitulos{
+    margin: 30px 0 0 0;
+}
+
+table{
+    width: 60%;
+}

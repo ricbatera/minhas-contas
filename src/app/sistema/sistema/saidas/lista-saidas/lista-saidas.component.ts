@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { mockDados } from 'src/app/MOCK/mock-dados';
 import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
@@ -17,15 +19,20 @@ import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
   ],
 })
 export class ListaSaidasComponent implements OnInit {
-  lista = mockDados.getListaSaidas();
+  lista =new MatTableDataSource(mockDados.getListaSaidas());
   colunasTabela = ['descricao', 'status', 'Data Pagamento'];
   expandedElement!: dados | null;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private store:Store<{app: IAppState}>
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.lista.sort = this.sort;
   }
 
   abreDetalhes(idSaida: number){

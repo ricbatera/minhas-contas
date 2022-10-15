@@ -31,9 +31,9 @@ export const mockDados = {
     {
       id: 1, nome: 'Game Stick', obs: 'Compra de game stick no Aliexpress', meioPagamento: 'cartao', cartao: { id: 2, cartao: "NuBank", descricao: "Cartão Credito", ativo: true },
       parcela: [
-        { id: 1, dataPagamento: new Date(2022 - 10 - 15), dataVencimento: new Date(2022 - 10 - 15), situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null },
-        { id: 2, dataPagamento: null, dataVencimento: new Date(2022 - 11 - 15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
-        { id: 3, dataPagamento: null, dataVencimento: new Date(2022 - 12 - 15), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
+        { id: 1, dataPagamento: new Date('2022-10-15'), dataVencimento: new Date('2022-10-15'), situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null },
+        { id: 2, dataPagamento: null, dataVencimento: new Date('2022-11-15'), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
+        { id: 3, dataPagamento: null, dataVencimento: new Date('2022-12-15'), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null },
       ]
     }
     return payload;
