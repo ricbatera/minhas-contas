@@ -1,9 +1,11 @@
-import { mockDados } from 'src/app/MOCK/mock-dados';
+import { dados } from './../../saidas/lista-saidas/lista-saidas.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger, } from '@angular/animations';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { mockDados } from 'src/app/MOCK/mock-dados';
+import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
+import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
 
 
 @Component({
@@ -14,40 +16,20 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
+      transition( 'expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class ListaEntradasComponent {
-  mock = mockDados;
-  form: FormGroup;
-  columnsToDisplay: string[] = ['descricao', 'valor', 'parcela', 'observacao', 'id'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: null | undefined;
-  fonteListaEntradas = new MatTableDataSource(this.mock.getListaEntrada());
-
-  listaEntrada = mockDados.getListaEntrada();
-  isEntrada = true;
+  lista = mockDados.getListaEntrada();
+  colunasEntradas = [ 'descricao', 'status', 'data Recebida'];
+  expandedElement!: itemListaEntrada | null;
 
   constructor(
-    private fb: FormBuilder,
-      private _liveAnnouncer: LiveAnnouncer
-  ) {
-    this.form = this.fb.group({
-      id:[null],
-      valor:[null, Validators.required],
-      descricao:[null, Validators.required],
-      parcela:[null, Validators.required],
-      prvisaoPagto:[null, Validators.required],
-      observacao:[null, Validators.required]
-    })
-   }
-
+    private store:Store<{app: IAppState}>
+  ) { }
   ngOnInit(): void {
   }
-
-  toogleComboEntrada() { }
 }
+
+

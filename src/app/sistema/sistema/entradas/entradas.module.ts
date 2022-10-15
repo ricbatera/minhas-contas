@@ -20,6 +20,7 @@ import { NovaEntradaComponent } from './nova-entrada/nova-entrada.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.component';
 
 
 
@@ -27,7 +28,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
   declarations: [
     EntradasComponent,
     NovaEntradaComponent,
-    ListaEntradasComponent
+    ListaEntradasComponent,
+    EntradaDetalheComponent
   ],
   imports: [
     CommonModule,
