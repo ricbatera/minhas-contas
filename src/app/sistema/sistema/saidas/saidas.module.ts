@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 // outras libs
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { DetalhesSaidaComponent } from './detalhes-saida/detalhes-saida.component';
 
 
 
@@ -25,7 +26,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
   declarations: [
     SaidasComponent,
     NovaSaidaComponent,
-    ListaSaidasComponent
+    ListaSaidasComponent,
+    DetalhesSaidaComponent
   ],
   imports: [
     CommonModule,

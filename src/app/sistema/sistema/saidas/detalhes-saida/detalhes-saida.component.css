@@ -1,0 +1,23 @@
+.titulo{
+    color: #3f51b5;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.linha{
+    display: flex;
+    gap: 10px;
+}
+
+mat-card{
+    width: 95%;
+    margin: 10px auto;
+}
+
+mat-form-field{
+    width: 100%;
+}

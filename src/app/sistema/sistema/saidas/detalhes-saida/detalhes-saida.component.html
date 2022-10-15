@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Detalhes da Saída: <span class="titulo">Conta de Luz</span></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="salvar()">
+            <div class="linha">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descrição</mat-label>
+                    <input matInput formControlName="nome">
+                    <mat-error *ngIf="!form.controls['nome'].valid">Campo <strong>obrigatório</strong></mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

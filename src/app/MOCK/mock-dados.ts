@@ -25,11 +25,11 @@ export const mockDados = {
   },
     getListaEntrada() {
       return [
-        { id: 1, descricao: "Salário", observacao: "salario da Alma Viva", valor: "1121,35,99", prvisaoPagto: "2022-10-28", parcela: "1 de 12" },
-        { id: 2, descricao: "Concerto Note Bia", observacao: "troca de memória do note da bianca", valor: "399,99", prvisaoPagto: "2022-11-28", parcela: "2 de 12" },
-        { id: 3, descricao: "Ponto Nivelo", observacao: "Pontos referente ao mês de setembro", valor: "899,80", prvisaoPagto: "2022-11-28", parcela: "3 de 12" },
-        { id: 4, descricao: "Bob", observacao: "dineiro que emprestei pro BOB", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "4 de 12" },
-        { id: 5, descricao: "Geladeira Mãe", observacao: "Parcela da geladeira que tirei pra mãe", valor: "239", prvisaoPagto: "2022-11-28", parcela: "5 de 12" },
+        { id: 1, descricao: "Salário", observacao: "salario da Alma Viva", valor: 1121.35, prvisaoPagto: "2022-10-28", parcela: "1 de 12" },
+        { id: 2, descricao: "Concerto Note Bia", observacao: "troca de memória do note da bianca", valor: 399.99, prvisaoPagto: "2022-11-28", parcela: "2 de 12" },
+        { id: 3, descricao: "Ponto Nivelo", observacao: "Pontos referente ao mês de setembro", valor: 899.80, prvisaoPagto: "2022-11-28", parcela: "3 de 12" },
+        { id: 4, descricao: "Bob", observacao: "dineiro que emprestei pro BOB", valor: 99.99, prvisaoPagto: "2022-11-28", parcela: "4 de 12" },
+        { id: 5, descricao: "Geladeira Mãe", observacao: "Parcela da geladeira que tirei pra mãe", valor: 239, prvisaoPagto: "2022-11-28", parcela: "5 de 12" },
         // { id: 6, descricao: "Conta Mensal", observacao: "Conta de Agúas", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "6 de 12" },
         // { id: 7, descricao: "Conta Mensal", observacao: "Conta de Luz", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "7 de 12" },
         // { id: 8, descricao: "Mercado Livre", observacao: "Compra de uma Jaqueta", valor: "99,99", prvisaoPagto: "2022-11-28", parcela: "8 de 12" },

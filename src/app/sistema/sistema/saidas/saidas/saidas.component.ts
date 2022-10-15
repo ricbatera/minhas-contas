@@ -22,13 +22,12 @@ listaTabs = ['Nova Saída', "Lista de Saídas", "Detalhes"];
   }
 
   ngOnInit(): void {
-    this.store.dispatch(indiceTab({payload: 1}))
-    setTimeout(() => {
-    }, 5000);
+    // setTimeout(() => {
+    //   this.store.dispatch(indiceTab({payload: 1}))
+    // }, 10000);
   }
 
   setaTab(ev: number){
     this.store.dispatch(indiceTab({payload: ev}));
   }
-
 }
