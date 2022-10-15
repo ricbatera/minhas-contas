@@ -10,6 +10,35 @@
                     <input matInput formControlName="nome">
                     <mat-error *ngIf="!form.controls['nome'].valid">Campo <strong>obrigatório</strong></mat-error>
                 </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Formas de Pagamento</mat-label>
+                    <mat-select formControlName="meioPagto" [disabled]=true>
+                        <mat-option value="cartao">Cartão de Crédito</mat-option>
+                        <mat-option value="debito">Débito / Boleto</mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="!form.controls['meioPagto'].valid">Campo <strong>obrigatório</strong></mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" *ngIf="true">
+                    <mat-label>Cartões de Crédito</mat-label>
+                    <mat-select formControlName="cartaoSelecionado" [disabled]=true>
+                        <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.cartao}}</mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="linha">
+                <mat-form-field appearance="outline">
+                    <mat-label>Observações</mat-label>
+                    <input matInput formControlName="obs">
+                    <mat-error *ngIf="!form.controls['obs'].valid">Campo <strong>obrigatório</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="linha">
+                <mat-card-subtitle>
+                    Detalhes da Saída
+                </mat-card-subtitle>
             </div>
         </form>
     </mat-card-content>

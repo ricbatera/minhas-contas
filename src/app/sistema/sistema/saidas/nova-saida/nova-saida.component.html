@@ -55,7 +55,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Formas de Pagamento</mat-label>
+                <mat-label>Cartões de Crédito</mat-label>
                 <mat-select formControlName="cartaoSelecionado" [disabled]="isCartao">
                     <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.cartao}}</mat-option>
                 </mat-select>
