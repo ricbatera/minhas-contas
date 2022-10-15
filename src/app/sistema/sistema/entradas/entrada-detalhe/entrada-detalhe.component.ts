@@ -7,6 +7,8 @@ import { mockDados } from 'src/app/MOCK/mock-dados';
   templateUrl: './entrada-detalhe.component.html',
   styleUrls: ['./entrada-detalhe.component.css']
 })
+
+
 export class EntradaDetalheComponent implements OnInit {
  detalhe = mockDados.getEntradaDetalhes
 

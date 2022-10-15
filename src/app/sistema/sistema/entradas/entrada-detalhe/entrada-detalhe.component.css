@@ -25,3 +25,7 @@ mat-card{
     font-size: 1.2em;
     font-weight: 400;
   }
+  
+  .ul > li{
+    font-size: 1,2rem ;
+  }
