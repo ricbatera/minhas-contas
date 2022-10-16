@@ -5,7 +5,8 @@ export interface parcela {
     situacao: string,
     valor: number,
     valorPago: number | null,
-    contaBancaria?: contaBancaria | null
+    contaBancaria?: contaBancaria | null,
+    parcela: string
 }
 
 export interface contaBancaria {

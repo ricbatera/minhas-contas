@@ -1,9 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { mockDados } from 'src/app/MOCK/mock-dados';
+import { ItemListaSaida } from 'src/app/model/item-lista-saidas';
 import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
 
 @Component({
@@ -19,9 +21,9 @@ import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
   ],
 })
 export class ListaSaidasComponent implements OnInit {
-  lista =new MatTableDataSource(mockDados.getListaSaidas());
+  lista =new MatTableDataSource<ItemListaSaida>(mockDados.getListaSaidas());
   colunasTabela = ['descricao', 'status', 'Data Pagamento'];
-  expandedElement!: dados | null;
+  expandedElement!: ItemListaSaida | null;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
@@ -42,17 +44,17 @@ export class ListaSaidasComponent implements OnInit {
 
 }
 
-export interface dados{
-  id: number,
-  descricao: string,
-  obs: string,
-  parcela:{
-    status:string,
-    dataVencimento:Date,
-    dataPagamento: Date,
-    meioPagto: string,
-    valor:number,
-    valorPago: number,
-    parcela: string
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-pagar-saida.html'})
+export class DialogPagaSaida {
+  constructor(
+    public dialogRef: MatDialogRef<DialogPagaSaida>,
+    @Inject(MAT_DIALOG_DATA) public data: ItemListaSaida,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

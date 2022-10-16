@@ -1,71 +1,88 @@
 table {
-    width: 100%;
-  }
-  
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .element-detalhes {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .icone-grande {
-    flex: 1;
-    min-width: 80px;
-    font-size: 3em;
-    height: 104px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;    
-  }
-  .icone-grande span{
-    font-size: .3em;
-  }
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-
-  .descricao-acoes{
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .descricao-detalhes {
-    flex: 10;
-    padding: 16px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 50px;
-    color: #260e04;
-  }
-  .lado-a{
-    max-width: 400px;
-}
-.lado-B{
-      max-width: 300px;
-    
+  width: 100%;
 }
 
-.botoes-acao{
-    display: flex;
-    gap: 10px;
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detalhes {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.icone-grande {
+  flex: 1;
+  min-width: 80px;
+  font-size: 3em;
+  height: 104px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.icone-grande span {
+  font-size: .3em;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.descricao-acoes {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.descricao-detalhes {
+  flex: 10;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+  color: #260e04;
+}
+
+.lado-a {
+  max-width: 400px;
+  min-width: 300px;
+  width: 300px;
+}
+
+.lado-b {
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.botoes-acao {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+ul{
+  display: flex;
+  gap: 50px
 }

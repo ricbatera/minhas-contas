@@ -8,7 +8,7 @@ export interface IAppState {
 }
 
 export const estadoInicial: IAppState = {
-    indice: 2,
+    indice: 1,
     idSaida: 0,
     indiceEntradas: 2,
     idEntrada: 0

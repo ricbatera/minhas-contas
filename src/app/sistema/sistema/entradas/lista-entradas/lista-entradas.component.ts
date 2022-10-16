@@ -1,4 +1,4 @@
-import { dados } from './../../saidas/lista-saidas/lista-saidas.component';
+
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';

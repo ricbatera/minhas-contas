@@ -10,8 +10,9 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Status
         </th>
-        <td mat-cell *matCellDef="let item"> {{item.parcela.status}} </td>
+        <td mat-cell *matCellDef="let item"> {{item.parcela.situacao}} </td>
     </ng-container>
+
     <ng-container matColumnDef="Data Pagamento">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Data do Vencimento
@@ -23,38 +24,39 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="colunasTabela.length">
             <div class="element-detalhes" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                 <div class="icone-grande">
-                    <i class="fal fa-box-check" *ngIf="element.parcela.status === 'Pago'" style="color: #00b248;"></i>
-                    <i class="fal fa-box-usd" *ngIf="element.parcela.status === 'Aberto'" style="color: #3f51b5;"></i>
-                    <i class="fal fa-box-fragile" *ngIf="element.parcela.status === 'Atrasado'"
-                        style="color: #f44336;"></i>
+                    <i class="fal fa-box-check" *ngIf="element.parcela.situacao === 'Pago'" style="color: #00b248;"></i>
+                    <i class="fal fa-box-usd" *ngIf="element.parcela.situacao === 'Aberto'" style="color: #3f51b5;"></i>
+                    <i class="fal fa-box-fragile" *ngIf="element.parcela.situacao === 'Atrasado'" style="color: #f44336;"></i>
                     <span>{{element.parcela.parcela}}</span>
                 </div>
                 <div class="descricao-detalhes">
                     <div class="lado-a">
-                        <h2 style="margin-bottom: 0;">{{element.descricao}}</h2>
+                        <h2 style="margin-bottom: 0;"><strong>{{element.descricao}}</strong></h2>
                         <p>{{element.obs}}</p>
                     </div>
                     <div class="lado-b">
-                        <h2 style="margin-bottom: 0;"><strong>Detalhes do Vencimento</strong></h2>
-                        <h4 style="margin-bottom: 0;">Vencimento: <strong>{{element.parcela.dataVencimento | date:
-                                'shortDate'}}</strong></h4>
-                        <h4 style="margin-bottom: 0;">Valor: <strong>{{element.parcela.valor | currency:'BRL'}}</strong>
-                        </h4>
-                    </div>
-                    <div>
-                        <h2 style="margin-bottom: 0;"><strong>Detalhes do Pagamento</strong></h2>
-                        <h4 style="margin-bottom: 0;">Pago em: <strong>{{element.parcela.dataPagamento | date:
-                                'shortDate'}}</strong></h4>
-                        <h4 style="margin-bottom: 0;">Valor: <strong>{{element.parcela.valorPago |
-                                currency:'BRL'}}</strong></h4>
+                        <mat-card>
+                           <p>Detalhes dos Vencimento</p>
+                            <ul>
+                                <li><i class="fad fa-calendar-exclamation"></i> Vencimento: <i style="font-weight: 600;">{{element.parcela.dataVencimento | date:'shortDate'}}</i></li>
+                                <li><i class="fad fa-money-bill-alt"></i> Valor: <i style="font-weight: 600;">{{element.parcela.valor | currency:'BRL'}}</i></li>
+                                <li><i class="fad fa-file-invoice-dollar"></i> Forma Pagamento <i style="font-weight: 600;">{{element.meioPagamento}}</i></li>
+                            </ul>
+                        </mat-card>
+                        <mat-card *ngIf="element.parcela.situacao == 'Pago'">
+                           <p>Detalhes dos Pagamento</p>
+                            <ul>
+                                <li><i class="fad fa-calendar-exclamation"></i> Vencimento: <i style="font-weight: 600;">{{element.parcela.dataPagamento | date:'shortDate'}}</i></li>
+                                <li><i class="fad fa-money-bill-alt"></i> Valor: <i style="font-weight: 600;">{{element.parcela.valorPago | currency:'BRL'}}</i></li>
+                                <li *ngIf="element.parcela.contaBancaria != null"><i class="fad fa-money-bill-alt"></i> Debitado da Conta: <i style="font-weight: 600;">{{element.parcela.contaBancaria.conta }}</i></li>
+                                <li *ngIf="element.parcela.contaBancaria == null"><i class="fad fa-money-bill-alt"></i> Pago com o Cartão: <i style="font-weight: 600;">{{element.cartao?.cartao}}</i></li>
+                            </ul>
+                        </mat-card>
                     </div>
                 </div>
                 <div class="descricao-acoes">
-                    <div>
-                        <h2 style="margin-bottom: 0;"><strong>Ações</strong></h2>
-                    </div>
                     <div class="botoes-acao">
-                        <button mat-raised-button>Pagar</button>
+                        <button mat-raised-button *ngIf="element.parcela.situacao != 'Pago'">Pagar</button>
                         <button mat-raised-button color="primary" (click)="abreDetalhes(element.id)">Detalhes</button>
                     </div>
                 </div>
