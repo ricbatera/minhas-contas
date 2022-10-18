@@ -33,9 +33,9 @@
             <mat-card-title>Lista de Contas Bancárias</mat-card-title>
             <mat-card-subtitle>Aqui estão todas as contas bancárias cadastradas</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>            
+        <mat-card-content>
             <div class="botoes-selecao">
-                <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="selecaoLista"  (change)="filtraLista()">
+                <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="selecaoLista" (change)="filtraLista()">
                     <mat-radio-button value="0">Ativos</mat-radio-button>
                     <mat-radio-button value="1">Inativos</mat-radio-button>
                     <mat-radio-button value="2">Todos</mat-radio-button>
@@ -69,22 +69,16 @@
                         Ação
                     </th>
                     <td mat-cell *matCellDef="let item"> {{item.acao}}
-                        <div class="acao">
-                            <a routerLink="" class="edit">
-                                <i class="material-icons ">
-                                    edit
-                                </i>
-                            </a>
-                            <a routerLink="" class="delete">
-                                <i class="material-icons ">
-                                    delete
-                                </i>
-                            </a>
+                        <div class="acao">                           
+                            <button mat-icon-button aria-label="Botão Editar" class="edit" (click)="edita(item.id)">
+                                <i class="material-icons ">edit</i>
+                            </button>
+                            <button mat-icon-button aria-label="Botão Deletar" class="delete" (click)="deleta(item.id)">
+                                <i class="material-icons ">delete</i>
+                            </button>
                         </div>
                     </td>
                 </ng-container>
-
-
 
                 <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>

@@ -13,7 +13,7 @@ export interface contaBancaria {
     id: number,
     conta: string,
     descricao: string,
-    ativo: true
+    ativo: boolean
 }
 
 export interface cartao {
@@ -21,4 +21,12 @@ export interface cartao {
     cartao: string,
     descricao: string,
     ativo: boolean
+}
+
+export interface fatura {
+    id: number,
+    cartao: cartao,
+    dataVenvimento: string,
+    situacao: string,
+    item: parcela[]
 }

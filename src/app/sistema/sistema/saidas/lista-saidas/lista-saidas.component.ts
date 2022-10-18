@@ -61,7 +61,6 @@ export class ListaSaidasComponent implements OnInit {
         console.log(result);
       });
     } else{
-      // alert("Chamar fluxo de cartão de crédito");
       const dialogRef = this.dialog.open(DialogPagarCartaoComponent, {
         width: '500px',
         data: this.itemLista,
