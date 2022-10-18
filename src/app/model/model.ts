@@ -1,7 +1,7 @@
 export interface parcela {
     id: number,
-    dataPagamento: Date | null,
-    dataVencimento: Date,
+    dataPagamento: string | null,
+    dataVencimento: string,
     situacao: string,
     valor: number,
     valorPago: number | null,

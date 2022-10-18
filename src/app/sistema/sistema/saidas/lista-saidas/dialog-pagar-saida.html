@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Pagar</h1>
+<div mat-dialog-content>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Valor Esperado</mat-label>
+            <input matInput [(ngModel)]="data.parcela.valor" disabled currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px;">
+            <mat-label>Vencimento</mat-label>
+            <input type="date" matInput [(ngModel)]="data.parcela.dataVencimento" disabled>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Valor Pago</mat-label>
+            <input matInput [(ngModel)]="data.parcela.valorPago" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px;">
+            <mat-label>Pago em</mat-label>
+            <input type="date" matInput [(ngModel)]="data.parcela.dataPagamento">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="data.parcela.valorPago != null && data.parcela.dataPagamento != null" >Pagar</button>    
+</div>

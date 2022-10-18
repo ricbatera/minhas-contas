@@ -9,7 +9,7 @@ export const mockDados = {
       { id: 2, conta: "Santander", descricao: "Conta Santander", ativo: true },
       { id: 3, conta: "Nubank", descricao: "Conta Itaú Nubank", ativo: true },
       { id: 4, conta: "C6Bank", descricao: "Conta C6Bank", ativo: true },
-      { id: 5, conta: "bala", descricao: "Bala doce", ativo: true },
+      { id: 5, conta: "bala", descricao: "Bala doce", ativo: false },
     ]
   },
   getCartoes() {
@@ -22,11 +22,11 @@ export const mockDados = {
   },
   getListaSaidas() {
     const payload: ItemListaSaida[] = [
-      { id: 1, cartao:null, descricao: "Conta  de Luz", obs: "Conta de luz anual. Mussum Ipsum, cacilds vidis litro abertis. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Casamentiss faiz malandris se pirulitá.Viva Forevis aptent taciti sociosqu ad litora torquent.Cevadis im ampola pa arma uma pindureta.", meioPagamento: "Boleto / Débito", parcela: { id: 1, dataVencimento: new Date("2022-10-28"), dataPagamento: null, situacao: "Aberto", valor: 1321.15, valorPago: null, parcela: "2 de 3" } },
-      { id: 2, cartao:null, descricao: "Internet", obs: "Live TIM internet e telefone.", meioPagamento: "Boleto / Débito", parcela: { id: 10, dataVencimento: new Date("2022-10-28") , dataPagamento: null, situacao: "Atrasado",  valor: 199.3, valorPago: null, parcela: "2 de 3" } },
-      { id: 3, cartao:null, descricao: "Celular", obs: "Contade celular claro.", meioPagamento: "Boleto / Débito", parcela: { id: 11, dataVencimento: new Date("2022-10-28"), dataPagamento: new Date("2022-10-27"), situacao: "Pago", valor: 199.3, valorPago: 200, parcela: "2 de 3", contaBancaria: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true } } },
-      { id: 4, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 12, dataVencimento: new Date("2022-10-28"), dataPagamento: new Date("2022-10-27"), situacao: "Pago", valor: 73.25, valorPago: 73.25, parcela: "1 de 2", contaBancaria: null } },
-      { id: 5, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 13, dataVencimento: new Date("2022-11-28"), dataPagamento: null, situacao: "Aberto", valor: 73.25, valorPago: null, parcela: "2 de 2", contaBancaria: null } },
+      { id: 1, cartao:null, descricao: "Conta  de Luz", obs: "Conta de luz anual. Mussum Ipsum, cacilds vidis litro abertis. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Casamentiss faiz malandris se pirulitá.Viva Forevis aptent taciti sociosqu ad litora torquent.Cevadis im ampola pa arma uma pindureta.", meioPagamento: "Boleto / Débito", parcela: { id: 1, dataVencimento: "2022-10-28", dataPagamento: null, situacao: "Aberto", valor: 1321.15, valorPago: null, parcela: "2 de 3" } },
+      { id: 2, cartao:null, descricao: "Internet", obs: "Live TIM internet e telefone.", meioPagamento: "Boleto / Débito", parcela: { id: 10, dataVencimento: "2022-10-28" , dataPagamento: null, situacao: "Atrasado",  valor: 199.3, valorPago: null, parcela: "2 de 3" } },
+      { id: 3, cartao:null, descricao: "Celular", obs: "Contade celular claro.", meioPagamento: "Boleto / Débito", parcela: { id: 11, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 199.3, valorPago: 200, parcela: "2 de 3", contaBancaria: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true } } },
+      { id: 4, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 12, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 73.25, valorPago: 73.25, parcela: "1 de 2", contaBancaria: null } },
+      { id: 5, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 13, dataVencimento: "2022-12-15", dataPagamento: null, situacao: "Aberto", valor: 73.25, valorPago: null, parcela: "2 de 2", contaBancaria: null } },
     ]
     return payload;
   },
@@ -36,9 +36,9 @@ export const mockDados = {
     {
       id: 1, nome: 'Game Stick', obs: 'Compra de game stick no Aliexpress', meioPagamento: 'cartao', cartao: { id: 2, cartao: "NuBank", descricao: "Cartão Credito", ativo: true },
       parcela: [
-        { id: 1, dataPagamento: new Date('2022-10-15'), dataVencimento: new Date('2022-10-15'), situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null, parcela: '1/3' },
-        { id: 2, dataPagamento: null, dataVencimento: new Date('2022-11-15'), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null, parcela: '1/3' },
-        { id: 3, dataPagamento: null, dataVencimento: new Date('2022-12-15'), situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null, parcela: '1/3' },
+        { id: 1, dataPagamento: "2022-10-15", dataVencimento: "2022-10-15", situacao: "Pago", valor: 53.15, valorPago: 53.15, contaBancaria: null, parcela: '1/3' },
+        { id: 2, dataPagamento: null, dataVencimento: "2022-11-15", situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null, parcela: '1/3' },
+        { id: 3, dataPagamento: null, dataVencimento: "2022-12-15", situacao: "Aberto", valor: 53.15, valorPago: null, contaBancaria: null, parcela: '1/3' },
       ]
     }
     return payload;

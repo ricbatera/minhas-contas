@@ -56,7 +56,7 @@
                 </div>
                 <div class="descricao-acoes">
                     <div class="botoes-acao">
-                        <button mat-raised-button *ngIf="element.parcela.situacao != 'Pago'">Pagar</button>
+                        <button mat-raised-button *ngIf="element.parcela.situacao != 'Pago'" (click)="openDialogSalvar(element.id)">Pagar</button>
                         <button mat-raised-button color="primary" (click)="abreDetalhes(element.id)">Detalhes</button>
                     </div>
                 </div>
