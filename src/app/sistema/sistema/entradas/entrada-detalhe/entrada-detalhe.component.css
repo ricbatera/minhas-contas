@@ -6,26 +6,23 @@ mat-card{
   mat-form-field{
     width: 100%;
   }
-  
-  form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .linha{
-    display: flex;
-    gap: 10px;
-  }
-  .linha button i{
-    margin-right: 5px;
-  }
-  
-  .linha button{
-    font-size: 1.2em;
-    font-weight: 400;
-  }
-  
-  .ul > li{
-    font-size: 1,2rem ;
-  }
+  .content-detalhes{
+    width: 100%;
+}
+.content-detalhes ul{
+   font-size: 1.1em;
+   display: flex;
+   gap: 10px;
+   justify-content: space-between;
+}
+.content-detalhes ul i{
+   font-size: 1.5em;   
+}
+
+.subtitulos{
+    margin: 30px 0 0 0;
+}
+
+table{
+  width: 60%;
+}
