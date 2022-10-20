@@ -19,23 +19,25 @@ let listaCartoes: cartao[]= [
 ];
 
 let listaSaidas: ItemListaSaida[] = [
-  { id: 1, cartao:null, descricao: "Conta  de Luz", obs: "Conta de luz anual. Mussum Ipsum, cacilds vidis litro abertis. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Casamentiss faiz malandris se pirulitá.Viva Forevis aptent taciti sociosqu ad litora torquent.Cevadis im ampola pa arma uma pindureta.", meioPagamento: "Boleto / Débito", parcela: { id: 1, dataVencimento: "2022-10-28", dataPagamento: null, situacao: "Aberto", valor: 1321.15, valorPago: null, parcela: "2 de 3" } },
-  { id: 2, cartao:null, descricao: "Internet", obs: "Live TIM internet e telefone.", meioPagamento: "Boleto / Débito", parcela: { id: 10, dataVencimento: "2022-10-28" , dataPagamento: null, situacao: "Atrasado",  valor: 199.3, valorPago: null, parcela: "2 de 3" } },
-  { id: 3, cartao:null, descricao: "Celular", obs: "Contade celular claro.", meioPagamento: "Boleto / Débito", parcela: { id: 11, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 199.3, valorPago: 200, parcela: "2 de 3", contaBancaria: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true } } },
-  { id: 4, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 12, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 73.25, valorPago: 73.25, parcela: "1 de 2", contaBancaria: null } },
-  { id: 5, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 13, dataVencimento: "2022-12-15", dataPagamento: null, situacao: "Aberto", valor: 73.25, valorPago: null, parcela: "2 de 2", contaBancaria: null } },
-  { id: 6, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Geladeira", obs: "Teste de fatura de cartão", meioPagamento: "Cartão  de Crédito", parcela: { id: 14, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
-  { id: 7, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Batedeira Planetária", obs: "Teste de fatura de cartão item 2", meioPagamento: "Cartão  de Crédito", parcela: { id: 15, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
-  { id: 8, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Torradeira", obs: "Teste de fatura de cartão item 3", meioPagamento: "Cartão  de Crédito", parcela: { id: 15, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
+  { id: 1, idFatura: null, cartao:null, descricao: "Conta  de Luz", obs: "Conta de luz anual. Mussum Ipsum, cacilds vidis litro abertis. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Casamentiss faiz malandris se pirulitá.Viva Forevis aptent taciti sociosqu ad litora torquent.Cevadis im ampola pa arma uma pindureta.", meioPagamento: "Boleto / Débito", parcela: { id: 1, dataVencimento: "2022-10-28", dataPagamento: null, situacao: "Aberto", valor: 1321.15, valorPago: null, parcela: "2 de 3" } },
+  { id: 2, idFatura: null, cartao:null, descricao: "Internet", obs: "Live TIM internet e telefone.", meioPagamento: "Boleto / Débito", parcela: { id: 10, dataVencimento: "2022-10-28" , dataPagamento: null, situacao: "Atrasado",  valor: 199.3, valorPago: null, parcela: "2 de 3" } },
+  { id: 3, idFatura: null, cartao:null, descricao: "Celular", obs: "Contade celular claro.", meioPagamento: "Boleto / Débito", parcela: { id: 11, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 199.3, valorPago: 200, parcela: "2 de 3", contaBancaria: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true } } },
+  { id: 4, idFatura: null, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 12, dataVencimento: "2022-10-28", dataPagamento: "2022-10-27", situacao: "Pago", valor: 73.25, valorPago: 73.25, parcela: "1 de 2", contaBancaria: null } },
+  { id: 5, idFatura: 2, cartao:{ id: 1, cartao: "PicPay", descricao: "Cartão Debito", ativo: true }, descricao: "Game Stick", obs: "Compra do Game Stick pelo AliExpress", meioPagamento: "Cartão  de Crédito", parcela: { id: 13, dataVencimento: "2022-12-15", dataPagamento: null, situacao: "Aberto", valor: 73.25, valorPago: null, parcela: "2 de 2", contaBancaria: null } },
+  { id: 6, idFatura: 1, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Geladeira", obs: "Teste de fatura de cartão", meioPagamento: "Cartão  de Crédito", parcela: { id: 14, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
+  { id: 7, idFatura: 1, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Batedeira Planetária", obs: "Teste de fatura de cartão item 2", meioPagamento: "Cartão  de Crédito", parcela: { id: 15, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
+  { id: 8, idFatura: 1, cartao:{ id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true }, descricao: "Torradeira", obs: "Teste de fatura de cartão item 3", meioPagamento: "Cartão  de Crédito", parcela: { id: 15, dataVencimento: "2022-10-09", dataPagamento: null, situacao: "Atrasado", valor: 573.25, valorPago: null, parcela: "2 de 10", contaBancaria: null } },
 ]
 
-let faturaC6: fatura = {
+let faturaC6: fatura[] = [{
   id:1,
   cartao: { id: 3, cartao: "C6Bank", descricao: "Cartão Debito", ativo: true },
   dataVenvimento: '2022-10-09',
   situacao: 'Atrasado',
-  item:getTeste() 
-}
+  valor: 1719.75,
+  valorPago: null,
+  itens:getTeste() 
+}]
 
 function getTeste(){
   const parcelas: parcela [] = []
@@ -56,8 +58,11 @@ export const mockDados = {
     return listaSaidas;
   },
 
-  getFatura(){
-    return faturaC6;
+  getFatura(idFatura: number | null){
+    let fat;
+    // let fat: fatura;
+    faturaC6.forEach(el=>{if(el.id == idFatura) fat = el})
+    return fat;
   },
 
   getSaidaDetalhes() {

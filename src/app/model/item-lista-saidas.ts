@@ -6,5 +6,6 @@ export interface ItemListaSaida {
     obs: string,
     parcela: parcela,
     meioPagamento: string,
-    cartao: cartao | null
+    cartao: cartao | null,
+    idFatura: number | null
 }

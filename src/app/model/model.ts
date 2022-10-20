@@ -28,5 +28,7 @@ export interface fatura {
     cartao: cartao,
     dataVenvimento: string,
     situacao: string,
-    item: parcela[]
+    valor: number,
+    valorPago: number | null
+    itens: parcela[]
 }

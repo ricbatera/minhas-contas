@@ -16,7 +16,9 @@ import { DialogPagaSaida, ListaSaidasComponent } from './lista-saidas/lista-said
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 // outras libs
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -48,7 +50,10 @@ import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-c
     MatSelectModule,
     CurrencyMaskModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule,
+    FormsModule,
+    MatCheckboxModule
   ]
 })
 export class SaidasModule { }

@@ -65,6 +65,12 @@ export class ListaSaidasComponent implements OnInit {
         width: '500px',
         data: this.itemLista,
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.itemLista = result; // talvez tenha que mudar aqui
+        console.log(result); // talzez tenha que mudar aqui
+      });
     }
   }
 }
