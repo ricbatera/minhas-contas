@@ -24,6 +24,7 @@ export class CartoesCreditoComponent implements OnInit {
     this.form = this.fb.group({
       id: [null],
       nome: [null, Validators.required],
+      diaVencimento: [null, Validators.required],
       descricao: [null, Validators.required]
     })
   }

@@ -20,12 +20,19 @@
                       <input matInput formControlName="descricao">
                       <mat-error *ngIf="!form.controls['descricao'].valid">Campo obrigatório</mat-error>
                   </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Dia de Vencimento</mat-label>
+                    <input type="number" matInput formControlName="diaVencimento">
+                    <mat-error *ngIf="!form.controls['diaVencimento'].valid">
+                        Campo <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
               </div>
               <div>
                   <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"></i>Salvar</button>
               </div>
           </form>
-          <!-- <p>{{form.value | json}}</p> -->
+          <p>{{form.value | json}}</p>
       </mat-card-content>
   </mat-card>
   <mat-card class="lado-b">
