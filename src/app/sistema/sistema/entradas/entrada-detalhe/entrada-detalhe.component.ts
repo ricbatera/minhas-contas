@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { mockDados } from 'src/app/MOCK/mock-dados';
 import { EntradaDetalhes } from 'src/app/model/entrada-detalhes';
-import { parcela } from 'src/app/model/model';
 import { IAppState } from 'src/app/store/app.reducer';
+import { parcela } from 'src/app/model/item-lista-entrada'
 
 @Component({
   selector: 'app-entrada-detalhe',
@@ -17,40 +17,34 @@ import { IAppState } from 'src/app/store/app.reducer';
 
 
 export class EntradaDetalheComponent implements OnInit {
- idEntrada$ =  this.store.select('app').pipe(map(dado => dado.idEntrada));
- detalhe = mockDados.getEntradaDetalhes
+  idEntrada$ = this.store.select('app').pipe(map(dado => dado.idEntrada));
+  form: FormGroup;
+  listaCartoes = mockDados.getCartoes();
+  entradaDetalhe: EntradaDetalhes = mockDados.getEntradaDetalhes();
+  listaParcelas = new MatTableDataSource<parcela>(this.entradaDetalhe.parcela);
+  colunasTabela = ['Observacao', 'Descricao', 'Ação']
+  @ViewChild(MatSort) sort!: MatSort;
 
 
- form: FormGroup;
- listaCartoes = mockDados.getCartoes();
- entradaDetalhe: EntradaDetalhes = mockDados.getEntradaDetalhes();
- colunasTabela = ['Valor', 'Vencimento', 'Ação']
- @ViewChild(MatSort) sort!: MatSort;
-
-
- constructor(
-  private store:Store<{app: IAppState}>,
-  private fb: FormBuilder
-) {
-  this.form = this.fb.group({
-    id: [null],
-    nome: [null, Validators.required],
-    observacao: [null, Validators.required], 
-    descricao: [null, Validators.required], 
-    dataRecebimento: [null, Validators.required],
-    qtdeParcelas: [null, Validators.required],
-    valoReceber: [null, Validators.required]
-  })
-}
+  constructor(
+    private store: Store<{ app: IAppState }>,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      id: [this.idEntrada$],
+      observacao: [null, Validators.required],
+      descricao: [null, Validators.required],
+      parcela: [null, Validators.required],
+    })
+  }
 
   ngOnInit(): void {
+    this.form.controls['observacao'].setValue(this.entradaDetalhe.observacao);
+    this.form.controls['descricao'].setValue(this.entradaDetalhe.descricao);
+
   }
 
-  Editar() {  if (this.form.valid) {
-    alert("alterando...")
-  } else {
-    alert('há erros no formulário')
-  }
+  salvar() {
 
   }
 }

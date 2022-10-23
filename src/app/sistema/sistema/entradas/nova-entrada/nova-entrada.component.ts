@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class NovaEntradaComponent implements OnInit {
 
-  listaCartoes = mockDados.getCartoes()
+  colunasTabela = mockDados.getCartoes()
   isCartao = true;
 
   form: FormGroup;

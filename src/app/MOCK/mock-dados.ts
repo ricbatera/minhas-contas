@@ -1,7 +1,7 @@
-import { EntradaDetalhes } from "../model/entrada-detalhes"
 import { ItemListaSaida } from "../model/item-lista-saidas"
 import { cartao, contaBancaria, fatura, parcela } from "../model/model"
 import { SaidaDetalhes } from "../model/saida-detalhes"
+import { EntradaDetalhes } from "../model/entrada-detalhes"
 
 let listaContas: contaBancaria[] = [
   { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true },
