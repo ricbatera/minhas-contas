@@ -21,6 +21,8 @@ import { NovaEntradaComponent } from './nova-entrada/nova-entrada.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.component';
+import { DailogReceberEntradaComponent } from './dailog-receber-entrada/dailog-receber-entrada.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -29,7 +31,8 @@ import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.compo
     EntradasComponent,
     NovaEntradaComponent,
     ListaEntradasComponent,
-    EntradaDetalheComponent
+    EntradaDetalheComponent,
+    DailogReceberEntradaComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +52,7 @@ import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.compo
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-
+    MatDialogModule
   ]
 })
 export class EntradasModule { }

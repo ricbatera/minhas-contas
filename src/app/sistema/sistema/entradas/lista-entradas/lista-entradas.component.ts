@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { mockDados } from 'src/app/MOCK/mock-dados';
 import { IAppState, indiceTab, indiceTabEntrada, setaIdEntrada, setaIdSaida } from 'src/app/store/app.reducer';
 import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
+import { MatDialog } from '@angular/material/dialog';
+import { DailogReceberEntradaComponent } from '../dailog-receber-entrada/dailog-receber-entrada.component';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class ListaEntradasComponent {
   expandedElement!: itemListaEntrada | null;
 
   constructor(
+    public dialog: MatDialog,
     private store:Store<{app: IAppState}>
   ) { }
   ngOnInit(): void {
@@ -34,6 +37,16 @@ export class ListaEntradasComponent {
   abreDetalhes(idEntrada: number){
     this.store.dispatch(indiceTabEntrada({payload: 2}));
     this.store.dispatch(setaIdEntrada({payload:idEntrada}));
+  }
+
+  Receber(): void {
+    const dialogRef = this.dialog.open(DailogReceberEntradaComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 
