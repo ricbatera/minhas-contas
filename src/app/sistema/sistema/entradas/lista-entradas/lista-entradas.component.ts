@@ -23,9 +23,10 @@ import { DailogReceberEntradaComponent } from '../dailog-receber-entrada/dailog-
   ],
 })
 export class ListaEntradasComponent {
-  lista = mockDados.getListaEntrada();
+  lista: itemListaEntrada[] = mockDados.getListaEntrada();
   colunasEntradas = [ 'descricao', 'status', 'data Recebida'];
   expandedElement!: itemListaEntrada | null;
+  itemEntrada?: itemListaEntrada;
 
   constructor(
     public dialog: MatDialog,
@@ -39,9 +40,12 @@ export class ListaEntradasComponent {
     this.store.dispatch(setaIdEntrada({payload:idEntrada}));
   }
 
-  Receber(): void {
+  Receber(idEntrada: number): void {   
+    this.lista.forEach(e =>{if(e.id == idEntrada)this.itemEntrada = e} )
+    console.log(this.itemEntrada)
     const dialogRef = this.dialog.open(DailogReceberEntradaComponent, {
-      width: '250px',
+      width: '350px',
+    data: this.itemEntrada
     });
 
     dialogRef.afterClosed().subscribe(result => {

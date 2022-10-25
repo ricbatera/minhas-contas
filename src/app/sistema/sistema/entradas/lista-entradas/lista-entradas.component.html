@@ -51,7 +51,7 @@
                       <h2 style="margin-bottom: 0;"><strong></strong></h2>
                   </div>
                   <div class="botoes-acao">
-                    <button mat-raised-button (click)="Receber()" *ngIf="element.parcela.status !=  'Recebido'" >Receber</button>
+                    <button mat-raised-button (click)="Receber(element.id)" *ngIf="element.parcela.status !=  'Recebido'" >Receber</button>
                     <button mat-raised-button color="primary" (click)="abreDetalhes(element.id)">Detalhes</button>
                   </div>
               </div>

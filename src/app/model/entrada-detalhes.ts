@@ -1,7 +1,7 @@
 import { parcela } from "./item-lista-entrada";
 import { contaBancaria } from "./model";
 
-export interface Entrada {
+export interface entrada {
     id: number,
     dataRecebida: Date ,
     valorRecebido: number ,
@@ -15,5 +15,4 @@ export interface EntradaDetalhes {
     descricao: string,
     observacao: string,
     parcela: parcela[],
-
 }

@@ -10,9 +10,10 @@ export interface itemListaEntrada {
 export interface parcela {
   id: number,
   status: string,
-  previsoaRecebimento: Date,
+  previsaoRecebimento: string,
   valoReceber: number ,
-  dataRecebida: Date | null,
+  dataRecebida: string | null,
   valorRecebido: number| null,
-  conta: contaBancaria | null
+  conta: contaBancaria | null,
+  parcela: string 
 }

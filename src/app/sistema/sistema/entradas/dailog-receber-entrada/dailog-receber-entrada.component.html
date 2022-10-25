@@ -1,23 +1,32 @@
-<h1 mat-dialog-title>Receber Entrada</h1>
-<form [formGroup]="form" >
-  <div class="linha">
-      <mat-form-field appearance="outline">
-          <mat-label>Valor</mat-label>
-          <input type="text" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }" formControlName="valor">
-        </mat-form-field>
+<div mat-dialog-content>
+  <ul>
+    <li>Total dessa Entrada:{{ data.parcela.valoReceber | currency: 'BRL' }}</li>
+    <li>Vencimento:{{ data.parcela.previsaoRecebimento | date: 'shortDate' }}</li>
+  </ul>
+  <div class="radio">
+    <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="data">
 
-        <mat-form-field appearance="outline">
-                <mat-label>Cartões de Crédito</mat-label>
-                <mat-select formControlName="contaSelecionado">
-                    <mat-option *ngFor="let conta of listaContas" [value]="conta.id">{{conta}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
+    </mat-radio-group>
   </div>
+  <mat-form-field appearance="outline" style="width: 90%;">
+    <mat-label>Valor Pago</mat-label>
+    <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask
+      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+  </mat-form-field>
 
-</form>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Conta</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let conta of listaContas" [value]="conta.id">{{data.parcela.conta}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
 
 <div mat-dialog-actions>
   <button mat-button (click)="Cacenlar()">Cancelar</button>
-  <button mat-raised-button type="submit" color="primary"><i class="fal fa-save" (click)="Receber()"></i>Receber</button>
+  <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"
+      (click)="Receber()"></i>Receber</button>
 </div>
