@@ -23,6 +23,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.component';
 import { DailogReceberEntradaComponent } from './dailog-receber-entrada/dailog-receber-entrada.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -52,7 +53,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule,
   ]
 })
 export class EntradasModule { }

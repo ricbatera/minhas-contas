@@ -1,28 +1,26 @@
+
+
+<h1 mat-dialog-title>Pagar Entrada</h1>
 <div mat-dialog-content>
-  <ul>
-    <li>Total dessa Entrada:{{ data.parcela.valoReceber | currency: 'BRL' }}</li>
-    <li>Vencimento:{{ data.parcela.previsaoRecebimento | date: 'shortDate' }}</li>
-  </ul>
-  <div class="radio">
-    <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="data">
-
-    </mat-radio-group>
-  </div>
-  <mat-form-field appearance="outline" style="width: 90%;">
-    <mat-label>Valor Pago</mat-label>
-    <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask
-      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
-  </mat-form-field>
-
-
-  <mat-form-field appearance="outline">
-    <mat-label>Conta</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let conta of listaContas" [value]="conta.id">{{data.parcela.conta}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
+   <ul>
+    <li>Total dessa Entrada: {{ data.parcela.valoReceber | currency: 'BRL' }}</li>
+    <li>Data de Vencimento: {{ data.parcela.previsaoRecebimento | date: 'shortDate' }}</li>
+   </ul>
+   <div class="radio">
+       <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagamentoIntegral" (change)="ValorPago()">
+        <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
+        <mat-radio-button value="2">Pagamento parcial</mat-radio-button>
+      </mat-radio-group>   
+   </div>
+   <div *ngIf="pagamentoIntegral == '2'">
+    <mat-form-field appearance="outline" style="width: 90%;">
+        <mat-label>Valor Pago</mat-label>
+        <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+    </mat-form-field>
+   </div>
 </div>
+
 
 
 <div mat-dialog-actions>

@@ -21,6 +21,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .element-detalhes {
   overflow: hidden;
   display: flex;
+  align-items: center;
 }
 
 .icone-grande {
@@ -34,16 +35,18 @@ tr.example-element-row:not(.example-expanded-row):active {
   justify-content: center;
   flex-direction: column;
 }
-.icone-grande span{
+
+.icone-grande span {
   font-size: .3em;
 }
+
 .example-element-symbol {
   font-weight: bold;
   font-size: 40px;
   line-height: normal;
 }
 
-.descricao-acoes{
+.descricao-acoes {
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -57,15 +60,29 @@ tr.example-element-row:not(.example-expanded-row):active {
   gap: 50px;
   color: #260e04;
 }
-.lado-a{
+
+.lado-a {
   max-width: 400px;
+  min-width: 300px;
+  width: 300px;
 }
-.lado-B{
-    max-width: 300px;
+
+.lado-b {
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
 }
 
-.botoes-acao{
+.botoes-acao {
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  gap: 50px
 }

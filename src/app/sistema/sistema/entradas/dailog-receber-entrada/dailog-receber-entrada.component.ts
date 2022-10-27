@@ -13,6 +13,8 @@ import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
 export class DailogReceberEntradaComponent implements OnInit {
   entrada?: entrada;
   valorTotalEntrada: number | undefined = 0;
+  pagamentoIntegral = "1";
+  
 
   // form: FormGroup;
   isConta = true;
@@ -26,7 +28,13 @@ export class DailogReceberEntradaComponent implements OnInit {
 
   ) {  }
 
-
+  ValorPago(){
+    if(this.pagamentoIntegral == "1"){
+      this.data.parcela.valorRecebido = this.data.parcela.valoReceber;
+    } else {
+      this.data.parcela.valorRecebido = 0;
+    }
+  }
 
   ngOnInit(): void {
   }
