@@ -15,6 +15,8 @@ export class DailogReceberEntradaComponent implements OnInit {
   valorTotalEntrada: number | undefined = 0;
   pagamentoIntegral = "1";
   
+  form!: FormGroup;
+
 
   // form: FormGroup;
   isConta = true;
@@ -43,12 +45,9 @@ export class DailogReceberEntradaComponent implements OnInit {
     this.dialogRef.close();
   }
   Receber(): void {
-    console.log("Valor Recebido...");
+    alert("Valor Recebido...");
   }
 
-  toogleComboCartoes(){
-      this.isConta = true;
-      // this.form.controls['contaSelecionado'].setValue(null);
-    }
+ 
   }
 

@@ -1,30 +1,34 @@
-
-
-<h1 mat-dialog-title>Pagar Entrada</h1>
+<h1 mat-dialog-title>Receber {{ data.descricao}}</h1>
 <div mat-dialog-content>
-   <ul>
-    <li>Total dessa Entrada: {{ data.parcela.valoReceber | currency: 'BRL' }}</li>
-    <li>Data de Vencimento: {{ data.parcela.previsaoRecebimento | date: 'shortDate' }}</li>
-   </ul>
-   <div class="radio">
-       <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagamentoIntegral" (change)="ValorPago()">
-        <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
-        <mat-radio-button value="2">Pagamento parcial</mat-radio-button>
-      </mat-radio-group>   
-   </div>
-   <div *ngIf="pagamentoIntegral == '2'">
-    <mat-form-field appearance="outline" style="width: 90%;">
-        <mat-label>Valor Pago</mat-label>
-        <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask
-            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
-    </mat-form-field>
-   </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Entrada Esperado</mat-label>
+            <input matInput [(ngModel)]="data.parcela.valoReceber" disabled currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px;">
+            <mat-label>Vencimento</mat-label>
+            <input type="date" matInput [(ngModel)]="data.parcela.previsaoRecebimento" disabled>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Entrada </mat-label>
+            <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px;">
+            <mat-label>Pago em</mat-label>
+            <input type="date" matInput [(ngModel)]="data.parcela.dataRecebida">
+        </mat-form-field>
+    </div>
+      
+        <mat-form-field appearance="outline" style="margin-left: 90px;">
+            <mat-label>Selecione a Conta</mat-label>
+            <mat-select>
+                <input type="date" matInput [(ngModel)]="data.parcela.conta">
+            </mat-select>
+        </mat-form-field>
 </div>
-
-
-
 <div mat-dialog-actions>
-  <button mat-button (click)="Cacenlar()">Cancelar</button>
-  <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"
-      (click)="Receber()"></i>Receber</button>
+    <button mat-button (click)="Cacenlar()">Cancelar</button>
+    <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"  (click)="Receber()"></i>Receber</button>
 </div>

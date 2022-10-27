@@ -19,25 +19,31 @@ import { parcela } from 'src/app/model/item-lista-entrada'
 export class EntradaDetalheComponent implements OnInit {
   idEntrada$ = this.store.select('app').pipe(map(dado => dado.idEntrada));
   form: FormGroup;
-  listaCartoes = mockDados.getCartoes();
+
+  listaContas = mockDados.getContas();
   entradaDetalhe: EntradaDetalhes = mockDados.getEntradaDetalhes();
   listaParcelas = new MatTableDataSource<parcela>(this.entradaDetalhe.parcela);
-  colunasTabela = ['Observacao', 'Descricao', 'Ação']
+  
+  colunasTabela = ['Observacao', 'Descricao', 'parcela' ,'Ação']
+  
   @ViewChild(MatSort) sort!: MatSort;
 
 
   constructor(
-    private store: Store<{ app: IAppState }>,
+    private store:Store<{app: IAppState}>,
     private fb: FormBuilder
-  ) {
+  ) { 
     this.form = this.fb.group({
-      id: [this.idEntrada$],
-      observacao: [null, Validators.required],
-      descricao: [null, Validators.required],
-      parcela: [null, Validators.required],
+      id:[this.idEntrada$],
+      descricao:[null, Validators.required],
+      observacao:[null, Validators.required],
+      previsaoRecebimento:[null, Validators.required],
+      parcelas:[null, Validators.required],
+      valorReceber: [null, Validators.required],
+      valorRecebido: [null],
+      conta: [null],
     })
   }
-
   ngOnInit(): void {
     this.form.controls['observacao'].setValue(this.entradaDetalhe.observacao);
     this.form.controls['descricao'].setValue(this.entradaDetalhe.descricao);

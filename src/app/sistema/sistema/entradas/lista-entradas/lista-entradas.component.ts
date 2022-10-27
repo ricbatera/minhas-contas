@@ -44,7 +44,7 @@ export class ListaEntradasComponent {
     this.lista.forEach(e =>{if(e.id == idEntrada)this.itemEntrada = e} )
     console.log(this.itemEntrada)
     const dialogRef = this.dialog.open(DailogReceberEntradaComponent, {
-      width: '350px',
+      width: '500px',
     data: this.itemEntrada
     });
 

@@ -1,10 +1,4 @@
-.radio{
-    margin: 20px 0;
-}
 
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 26px;
-}
 
 ul{
     display: flex;
