@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { mockDados } from 'src/app/MOCK/mock-dados';
 import { entrada, EntradaDetalhes } from 'src/app/model/entrada-detalhes';
 import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
+import { contaBancaria } from 'src/app/model/model';
+import { ContasBancariasComponent } from '../../cadastros/contas-bancarias/contas-bancarias.component';
 
 @Component({
   selector: 'app-dailog-receber-entrada',
@@ -12,16 +14,13 @@ import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
 })
 export class DailogReceberEntradaComponent implements OnInit {
   entrada?: entrada;
-  valorTotalEntrada: number | undefined = 0;
-  pagamentoIntegral = "1";
-  
+
+
+ listaContas =mockDados.getContas();
+  isConta = true;
+  selecioneConta!: contaBancaria;
   form!: FormGroup;
 
-
-  // form: FormGroup;
-  isConta = true;
-  listaContas = mockDados.getContas();
-  
 
   constructor(
     private fb: FormBuilder,
@@ -30,13 +29,7 @@ export class DailogReceberEntradaComponent implements OnInit {
 
   ) {  }
 
-  ValorPago(){
-    if(this.pagamentoIntegral == "1"){
-      this.data.parcela.valorRecebido = this.data.parcela.valoReceber;
-    } else {
-      this.data.parcela.valorRecebido = 0;
-    }
-  }
+
 
   ngOnInit(): void {
   }
@@ -44,10 +37,19 @@ export class DailogReceberEntradaComponent implements OnInit {
   Cacenlar(): void {
     this.dialogRef.close();
   }
+
   Receber(): void {
     alert("Valor Recebido...");
   }
 
+  toogleComboContas(){
+    if(this.form.controls['conta'].value == 'conta'){
+      this.isConta = false;
+    } else{
+      this.isConta = true;
+      this.form.controls['ContasAtivas'].setValue(null);
+    }
+  }
  
   }
 
