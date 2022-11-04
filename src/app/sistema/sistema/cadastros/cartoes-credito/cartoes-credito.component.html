@@ -34,6 +34,15 @@
             <mat-card-title>Lista de Cartões Cadastrados</mat-card-title>
             <mat-card-subtitle>Aqui estão todas as cartões de Credito cadastradas</mat-card-subtitle>
         </mat-card-header>
+
+        <div class="botoes-selecao">
+            <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="selecaoLista" (change)="filtraLista()">
+                <mat-radio-button value="0">Ativos</mat-radio-button>
+                <mat-radio-button value="1">Inativos</mat-radio-button>
+                <mat-radio-button value="2">Todos</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
         <mat-card-content>
             <table mat-table [dataSource]="fonteCartoes" matSort class="mat-elevation-z8">
                 <ng-container matColumnDef="cartao">

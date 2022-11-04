@@ -16,11 +16,10 @@ export class DailogReceberEntradaComponent implements OnInit {
   entrada?: entrada;
 
 
- listaContas =mockDados.getContas();
+  listaContas =mockDados.getContas();
   isConta = true;
   selecioneConta!: contaBancaria;
-  form!: FormGroup;
-
+  
 
   constructor(
     private fb: FormBuilder,
@@ -43,12 +42,7 @@ export class DailogReceberEntradaComponent implements OnInit {
   }
 
   toogleComboContas(){
-    if(this.form.controls['conta'].value == 'conta'){
-      this.isConta = false;
-    } else{
-      this.isConta = true;
-      this.form.controls['ContasAtivas'].setValue(null);
-    }
+  
   }
  
   }

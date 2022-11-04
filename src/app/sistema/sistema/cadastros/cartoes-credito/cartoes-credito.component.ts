@@ -15,6 +15,8 @@ export class CartoesCreditoComponent implements OnInit {
   form: FormGroup;
   colunasTabela: string[] = ['descricao', 'cartao', 'acao'];
   fonteCartoes = new MatTableDataSource(this.mock.getCartoes());
+  selecaoLista: any = "2";
+
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -45,6 +47,18 @@ export class CartoesCreditoComponent implements OnInit {
     // console.log(this.form.value)
     console.log(this.mock.getCartoes())
 
+  }
+
+  filtraLista() {
+    if (this.selecaoLista == "0") {
+      let newList = mockDados.getCartoes().filter(conta => conta.ativo);
+      this.fonteCartoes.data = newList;
+    } else if (this.selecaoLista == "1") {
+      let newList = mockDados.getCartoes().filter(conta => !conta.ativo);
+      this.fonteCartoes.data = newList;
+    } else {
+      this.fonteCartoes.data = mockDados.getCartoes();
+    }
   }
 
 }
