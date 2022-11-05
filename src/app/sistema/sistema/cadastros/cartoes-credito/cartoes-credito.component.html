@@ -20,6 +20,11 @@
                         <input matInput formControlName="descricao">
                         <mat-error *ngIf="!form.controls['descricao'].valid">Campo obrigatório</mat-error>
                     </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dia de Vencimento</mat-label>
+                        <input matInput formControlName="diaVencimento" type="number">
+                        <mat-error *ngIf="!form.controls['diaVencimento'].valid">Campo obrigatório</mat-error>
+                    </mat-form-field>
 
                 </div>
                 <div>
@@ -35,23 +40,23 @@
             <mat-card-subtitle>Aqui estão todas as cartões de Credito cadastradas</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <table mat-table [dataSource]="fonteCartoes" matSort class="mat-elevation-z8">
+            <table mat-table [dataSource]="cartoesList" class="mat-elevation-z8">
                 <ng-container matColumnDef="cartao">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por conta">
+                    <th mat-header-cell *matHeaderCellDef>
                         Cartões
                     </th>
-                    <td mat-cell *matCellDef="let item"> {{item.cartao}}</td>
+                    <td mat-cell *matCellDef="let item"> {{item.nome}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="descricao">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por descricao">
+                    <th mat-header-cell *matHeaderCellDef>
                         Descrição
                     </th>
                     <td mat-cell *matCellDef="let item"> {{item.descricao}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="acao">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por acao">
+                    <th mat-header-cell *matHeaderCellDef>
                         Ação
                     </th>
                     <td mat-cell *matCellDef="let item">
@@ -73,6 +78,50 @@
                 <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>
             </table>
+            <div>
+                <ul>
+                    <li *ngFor="let i  cartoesList">{{i.nome}}</li>
+                </ul>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
+
+<!-- <table mat-table [dataSource]="fonteCartoes" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="cartao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por conta">
+            Cartões
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.nome}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por descricao">
+            Descrição
+        </th>
+        <td mat-cell *matCellDef="let item"> {{item.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por acao">
+            Ação
+        </th>
+        <td mat-cell *matCellDef="let item">
+            <div class="acao">
+                <a routerLink="" class="edit">
+                    <i class="material-icons ">
+                        edit
+                    </i>
+                </a>
+                <a routerLink="" class="delete">
+                    <i class="material-icons ">
+                        delete
+                    </i> 
+                </a>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>
+</table> -->

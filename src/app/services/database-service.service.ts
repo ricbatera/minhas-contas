@@ -4,9 +4,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 // import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { categoria } from '../model/categoria';
-import { EmpresasJavaGas } from '../model/empresas-javagas';
-import { Obra } from '../model/Obra';
+import { CartaoCredito } from '../model/cartao-credito';
+import { ContaBancaria } from '../model/conta-bancaria';
+import { contaBancaria } from '../model/model';
+import { NovaSaidaRequest } from '../model/nova-saida-request';
+import { ItemListaSaida } from '../model/item-lista-saidas';
+import { ItemListaSaidaApi } from '../model/item-lista-saida-api';
+import { FaturaApi } from '../model/fatura-api';
+import { PagarFaturaRequest } from '../model/pagar-fatura-request';
 
 @Injectable({
   providedIn: 'root'
@@ -51,17 +56,6 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
-  listarCategorias(): Observable<categoria[]> {
-    return this.httpClient.get<categoria[]>(this.API_URL + "cadastro/categoria/listar");
-  }
-
-  listarEmpresasJavaGas(): Observable<EmpresasJavaGas[]> {
-    return this.httpClient.get<EmpresasJavaGas[]>(this.API_URL + "cadastro/empresas-java/listar");
-  }
-
-  listarTodasObrasAtivas(): Observable<Obra[]>{
-    return this.httpClient.get<Obra[]>(this.API_URL + "cadastro/obra/listar");
-  }
 
   listarSaidasMensal(dataPesquisa: string): Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.API_URL}saida/listarMensal?dataBase=${dataPesquisa}`);
@@ -74,6 +68,47 @@ export class DatabaseServiceService {
     return this.httpClient.get<any>(`${this.API_URL}saida/${id}`);
   }
 
+// ***********************************************************************************************
+
+  getCartoesFull(): Observable<CartaoCredito[]> {
+    return this.httpClient.get<CartaoCredito[]>(`${this.API_URL}cadastros/cartao-credito/listar-cartoes`);
+  }
+
+  getCartoesAtivos(): Observable<CartaoCredito[]> {
+    return this.httpClient.get<CartaoCredito[]>(`${this.API_URL}cadastros/cartao-credito/listar-cartoes-ativos`);
+  }
+
+  novoCartao(payload: CartaoCredito): Observable<CartaoCredito> {
+    return this.httpClient.post<CartaoCredito>(this.API_URL+"cadastros/cartao-credito/novoCartaoCredito", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  getContasFull(): Observable<ContaBancaria[]> {
+    return this.httpClient.get<ContaBancaria[]>(`${this.API_URL}cadastros/conta-bancaria/listar-contas-bancarias`);
+  }
+
+  novaConta(payload: CartaoCredito): Observable<ContaBancaria> {
+    return this.httpClient.post<ContaBancaria>(this.API_URL+"cadastros/conta-bancaria/nova-conta-bancaria", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  novaSaidaRequest(payload: NovaSaidaRequest): Observable<NovaSaidaRequest> {
+    return this.httpClient.post<NovaSaidaRequest>(this.API_URL+"saidas/nova-saida", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  getitensSaida(): Observable<ItemListaSaidaApi[]> {
+    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=9`);
+  }
+
+  getFaturaApi(id: number | undefined): Observable<FaturaApi> {
+    return this.httpClient.get<FaturaApi>(`${this.API_URL}saidas/busca-fatura?idFatura=${id}`);
+  }
+
+  pagarFatura(payload: PagarFaturaRequest): Observable<PagarFaturaRequest> {
+    return this.httpClient.post<PagarFaturaRequest>(this.API_URL+"saidas/pagar-fatura", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
 
   // Manipulação de erros
   handleError(error: HttpErrorResponse) {

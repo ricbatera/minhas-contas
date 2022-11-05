@@ -1,24 +1,38 @@
 <h1 mat-dialog-title>Pagar Fatura</h1>
 <div mat-dialog-content>
-   <p>Deseja pagar a fatura do cartão {{data.cartao?.cartao}}?</p>
-   <ul>
-    <li>Total dessa fatura: {{fatura?.valor | currency: 'BRL'}}</li>
-    <li>Data de Vencimento: {{fatura?.dataVenvimento | date: "shortDate"}}</li>
-   </ul>
-   <div class="radio">
-       <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagamentoIntegral" (change)="setaValorPago()">
-        <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
-        <mat-radio-button value="2">Pamgamento parcial</mat-radio-button>
-      </mat-radio-group>   
-   </div>
-   <div *ngIf="pagamentoIntegral == '2'">
-    <mat-form-field appearance="outline" style="width: 90%;">
-        <mat-label>Valor Pago</mat-label>
-        <input matInput [(ngModel)]="fatura!.valorPago" currencyMask
-            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
-    </mat-form-field>
-    <mat-checkbox class="example-margin" [(ngModel)]="gerarParcelaProximaFatura">Gerar parcela com a diferença para a proxima fatura</mat-checkbox>
-   </div>
+    <p>Deseja pagar a fatura do cartão {{data.fatura?.cartao?.nome}}?</p>
+    <ul>
+        <li>Total dessa fatura: {{fatura?.valor | currency: 'BRL'}}</li>
+        <li>Data de Vencimento: {{fatura?.dataVencimento | date: "shortDate"}}</li>
+    </ul>
+    <div class="radio">
+        <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagamentoIntegral" (change)="setaValorPago()">
+            <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
+            <mat-radio-button value="2">Pamgamento parcial</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="pagamentoIntegral == '2'">
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Valor Pago</mat-label>
+            <input matInput [(ngModel)]="fatura!.valorPago" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-checkbox class="example-margin" [(ngModel)]="gerarParcelaProximaFatura">Gerar parcela com a diferença para
+            a proxima fatura</mat-checkbox>
+    </div>
+
+    <div class="radio">
+        <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="usarDataVencimento" (change)="setaDataPagamento()">
+            <mat-radio-button value="3">Usar data do vencimento</mat-radio-button>
+            <mat-radio-button value="4">Usar outra data para pagamento</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="usarDataVencimento == '4'">
+        <mat-form-field appearance="outline">
+            <mat-label>Vencimento</mat-label>
+            <input type="date" matInput [(ngModel)]="fatura!.dataPagamento">
+        </mat-form-field>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>

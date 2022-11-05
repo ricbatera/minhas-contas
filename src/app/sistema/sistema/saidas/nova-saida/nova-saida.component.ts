@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mockDados } from 'src/app/MOCK/mock-dados';
+import { CartaoCredito } from 'src/app/model/cartao-credito';
+import { DatabaseServiceService } from 'src/app/services/database-service.service';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nova-saida',
@@ -9,13 +13,14 @@ import { mockDados } from 'src/app/MOCK/mock-dados';
 })
 export class NovaSaidaComponent implements OnInit {
 
-  listaCartoes = mockDados.getCartoes();
+  listaCartoes: CartaoCredito[] = [];
   isCartao = true;
 
   form: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private db: DatabaseServiceService
   ) {
     this.form = this.fb.group({
       id:[null],
@@ -33,7 +38,28 @@ export class NovaSaidaComponent implements OnInit {
   }
 
   salvar(){
+    if(this.form.valid){
+      this.db.novaSaidaRequest(this.form.value).subscribe(res=>{
+        console.log(`Resposta da API para nova Saída: ${res}`)
+      })
+    }
+  }
 
+  ngAfterViewInit() {
+    merge().pipe(
+      startWith({}),
+      switchMap(() => {
+        return this.db.getCartoesAtivos()
+          .pipe(catchError(() => observableOf(null)))
+      }
+      ),
+      map(data => {
+        if (data === null) {
+          return [];
+        }
+        return data;
+      })
+    ).subscribe(data => this.listaCartoes = data)
   }
 
   toogleComboCartoes(){

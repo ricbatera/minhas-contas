@@ -5,8 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { mockDados } from 'src/app/MOCK/mock-dados';
-import { contaBancaria} from 'src/app/model/model'
+import { ContaBancaria } from 'src/app/model/conta-bancaria';
+import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { DialogDeletarComponent } from '../components/dialog-deletar/dialog-deletar.component';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface conta {
@@ -21,72 +24,90 @@ export interface conta {
   styleUrls: ['./contas-bancarias.component.css']
 })
 export class ContasBancariasComponent implements OnInit {
-  mock = mockDados; // dados mockados para testes
+
   form: FormGroup;
   colunasTabela: string[] = ["id", 'conta', 'descricao', 'acao'];
-  fonteDados = new MatTableDataSource<contaBancaria>(this.mock.getContas());
+  fonteDados: ContaBancaria[] = [];
+  fonteDadosFiltro: ContaBancaria[] = [];
+
   selecaoLista: any = "2";
-  conta?: contaBancaria;
+  conta?: ContaBancaria;
 
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private db: DatabaseServiceService
   ) {
     this.form = this.fb.group({
       id1: [null],
       nome: [null, Validators.required],
-      descricao: [null, Validators.required]
+      obs: [null, Validators.required]
     })
   }
 
   ngAfterViewInit() {
-    this.fonteDados.sort = this.sort;
+    merge().pipe(
+      startWith({}),
+      switchMap(() => {
+        return this.db.getContasFull()
+          .pipe(catchError(() => observableOf(null)))
+      }
+      ),
+      map(data => {
+        if (data === null) {
+          return [];
+        }
+        return data;
+      })
+    ).subscribe(data => this.fonteDados = data)
   }
 
   ngOnInit(): void {
-    console.log(this.fonteDados);
+    // console.log(this.fonteDados);
     this.filtraLista();
   }
 
   salvar() {
     if (this.form.valid) {
-      alert("Salvando...")
+      this.db.novaConta(this.form.value).subscribe(res=>{
+        console.log(`Retorno da API salvar Conta ${res}`)
+        this.ngAfterViewInit();
+      })
     } else {
       alert('há erros no formulário')
     }
-    // console.log(this.form.value)
-    console.log(this.mock.getContas())
 
   }
 
   filtraLista() {
+    console.log(this.fonteDados);
     if (this.selecaoLista == "0") {
-      let newList = mockDados.getContas().filter(conta => conta.ativo);
-      this.fonteDados.data = newList;
+      let newList = this.fonteDados.filter(conta => conta.status);
+      this.fonteDados = newList;
     } else if (this.selecaoLista == "1") {
-      let newList = mockDados.getContas().filter(conta => !conta.ativo);
-      this.fonteDados.data = newList;
+      let newList = this.fonteDados.filter(conta => !conta.status);
+      this.fonteDados = newList;
     } else {
-      this.fonteDados.data = mockDados.getContas();
+      this.ngAfterViewInit(); // não é a melhor prática - preciso ver uma forma de fazer cache dessas informações
     }
   }
 
-  deleta(id: number){
-    this.fonteDados.data.forEach(element => {if(element.id == id) this.conta = element });
-    const dialogRef = this.dialog.open(DialogDeletarComponent, {
-      width: '500px',
-      data: this.conta,
-    });
+  deleta(id: number) {
+    // this.fonteDados.forEach(element => {if(element.id == id) this.conta = element });
+    // const dialogRef = this.dialog.open(DialogDeletarComponent, {
+    //   width: '500px',
+    //   data: this.conta,
+    // });
 
-    dialogRef.afterClosed().subscribe((res: contaBancaria) =>{
-      this.conta = res;
-      mockDados.inativarConta(res.id); // mock
-    })
+    // dialogRef.afterClosed().subscribe((res: ContaBancaria) =>{
+    //   this.conta = res;
+    //   mockDados.inativarConta(res.id); // mock
+    // })
   }
 
-  edita(id: number){
+  edita(id: number) {
 
   }
 }

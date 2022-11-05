@@ -17,8 +17,8 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Descrição</mat-label>
-                        <input matInput formControlName="descricao">
-                        <mat-error *ngIf="!form.controls['descricao'].valid">Campo obrigatório</mat-error>
+                        <input matInput formControlName="obs">
+                        <mat-error *ngIf="!form.controls['obs'].valid">Campo obrigatório</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
@@ -49,21 +49,21 @@
                     </th>
                     <td mat-cell *matCellDef="let item"> {{item.id}} </td>
                 </ng-container>
-
+            
                 <ng-container matColumnDef="conta">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Conta
                     </th>
-                    <td mat-cell *matCellDef="let item"> {{item.conta}} </td>
+                    <td mat-cell *matCellDef="let item"> {{item.nome}} </td>
                 </ng-container>
-
+            
                 <ng-container matColumnDef="descricao">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Descrição
                     </th>
-                    <td mat-cell *matCellDef="let item"> {{item.descricao}} </td>
+                    <td mat-cell *matCellDef="let item"> {{item.obs}} </td>
                 </ng-container>
-
+            
                 <ng-container matColumnDef="acao">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Ação
@@ -79,10 +79,11 @@
                         </div>
                     </td>
                 </ng-container>
-
+            
                 <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>
             </table>
+            <!-- <p>{{form.value | json}}</p> -->
         </mat-card-content>
     </mat-card>
 </div>
