@@ -81,7 +81,7 @@ export const mockDados = {
   getListaEntrada() {
     const payload: itemListaEntrada[] = [
       { id: 1, descricao: "Salário", observacao: "Salario AlmaViva", parcela: { id: 1, previsaoRecebimento: "2022-10-30", valoReceber: 1121.35, dataRecebida: "2022-10-29", valorRecebido: 1121.35, parcela: "1 de 24", status: "Recebido", conta: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true } } },
-      { id: 2, descricao: "Salário", observacao: "Pontos livelo", parcela: { id: 10, previsaoRecebimento: "2022-12-30", valoReceber: 1100.00, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Pendente", conta: null } },
+      { id: 2, descricao: "Salário", observacao: "Pontos livelo", parcela: { id: 10, previsaoRecebimento: "2022-12-30", valoReceber: 1100.00, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Pendente", conta: { id: 1, conta: "Itaú", descricao: "Conta Itaú Unibanco", ativo: true }  } },
       { id: 3, descricao: "Emprestimo", observacao: "Dinheiro emprestado para Henrique", parcela: { id: 30, previsaoRecebimento: "2022-8-30", valoReceber: 11210.34, dataRecebida: null, valorRecebido: null, parcela: "1 de 24", status: "Atrasado", conta: null } },
     ]
     return payload;
