@@ -88,9 +88,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 /* menu meses */
-.menu-meses{
-  /* padding: 10px; */
-}
+
 .menu-meses > ul{
   display: flex;
   flex-wrap: wrap;

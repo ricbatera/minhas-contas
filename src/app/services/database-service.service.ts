@@ -12,6 +12,8 @@ import { ItemListaSaida } from '../model/item-lista-saidas';
 import { ItemListaSaidaApi } from '../model/item-lista-saida-api';
 import { FaturaApi } from '../model/fatura-api';
 import { PagarFaturaRequest } from '../model/pagar-fatura-request';
+import { NovaEntradaRequest } from '../model/nova-entrada-request';
+import { ItemEntradaApi } from '../model/item-entrada-api';
 
 @Injectable({
   providedIn: 'root'
@@ -27,48 +29,6 @@ export class DatabaseServiceService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  novaCategoria(payload: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+"cadastro/categoria", JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  novaObra(payload: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+"cadastro/obra", JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  novaSaida(payload: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+"saida/nova-saida", JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  novaEntrada(payload: any): Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+"entrada/nova-entrada", JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  pagarParcela(payload: any, id:number): Observable<any> {
-    return this.httpClient.put<any>(this.API_URL+"saida/pagar-parcela/"+id, JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  receberEntrada(payload: any, id:number): Observable<any> {
-    return this.httpClient.put<any>(this.API_URL+"entrada/receber/"+id, JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-  atualizarSaida(payload: any): Observable<any> {
-    return this.httpClient.put<any>(this.API_URL+"saida/atualizarSaida", JSON.stringify(payload), this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError))
-  }
-
-
-  listarSaidasMensal(dataPesquisa: string): Observable<any[]>{
-    return this.httpClient.get<any[]>(`${this.API_URL}saida/listarMensal?dataBase=${dataPesquisa}`);
-  }
-  listarEntradasMensal(dataPesquisa: string): Observable<any[]>{
-    return this.httpClient.get<any[]>(`${this.API_URL}entrada/listarMensal?dataBase=${dataPesquisa}`);
-  }
-
-  getSaidaById(id:number): Observable<any> {
-    return this.httpClient.get<any>(`${this.API_URL}saida/${id}`);
-  }
-
-// ***********************************************************************************************
 
   getCartoesFull(): Observable<CartaoCredito[]> {
     return this.httpClient.get<CartaoCredito[]>(`${this.API_URL}cadastros/cartao-credito/listar-cartoes`);
@@ -101,8 +61,20 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
+  novaEntradaRequest(payload: NovaEntradaRequest): Observable<NovaEntradaRequest> {
+    return this.httpClient.post<NovaEntradaRequest>(this.API_URL+"entradas/nova-entrada", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+
+
   getitensSaida(mes: number): Observable<ItemListaSaidaApi[]> {
     return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}`);
+  }
+
+
+  getitensEntrada(mes: number): Observable<ItemEntradaApi[]> {
+    return this.httpClient.get<ItemEntradaApi[]>(`${this.API_URL}entradas/listar-mensal?mes=${mes}`);
   }
 
   getFaturaApi(id: number | undefined): Observable<FaturaApi> {

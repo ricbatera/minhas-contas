@@ -1,9 +1,13 @@
+ul {
+  display: flex;
+  gap: 50px
+}
 
 
-ul{
-    display: flex;
-    gap: 50px
-  }
+.radio {
+  margin: 20px 0;
+}
 
-
-
+.mat-radio-button~.mat-radio-button {
+  margin-left: 16px;
+}

@@ -10,7 +10,7 @@ export interface IAppState {
 export const estadoInicial: IAppState = {
     indice: 1,
     idSaida: 0,
-    indiceEntradas: 2,
+    indiceEntradas: 1,
     idEntrada: 0
 };
 

@@ -1,23 +1,29 @@
-<h1 mat-dialog-title>Receber {{ data.descricao}}</h1>
+<h1 mat-dialog-title>Receber {{ data.entrada.nome}}</h1>
 <div mat-dialog-content>
-    <div>
-        <mat-form-field appearance="outline">
-            <mat-label>Entrada Esperado</mat-label>
-            <input matInput [(ngModel)]="data.parcela.valoReceber" disabled currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
-        </mat-form-field>
-        <mat-form-field appearance="outline" style="margin-left: 10px;">
-            <mat-label>Vencimento</mat-label>
-            <input type="date" matInput [(ngModel)]="data.parcela.previsaoRecebimento" disabled>
-        </mat-form-field>
+    <div class="radio">
+        <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="recebeDefault" (change)="setaValorPago()">
+            <mat-radio-button value="1">Usar esses dados</mat-radio-button>
+            <mat-radio-button value="2">Personalizar valor e data</mat-radio-button>
+        </mat-radio-group>
     </div>
     <div>
         <mat-form-field appearance="outline">
+            <mat-label>Valor Esperado</mat-label>
+            <input matInput [(ngModel)]="data.valor" disabled currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px;">
+            <mat-label>Data Prevista</mat-label>
+            <input type="date" matInput [(ngModel)]="data.dataPrevistaRecebimento" disabled>
+        </mat-form-field>
+    </div>
+    <div *ngIf="recebeDefault == '2'">
+        <mat-form-field appearance="outline">
             <mat-label>Entrada </mat-label>
-            <input matInput [(ngModel)]="data.parcela.valorRecebido" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+            <input matInput [(ngModel)]="data.valorRecebido" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
         </mat-form-field>
         <mat-form-field appearance="outline" style="margin-left: 10px;">
             <mat-label>Pago em</mat-label>
-            <input type="date" matInput [(ngModel)]="data.parcela.dataRecebida">
+            <input type="date" matInput [(ngModel)]="data.dataRecebimento">
         </mat-form-field>
     </div>
       
@@ -26,7 +32,7 @@
         <mat-form-field appearance="outline" style="margin-left: 100px;">
             <mat-label>Selecione a Conta</mat-label>
             <mat-select>
-                <mat-option value="conta">{{data.parcela.conta}}</mat-option>
+                <mat-option *ngFor="let conta of listaContas" value={{conta.id}}>{{conta.nome}}</mat-option>
             </mat-select>
         </mat-form-field>
 </div>

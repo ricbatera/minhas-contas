@@ -82,7 +82,32 @@ tr.example-element-row:not(.example-expanded-row):active {
   align-items: center;
 }
 
-ul {
+.lado-b ul {
   display: flex;
   gap: 50px
+}
+
+/* menu meses */
+
+.menu-meses > ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.1em;
+}
+
+.meses{
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+}
+/* .meses:hover{
+  background-color: bisque;
+} */
+
+.mes-selecionado{
+  background-color: #263238;
+  color: #fff;
+  border-bottom: 4px solid #fff;
 }
