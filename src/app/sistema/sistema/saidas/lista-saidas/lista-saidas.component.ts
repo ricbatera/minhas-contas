@@ -13,6 +13,8 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
 import { DateAdapter } from '@angular/material/core';
+import { Meses } from 'src/assets/menudata/meses';
+import { DatasService } from 'src/app/services/datas.service';
 
 @Component({
   selector: 'app-lista-saidas',
@@ -27,32 +29,48 @@ import { DateAdapter } from '@angular/material/core';
   ],
 })
 export class ListaSaidasComponent implements OnInit {
-  lista = new MatTableDataSource<ItemListaSaida>(mockDados.getListaSaidas());
   itensLista: ItemListaSaidaApi[] = [];
   itemLista?: ItemListaSaidaApi;
-  colunasTabela = ['descricao', 'status', 'Data Pagamento'];
-  expandedElement!: ItemListaSaida | null;
+  colunasTabela = ['descricao', 'status', 'Valor', 'Meio de Pagamento', 'Data Pagamento'];
+  expandedElement!: ItemListaSaidaApi | null;
+  menu = Meses;
+  meses = document.getElementsByClassName("meses");
+  mesSelecionado: number = -1;
+
+
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private store: Store<{ app: IAppState }>,
     public dialog: MatDialog,
-    private db: DatabaseServiceService
+    private db: DatabaseServiceService,
+    private dataService: DatasService
   ) { }
-
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.lista.sort = this.sort;
-    this.carregaLista();
+    this.setaMesAtual();
   }
 
-  carregaLista(){
+  setaMesAtual() {
+    this.escutaMenuMeses(this.dataService.getMesAtual());
+  }
+
+  escutaMenuMeses(mes: number) {
+    for (let i = 0; i < this.meses.length; i++) {
+      this.meses[i].classList.remove("mes-selecionado");
+    }
+    this.meses[mes].classList.add("mes-selecionado");
+    this.carregaLista(mes + 1);
+    this.mesSelecionado = mes + 1;
+  }
+
+  carregaLista(mes: number) {
     merge().pipe(
       startWith({}),
       switchMap(() => {
-        return this.db.getitensSaida()
+        return this.db.getitensSaida(mes)
           .pipe(catchError(() => observableOf(null)))
       }
       ),
@@ -60,18 +78,18 @@ export class ListaSaidasComponent implements OnInit {
         if (data === null) {
           return [];
         }
-        data.map(d=>{
-          if(d.situacao == "Aberto"){
+        data.map(d => {
+          if (d.situacao == "Aberto") {
             let venc = Date.parse(d.dataVencimento);
             let hoje = Date.now();
-            if(hoje > venc){
+            if (hoje > venc) {
               d.situacao = "Atrasado"
             }
           }
         })
         return data;
       })
-    ).subscribe(data =>{ 
+    ).subscribe(data => {
       console.log("Carregando lista de saídas")
       this.itensLista = data
     })
@@ -81,23 +99,23 @@ export class ListaSaidasComponent implements OnInit {
     this.store.dispatch(indiceTab({ payload: 2 }));
     this.store.dispatch(setaIdSaida({ payload: idSaida }));
   }
-  
+
   openDialogSalvar(id: number): void {
     this.itensLista.forEach(item => { if (item.id == id) this.itemLista = item })
 
-    if(this.itemLista?.saida.meioPagto == "bebito"){
+    if (this.itemLista?.saida.meioPagto == "debito") {
       const dialogRef = this.dialog.open(DialogPagaSaida, {
         width: '500px',
         data: this.itemLista,
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         this.itemLista = result;
         console.log(result);
-        this.carregaLista();
+        this.carregaLista(this.mesSelecionado);
       });
-    } else{
+    } else {
       const dialogRef = this.dialog.open(DialogPagarCartaoComponent, {
         width: '500px',
         data: this.itemLista,
@@ -105,13 +123,11 @@ export class ListaSaidasComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        this.carregaLista();
+        this.carregaLista(this.mesSelecionado);
       });
     }
   }
 }
-
-
 
 @Component({
   selector: 'dialog-pagar-saida',

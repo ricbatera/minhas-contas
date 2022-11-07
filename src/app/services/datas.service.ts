@@ -10,7 +10,7 @@ export class DatasService {
   hoje = this.f.toISOString().substring(0,10);
   constructor() { }
 
-  getMesAtual(){
+  getMesAtual(): number{
     let today = new Date();
     return today.getMonth();
   }

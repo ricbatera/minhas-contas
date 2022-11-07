@@ -101,8 +101,8 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
-  getitensSaida(): Observable<ItemListaSaidaApi[]> {
-    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=9`);
+  getitensSaida(mes: number): Observable<ItemListaSaidaApi[]> {
+    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}`);
   }
 
   getFaturaApi(id: number | undefined): Observable<FaturaApi> {
