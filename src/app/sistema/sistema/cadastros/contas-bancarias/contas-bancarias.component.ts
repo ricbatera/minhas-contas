@@ -71,9 +71,11 @@ export class ContasBancariasComponent implements OnInit {
 
   salvar() {
     if (this.form.valid) {
-      this.db.novaConta(this.form.value).subscribe(res=>{
+      this.db.novaConta(this.form.value).subscribe(res => {
         console.log(`Retorno da API salvar Conta ${res}`)
         this.ngAfterViewInit();
+        alert('Conta Adicionada Com Sucesso')
+
       })
     } else {
       alert('há erros no formulário')
@@ -86,11 +88,14 @@ export class ContasBancariasComponent implements OnInit {
     if (this.selecaoLista == "0") {
       let newList = this.fonteDados.filter(conta => conta.status);
       this.fonteDados = newList;
+      this.ngAfterViewInit();
     } else if (this.selecaoLista == "1") {
       let newList = this.fonteDados.filter(conta => !conta.status);
       this.fonteDados = newList;
     } else {
-      this.ngAfterViewInit(); // não é a melhor prática - preciso ver uma forma de fazer cache dessas informações
+      this.ngAfterViewInit();
+
+      // não é a melhor prática - preciso ver uma forma de fazer cache dessas informações
     }
   }
 
