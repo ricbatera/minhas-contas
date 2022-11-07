@@ -87,6 +87,10 @@ export class DatabaseServiceService {
     return this.httpClient.get<ContaBancaria[]>(`${this.API_URL}cadastros/conta-bancaria/listar-contas-bancarias`);
   }
 
+  getContasAtivas(): Observable<ContaBancaria[]> {
+    return this.httpClient.get<ContaBancaria[]>(`${this.API_URL}cadastros/conta-bancaria/listar-contas-bancarias-ativas`);
+  }
+
   novaConta(payload: CartaoCredito): Observable<ContaBancaria> {
     return this.httpClient.post<ContaBancaria>(this.API_URL+"cadastros/conta-bancaria/nova-conta-bancaria", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))

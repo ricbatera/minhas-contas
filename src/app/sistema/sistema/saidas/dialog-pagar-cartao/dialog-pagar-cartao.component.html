@@ -5,10 +5,20 @@
         <li>Total dessa fatura: {{fatura?.valor | currency: 'BRL'}}</li>
         <li>Data de Vencimento: {{fatura?.dataVencimento | date: "shortDate"}}</li>
     </ul>
+    <div>
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Debitar dessa conta:</mat-label>
+            <mat-select [(ngModel)]="idConta">
+                <mat-option *ngFor="let conta of contasBancariasList" [value]="conta.id"> {{conta.nome}}</mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->
+        </mat-form-field>
+    </div>
     <div class="radio">
+        <h3>Valor</h3>
         <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagamentoIntegral" (change)="setaValorPago()">
             <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
-            <mat-radio-button value="2">Pamgamento parcial</mat-radio-button>
+            <mat-radio-button value="2">Pagamento parcial</mat-radio-button>
         </mat-radio-group>
     </div>
     <div *ngIf="pagamentoIntegral == '2'">
@@ -22,6 +32,7 @@
     </div>
 
     <div class="radio">
+        <h3>Data</h3>
         <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="usarDataVencimento" (change)="setaDataPagamento()">
             <mat-radio-button value="3">Usar data do vencimento</mat-radio-button>
             <mat-radio-button value="4">Usar outra data para pagamento</mat-radio-button>

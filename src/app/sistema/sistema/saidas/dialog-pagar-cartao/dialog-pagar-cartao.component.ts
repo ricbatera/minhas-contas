@@ -8,6 +8,8 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
+import { ContaBancaria } from 'src/app/model/conta-bancaria';
+import { PagarFaturaRequest } from 'src/app/model/pagar-fatura-request';
 @Component({
   selector: 'app-dialog-pagar-cartao',
   templateUrl: './dialog-pagar-cartao.component.html',
@@ -15,12 +17,11 @@ import { validateHorizontalPosition } from '@angular/cdk/overlay';
 })
 export class DialogPagarCartaoComponent implements OnInit {
   fatura?: FaturaApi;
-  // valorTotalFatura: number | undefined = 0;
   pagamentoIntegral = "1";
   usarDataVencimento = "3";
   gerarParcelaProximaFatura = false;
-  v1 = null;
-  v2 = null;
+  contasBancariasList: ContaBancaria[] = [];
+  idConta = null;
 
   constructor(
     public dialogRef: MatDialogRef<DialogPagarCartaoComponent>,
@@ -33,6 +34,9 @@ export class DialogPagarCartaoComponent implements OnInit {
     // this.fatura = mockDados.getFatura(this.data.idFatura);
     this.db.getFaturaApi(this.data.fatura?.id).subscribe(res=>{
       this.fatura = res;
+    });
+    this.db.getContasAtivas().subscribe(res=>{
+      this.contasBancariasList = res;
     })
   }
 
@@ -48,7 +52,6 @@ export class DialogPagarCartaoComponent implements OnInit {
   }
 
   setaValorPago(){
-    console.log(this.fatura)
     if(this.pagamentoIntegral == "1"){
       this.fatura!.valorPago = this.fatura!.valor;
       this.gerarParcelaProximaFatura = false;
@@ -67,24 +70,30 @@ export class DialogPagarCartaoComponent implements OnInit {
   }
   
   pagar(){
-    console.log(this.fatura)
     let valor
     let dataPagto
-    if(this.fatura?.valorPago == null){
-       valor = this.fatura?.valor
+    if(valor != null || dataPagto != null || this.idConta != null){
+      if(this.fatura?.valorPago == null){
+         valor = this.fatura?.valor
+      }else {
+        valor = this.fatura.valorPago
+      }
+      if(this.fatura?.dataPagamento == null){
+        dataPagto = this.fatura?.dataVencimento
+      } else{
+        dataPagto = this.fatura.dataPagamento
+      }
+      let request: PagarFaturaRequest = {
+        idFatura: this.data.fatura?.id,
+        dataPagamento: dataPagto,
+        valor: valor,
+        idConta: this.idConta,
+        gerarParcelaComDiferenca: this.gerarParcelaProximaFatura
+      }
+      this.db.pagarFatura(request).subscribe(res=>{
+        this.dialogRef.close();
+      })
     }
-    if(this.fatura?.dataPagamento == null){
-      dataPagto = this.fatura?.dataVencimento
-    }
-    let request = {
-      idFatura: this.data.fatura?.id,
-      dataPagamento: dataPagto,
-      valor: valor,
-      idConta: this.fatura?.conta?.id,
-      gerarParcelaComDiferenca: this.gerarParcelaProximaFatura
-    }
-
-    console.log(request);
   }
 
 }

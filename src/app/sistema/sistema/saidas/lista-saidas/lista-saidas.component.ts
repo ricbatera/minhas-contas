@@ -45,6 +45,10 @@ export class ListaSaidasComponent implements OnInit {
 
   ngAfterViewInit() {
     this.lista.sort = this.sort;
+    this.carregaLista();
+  }
+
+  carregaLista(){
     merge().pipe(
       startWith({}),
       switchMap(() => {
@@ -67,7 +71,10 @@ export class ListaSaidasComponent implements OnInit {
         })
         return data;
       })
-    ).subscribe(data => this.itensLista = data)
+    ).subscribe(data =>{ 
+      console.log("Carregando lista de saídas")
+      this.itensLista = data
+    })
   }
 
   abreDetalhes(idSaida: number) {
@@ -88,6 +95,7 @@ export class ListaSaidasComponent implements OnInit {
         console.log('The dialog was closed');
         this.itemLista = result;
         console.log(result);
+        this.carregaLista();
       });
     } else{
       const dialogRef = this.dialog.open(DialogPagarCartaoComponent, {
@@ -97,8 +105,7 @@ export class ListaSaidasComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        this.itemLista = result; // talvez tenha que mudar aqui
-        console.log(result); // talzez tenha que mudar aqui
+        this.carregaLista();
       });
     }
   }

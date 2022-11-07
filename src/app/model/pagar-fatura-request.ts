@@ -1,7 +1,7 @@
 export interface PagarFaturaRequest {
-    idFatura: number,
-    dataPagamento: string,
-    valor:number,
-    idConta: number,
+    idFatura: number | undefined,
+    dataPagamento: string | undefined,
+    valor:number | undefined,
+    idConta: number | undefined | null,
     gerarParcelaComDiferenca: boolean
 }
