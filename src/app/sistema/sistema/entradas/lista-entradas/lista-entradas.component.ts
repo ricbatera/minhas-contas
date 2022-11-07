@@ -61,7 +61,7 @@ export class ListaEntradasComponent {
     }
     this.meses[mes].classList.add("mes-selecionado");
     this.carregaLista(mes + 1);
-    this.mesSelecionado = mes + 1;
+    this.mesSelecionado = mes;
   }
 
   carregaLista(mes: number) {
@@ -108,6 +108,7 @@ export class ListaEntradasComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.escutaMenuMeses(this.mesSelecionado);
     });
   }
 }

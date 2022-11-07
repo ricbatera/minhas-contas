@@ -9,7 +9,8 @@
     <div>
         <mat-form-field appearance="outline">
             <mat-label>Valor Esperado</mat-label>
-            <input matInput [(ngModel)]="data.valor" disabled currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+            <input matInput [(ngModel)]="data.valor" disabled currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
         </mat-form-field>
         <mat-form-field appearance="outline" style="margin-left: 10px;">
             <mat-label>Data Prevista</mat-label>
@@ -18,25 +19,23 @@
     </div>
     <div *ngIf="recebeDefault == '2'">
         <mat-form-field appearance="outline">
-            <mat-label>Entrada </mat-label>
-            <input matInput [(ngModel)]="data.valorRecebido" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
+            <mat-label>Valor Recebido</mat-label>
+            <input matInput [(ngModel)]="valor" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
         </mat-form-field>
         <mat-form-field appearance="outline" style="margin-left: 10px;">
-            <mat-label>Pago em</mat-label>
-            <input type="date" matInput [(ngModel)]="data.dataRecebimento">
+            <mat-label>Recebido em</mat-label>
+            <input type="date" matInput [(ngModel)]="date">
         </mat-form-field>
     </div>
-      
-
-    
-        <mat-form-field appearance="outline" style="margin-left: 100px;">
-            <mat-label>Selecione a Conta</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let conta of listaContas" value={{conta.id}}>{{conta.nome}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 90%;">
+        <mat-label>Selecione a Conta</mat-label>
+        <mat-select [(ngModel)]="contaSelecionada">
+            <mat-option *ngFor="let conta of listaContas" value={{conta.id}}>{{conta.nome}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="Cacenlar()">Cancelar</button>
-    <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"  (click)="Receber()"></i>Receber</button>
+    <button mat-raised-button color="primary" (click)="receber()"><i class="fal fa-save"></i>Receber</button>
 </div>
