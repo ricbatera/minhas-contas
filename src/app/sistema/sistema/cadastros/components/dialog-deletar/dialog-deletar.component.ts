@@ -18,7 +18,7 @@ export class DialogDeletarComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(alert('Conta Deletada'));
   }
 
 }
