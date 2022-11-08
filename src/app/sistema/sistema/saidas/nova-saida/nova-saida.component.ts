@@ -40,7 +40,9 @@ export class NovaSaidaComponent implements OnInit {
   salvar(){
     if(this.form.valid){
       this.db.novaSaidaRequest(this.form.value).subscribe(res=>{
-        console.log(`Resposta da API para nova Saída: ${res}`)
+        console.log(`Resposta da API para nova Saída: ${res}`);
+        this.form.reset(alert('Saida Cadastrada')); 
+
       })
     }
   }
@@ -59,7 +61,8 @@ export class NovaSaidaComponent implements OnInit {
         }
         return data;
       })
-    ).subscribe(data => this.listaCartoes = data)
+    ).subscribe(data => this.listaCartoes = data) ;
+    
   }
 
   toogleComboCartoes(){

@@ -74,7 +74,7 @@ export class ContasBancariasComponent implements OnInit {
       this.db.novaConta(this.form.value).subscribe(res => {
         console.log(`Retorno da API salvar Conta ${res}`)
         this.ngAfterViewInit();
-        alert('Conta Adicionada Com Sucesso')
+        this.form.reset(alert('Conta Adicionada Com Sucesso'))
 
       })
     } else {
@@ -100,16 +100,16 @@ export class ContasBancariasComponent implements OnInit {
   }
 
   deleta(id: number) {
-    // this.fonteDados.forEach(element => {if(element.id == id) this.conta = element });
-    // const dialogRef = this.dialog.open(DialogDeletarComponent, {
-    //   width: '500px',
-    //   data: this.conta,
-    // });
+    this.fonteDados.forEach(element => {if(element.id == id) this.conta = element });
+    const dialogRef = this.dialog.open(DialogDeletarComponent, {
+      width: '500px',
+      data: this.conta,
+    });
 
-    // dialogRef.afterClosed().subscribe((res: ContaBancaria) =>{
-    //   this.conta = res;
-    //   mockDados.inativarConta(res.id); // mock
-    // })
+    dialogRef.afterClosed().subscribe((res: ContaBancaria) =>{
+      this.conta = res;
+      mockDados.inativarConta(res.id); // mock
+    })
   }
 
   edita(id: number) {
