@@ -11,6 +11,20 @@
             </th>
             <td mat-cell *matCellDef="let item"> {{item.entrada.nome}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="Observação">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Detalhes
+            </th>
+            <td mat-cell *matCellDef="let item"> {{item.entrada.obs}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Valor">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Valor
+            </th>
+            <td mat-cell *matCellDef="let item"> {{item.valor | currency: "BRL"}} </td>
+        </ng-container>
     
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>

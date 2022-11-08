@@ -111,3 +111,11 @@ tr.example-element-row:not(.example-expanded-row):active {
   color: #fff;
   border-bottom: 4px solid #fff;
 }
+
+.radio{
+  margin: 20px 0;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

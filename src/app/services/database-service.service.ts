@@ -15,6 +15,7 @@ import { PagarFaturaRequest } from '../model/pagar-fatura-request';
 import { NovaEntradaRequest } from '../model/nova-entrada-request';
 import { ItemEntradaApi } from '../model/item-entrada-api';
 import { ReceberEntradaRequest } from '../model/receber-entrada-request';
+import { PagarParcelaRequest } from '../model/pagar-parcela-request';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,11 @@ export class DatabaseServiceService {
 
   pagarFatura(payload: PagarFaturaRequest): Observable<PagarFaturaRequest> {
     return this.httpClient.post<PagarFaturaRequest>(this.API_URL+"saidas/pagar-fatura", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  pagarParcela(payload: PagarParcelaRequest): Observable<PagarParcelaRequest> {
+    return this.httpClient.post<PagarParcelaRequest>(this.API_URL+"saidas/pagar-parcela", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))
   }
 

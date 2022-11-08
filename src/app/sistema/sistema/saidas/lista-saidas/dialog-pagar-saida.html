@@ -1,29 +1,45 @@
 <h1 mat-dialog-title>Pagar</h1>
 <div mat-dialog-content>
     <div>
+        <mat-form-field appearance="outline" style="width: 90%;">
+            <mat-label>Debitar dessa conta:</mat-label>
+            <mat-select [(ngModel)]="idConta">
+                <mat-option *ngFor="let conta of contasBancariasList" [value]="conta.id"> {{conta.nome}}</mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->
+        </mat-form-field>
+    </div>
+    <div class="radio">
+        <h3>Valor</h3>
+        <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="pagoDefault" (change)="setaValores()">
+            <mat-radio-button value="1">Pagar Valor Integral</mat-radio-button>
+            <mat-radio-button value="2">Pagamento parcial</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div>
         <mat-form-field appearance="outline">
             <mat-label>Valor Esperado</mat-label>
-            <input matInput [(ngModel)]="data.parcela.valor" disabled currencyMask
+            <input matInput [(ngModel)]="data.valor" disabled currencyMask
                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
         </mat-form-field>
         <mat-form-field appearance="outline" style="margin-left: 10px;">
             <mat-label>Vencimento</mat-label>
-            <input type="date" matInput [(ngModel)]="data.parcela.dataVencimento" disabled>
+            <input type="date" matInput [(ngModel)]="data.dataVencimento" disabled>
         </mat-form-field>
     </div>
-    <div>
+    <div *ngIf="pagoDefault == '2'">
         <mat-form-field appearance="outline">
             <mat-label>Valor Pago</mat-label>
-            <input matInput [(ngModel)]="data.parcela.valorPago" currencyMask
+            <input matInput [(ngModel)]="valor" currencyMask
                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', suffix: '' }">
         </mat-form-field>
         <mat-form-field appearance="outline" style="margin-left: 10px;">
             <mat-label>Pago em</mat-label>
-            <input type="date" matInput [(ngModel)]="data.parcela.dataPagamento">
+            <input type="date" matInput [(ngModel)]="date">
         </mat-form-field>
     </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="data.parcela.valorPago != null && data.parcela.dataPagamento != null" >Pagar</button>    
+    <button mat-button cdkFocusInitial (click)="pagar()">Pagar</button>
 </div>

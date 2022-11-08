@@ -7,7 +7,7 @@ export interface ItemListaSaidaApi {
     dataVencimento: string,
     dataPagamento: string | null,
     valor: number,
-    valorPago: number,
+    valorPago: number | null,
     situacao: string,
     fatura: FaturaApi | null,
     saida: SaidaApi,

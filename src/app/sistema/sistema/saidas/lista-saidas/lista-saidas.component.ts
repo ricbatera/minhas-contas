@@ -2,19 +2,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { mockDados } from 'src/app/MOCK/mock-dados';
-import { ItemListaSaida } from 'src/app/model/item-lista-saidas';
 import { IAppState, indiceTab, setaIdSaida } from 'src/app/store/app.reducer';
 import { DialogPagarCartaoComponent } from '../dialog-pagar-cartao/dialog-pagar-cartao.component';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
-import { DateAdapter } from '@angular/material/core';
 import { Meses } from 'src/assets/menudata/meses';
 import { DatasService } from 'src/app/services/datas.service';
+import { ContaBancaria } from 'src/app/model/conta-bancaria';
 
 @Component({
   selector: 'app-lista-saidas',
@@ -131,15 +128,67 @@ export class ListaSaidasComponent implements OnInit {
 
 @Component({
   selector: 'dialog-pagar-saida',
-  templateUrl: 'dialog-pagar-saida.html'
+  templateUrl: 'dialog-pagar-saida.html',
+  styleUrls: ['./lista-saidas.component.css']
 })
 export class DialogPagaSaida {
+
+  valor = null;
+  date = null;
+  pagoDefault = "1";
+  contasBancariasList: ContaBancaria[] = [];
+  idConta = -1;
+
   constructor(
     public dialogRef: MatDialogRef<DialogPagaSaida>,
-    @Inject(MAT_DIALOG_DATA) public data: ItemListaSaida,
+    @Inject(MAT_DIALOG_DATA) public data: ItemListaSaidaApi,
+    private db: DatabaseServiceService
   ) { }
+
+  ngOnInit(): void {
+    this.setaValores();
+    this.db.getContasAtivas().subscribe(res => {
+      this.contasBancariasList = res;
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  setaValores() {
+    if (this.pagoDefault == "1") {
+      this.data.valorPago = this.data.valor;
+      this.data.dataPagamento = this.data.dataVencimento;
+    } else {
+
+      this.data.valorPago = this.valor;
+      this.data.dataPagamento = this.date;
+    }
+  }
+
+  pagar() {
+    if (this.pagoDefault == "1") {
+      this.data.valorPago = this.data.valor;
+      this.data.dataPagamento = this.data.dataVencimento;
+    } else {
+
+      this.data.valorPago = this.valor;
+      this.data.dataPagamento = this.date;
+    }
+    if (this.data.dataPagamento != null && this.data.valorPago != null && this.idConta != -1) {
+      const payload = {
+        idParcela: this.data.id,
+        dataPagamento: this.data.dataPagamento,
+        valor: this.data.valorPago,
+        idConta: this.idConta
+      }
+      this.db.pagarParcela(payload).subscribe(res=>{
+        this.dialogRef.close(this.data);
+        console.log("Retorno da API pagar parcela: " + res);
+      })
+    } else {
+      alert("Preencha corretamente o valor e a data");
+    }
   }
 }

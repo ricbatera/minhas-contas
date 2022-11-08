@@ -1,9 +1,7 @@
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { mockDados } from 'src/app/MOCK/mock-dados';
 import { IAppState, indiceTab, indiceTabEntrada, setaIdEntrada, setaIdSaida } from 'src/app/store/app.reducer';
 import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,7 +29,7 @@ import { ItemEntradaApi } from 'src/app/model/item-entrada-api';
 export class ListaEntradasComponent {
   // lista: itemListaEntrada[] = mockDados.getListaEntrada();
   itensLista: ItemEntradaApi[] = [];
-  colunasEntradas = [ 'descricao', 'status', 'data Recebida'];
+  colunasEntradas = [ 'descricao', 'Observação', 'Valor', 'status', 'data Recebida'];
   expandedElement!: itemListaEntrada | null;
   itemEntrada?: ItemEntradaApi;
   menu = Meses;
