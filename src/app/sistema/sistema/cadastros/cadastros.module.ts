@@ -18,7 +18,10 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatRadioModule} from '@angular/material/radio';
 import { DialogDeletarComponent } from './components/dialog-deletar/dialog-deletar.component';
 import { DialogEditarComponent } from './components/dialog-editar/dialog-editar.component';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { DevedorComponent } from './devedor/devedor.component';
+import { ClassificacaoComponent } from './classificacao/classificacao.component'; 
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -28,7 +31,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     ContasBancariasComponent,
     CartoesCreditoComponent,
     DialogDeletarComponent,
-    DialogEditarComponent
+    DialogEditarComponent,
+    DevedorComponent,
+    ClassificacaoComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +47,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSortModule,
     MatRadioModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ]
 })
 export class CadastrosModule { }

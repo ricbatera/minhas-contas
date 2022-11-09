@@ -16,6 +16,8 @@ import { NovaEntradaRequest } from '../model/nova-entrada-request';
 import { ItemEntradaApi } from '../model/item-entrada-api';
 import { ReceberEntradaRequest } from '../model/receber-entrada-request';
 import { PagarParcelaRequest } from '../model/pagar-parcela-request';
+import { Devedor } from '../model/devedor';
+import { Classificacao } from '../model/classificacao';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +97,24 @@ export class DatabaseServiceService {
 
   receberEntreda(payload: ReceberEntradaRequest): Observable<ReceberEntradaRequest> {
     return this.httpClient.post<ReceberEntradaRequest>(this.API_URL+"entradas/receber-parcela", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  getDevedoresFull(): Observable<Devedor[]> {
+    return this.httpClient.get<Devedor[]>(`${this.API_URL}cadastros/devedor/listar-devedores`);
+  }
+
+  getClassificacoesFull(): Observable<Classificacao[]> {
+    return this.httpClient.get<Classificacao[]>(`${this.API_URL}cadastros/classificacao/listar-classificacoes`);
+  }
+
+  novaClassificacao(payload: Classificacao): Observable<Classificacao> {
+    return this.httpClient.post<Classificacao>(this.API_URL+"cadastros/classificacao/nova-classificacao", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  novoDevedor(payload: Devedor): Observable<Devedor> {
+    return this.httpClient.post<Devedor>(this.API_URL+"cadastros/devedor/novo-devedor", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))
   }
 

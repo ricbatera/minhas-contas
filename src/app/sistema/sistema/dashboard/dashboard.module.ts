@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+// MATERIAL
+import {MatCardModule} from '@angular/material/card'; 
 
 
 @NgModule({
@@ -9,7 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatCardModule
   ]
 })
 export class DashboardModule { }

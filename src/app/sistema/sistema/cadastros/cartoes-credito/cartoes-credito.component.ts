@@ -1,10 +1,10 @@
 
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { mockDados } from 'src/app/MOCK/mock-dados';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { DialogDeletarComponent } from '../components/dialog-deletar/dialog-deletar.component';
@@ -76,7 +76,6 @@ export class CartoesCreditoComponent implements OnInit {
       this.db.novoCartao(this.form.value).subscribe(res => {
         this.ngAfterViewInit();
         this.form.reset( alert('Cartão Adicionado'));
-
       })
     } else {
       alert('há erros no formulário')
