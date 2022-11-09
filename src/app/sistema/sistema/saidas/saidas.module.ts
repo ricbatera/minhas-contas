@@ -19,6 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // outras libs
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -53,7 +54,8 @@ import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-c
     MatDialogModule,
     MatRadioModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
   ]
 })
 export class SaidasModule { }

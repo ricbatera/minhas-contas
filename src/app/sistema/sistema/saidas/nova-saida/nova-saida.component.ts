@@ -5,6 +5,8 @@ import { CartaoCredito } from 'src/app/model/cartao-credito';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { Classificacao } from 'src/app/model/classificacao';
+import { Devedor } from 'src/app/model/devedor';
 
 @Component({
   selector: 'app-nova-saida',
@@ -15,6 +17,9 @@ export class NovaSaidaComponent implements OnInit {
 
   listaCartoes: CartaoCredito[] = [];
   isCartao = true;
+  listaCategorias: Classificacao [] = [];
+  listaDevedores: Devedor [] = [];
+  avancado: boolean = false;
 
   form: FormGroup;
 
@@ -35,6 +40,13 @@ export class NovaSaidaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.db.getDevedoresFull().subscribe(res=>{
+      this.listaDevedores = res.filter(e=> e.status);
+    });
+
+    this.db.getClassificacoesFull().subscribe(res=>{
+      this.listaCategorias = res.filter(e=> e.status);
+    })
   }
 
   salvar(){

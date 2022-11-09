@@ -1,4 +1,5 @@
 export interface Devedor {
     id: number,
-    nome: string
+    nome: string,
+    status: boolean
 }

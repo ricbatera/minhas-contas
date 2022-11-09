@@ -66,6 +66,19 @@
         <div class="linha">
             <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"></i> Salvar</button>
         </div>
-        <!-- <p>{{form.value | json }}</p> -->
+        <div>
+            <mat-expansion-panel (opened)="avancado = true" (closed)="avancado = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Avançado
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{avancado ? 'Clique para escondr' : 'Mostrar'}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+            </mat-expansion-panel>
+        </div>
+        <p>{{form.value | json }}</p>
     </form>
 </mat-card>
