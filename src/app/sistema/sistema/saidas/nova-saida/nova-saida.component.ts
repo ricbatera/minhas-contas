@@ -19,7 +19,10 @@ export class NovaSaidaComponent implements OnInit {
   isCartao = true;
   listaCategorias: Classificacao [] = [];
   listaDevedores: Devedor [] = [];
-  avancado: boolean = false;
+  avancado: boolean = true;
+  mostrarDevedor: boolean = true;
+  gerarEntrada = "true";
+  ric: boolean = false;
 
   form: FormGroup;
 
@@ -36,6 +39,11 @@ export class NovaSaidaComponent implements OnInit {
       valor: [null, Validators.required],
       meioPagto: [null, Validators.required],
       cartaoSelecionado: [null],
+      associaDevedor: [true],
+      devedorId:[null],
+      criaEntrada:[null],
+      valorEntrada:[null],
+      classificacaoId:[null, Validators.required],
     })
   }
 
@@ -45,8 +53,18 @@ export class NovaSaidaComponent implements OnInit {
     });
 
     this.db.getClassificacoesFull().subscribe(res=>{
-      this.listaCategorias = res.filter(e=> e.status);
+      this.listaCategorias = res.filter(e=> e.status && e.tipo == 'Saída').sort(this.ordenar);
     })
+  }
+
+  ordenar(a:Classificacao, b: Classificacao){
+    if(a.nome > b.nome){
+      return 1;
+    }
+    if(a.nome < b.nome){
+      return -1;
+    }
+    return 0;
   }
 
   salvar(){
@@ -83,6 +101,21 @@ export class NovaSaidaComponent implements OnInit {
     } else{
       this.isCartao = true;
       this.form.controls['cartaoSelecionado'].setValue(null);
+    }
+  }
+
+  validaDevedor(){
+    if(!this.form.controls['associaDevedor'].value){
+      console.log('alterando');
+      this.form.controls['devedorId'].setValue(null);
+    }
+  }
+
+  validaValorEntradaDevedor(){
+    if(this.form.controls['criaEntrada'].value){
+      this.form.controls['valorEntrada'].setValue(this.form.controls['valor'].value);
+    } else{
+      this.form.controls['valorEntrada'].setValue(null);
     }
   }
 }

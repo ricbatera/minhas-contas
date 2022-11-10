@@ -25,3 +25,17 @@ form {
     font-size: 1.2em;
     font-weight: 400;
 }
+
+.botoes-selecao{
+    margin: 20px 0;
+  }
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  .radio-label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }

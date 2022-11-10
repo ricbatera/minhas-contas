@@ -20,11 +20,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 // outras libs
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DetalhesSaidaComponent } from './detalhes-saida/detalhes-saida.component';
 import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-cartao.component';
+import { TesteComponent } from './teste/teste.component';
 
 
 
@@ -36,6 +38,7 @@ import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-c
     DetalhesSaidaComponent,
     DialogPagaSaida,
     DialogPagarCartaoComponent,
+    TesteComponent,
   ],
   imports: [
     FormsModule,
@@ -55,7 +58,8 @@ import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-c
     MatRadioModule,
     FormsModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSlideToggleModule
   ]
 })
 export class SaidasModule { }
