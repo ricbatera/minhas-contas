@@ -74,7 +74,7 @@ export class ContasBancariasComponent implements OnInit {
       this.db.novaConta(this.form.value).subscribe(res => {
         console.log(`Retorno da API salvar Conta ${res}`)
         this.ngAfterViewInit();
-        this.form.reset(alert('Conta Adicionada Com Sucesso'))
+        //this.form.reset(alert('Conta Adicionada Com Sucesso'))
 
       })
     } else {

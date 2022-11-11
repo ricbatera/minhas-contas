@@ -39,9 +39,9 @@ export class NovaSaidaComponent implements OnInit {
       valor: [null, Validators.required],
       meioPagto: [null, Validators.required],
       cartaoSelecionado: [null],
-      associaDevedor: [true],
+      associaDevedor: [false],
       devedorId:[null],
-      criaEntrada:[null],
+      criaEntrada:[false],
       valorEntrada:[null],
       classificacaoId:[null, Validators.required],
     })
@@ -71,7 +71,7 @@ export class NovaSaidaComponent implements OnInit {
     if(this.form.valid){
       this.db.novaSaidaRequest(this.form.value).subscribe(res=>{
         console.log(`Resposta da API para nova Saída: ${res}`);
-        this.form.reset(alert('Saida Cadastrada')); 
+        //this.form.reset(alert('Saida Cadastrada')); 
 
       })
     }

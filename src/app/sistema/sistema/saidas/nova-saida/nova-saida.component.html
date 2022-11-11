@@ -44,7 +44,7 @@
                 <mat-select formControlName="classificacaoId">
                     <mat-option *ngFor="let item of listaCategorias" value="{{item.id}}">{{item.nome}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="!form.controls['meioPagto'].valid">Campo <strong>obrigatório</strong></mat-error>
+                <mat-error *ngIf="!form.controls['classificacaoId'].valid">Campo <strong>obrigatório</strong></mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="flex: 3;">

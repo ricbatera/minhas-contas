@@ -75,7 +75,7 @@ export class CartoesCreditoComponent implements OnInit {
     if (this.form.valid) {
       this.db.novoCartao(this.form.value).subscribe(res => {
         this.ngAfterViewInit();
-        this.form.reset( alert('Cartão Adicionado'));
+        //this.form.reset( alert('Cartão Adicionado'));
       })
     } else {
       alert('há erros no formulário')

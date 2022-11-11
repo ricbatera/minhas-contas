@@ -11,5 +11,5 @@ export interface FaturaApi {
     dataPagamento: string | null | undefined,
     conta: ContaBancaria | null,
     cartao: CartaoCredito | null,
-    itensFatura: ParcelaApi | null | undefined
+    itensFatura: ParcelaApi []
 }

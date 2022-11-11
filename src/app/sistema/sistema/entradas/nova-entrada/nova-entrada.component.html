@@ -37,18 +37,57 @@
           </mat-form-field>
       </div>
       <div class="linha">
-          <mat-form-field appearance="outline">
+
+        <mat-form-field appearance="outline" style="flex: 1;">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="classificacaoId">
+                <mat-option *ngFor="let item of listaCategorias" value="{{item.id}}">{{item.nome}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['classificacaoId'].valid">Campo <strong>obrigatório</strong></mat-error>
+        </mat-form-field>
+
+          <mat-form-field appearance="outline" style="flex: 3;">
               <mat-label>Observações</mat-label>
               <input matInput formControlName="obs">
               <mat-error *ngIf="!form.controls['obs'].valid">Campo <strong>obrigatório</strong></mat-error>
           </mat-form-field>
       </div>
 
+      <div>
+        <mat-expansion-panel (opened)="avancado = true" (closed)="avancado = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Avançado
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                    {{avancado ? 'Clique para escondr' : 'Mostrar'}}
+                </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <div class="linha">
+                <div class="botoes-selecao radio-label">
+                    <mat-label>Deseja associar essa saída a um devedor? </mat-label>
+                    <mat-slide-toggle formControlName="associaDevedor" (change)="validaDevedor()">
+                    </mat-slide-toggle>
+                </div>
+                <div *ngIf="form.controls['associaDevedor'].value">
+                    <mat-form-field appearance="outline" style="width: 300px; margin-left: 50px;">
+                        <mat-label>Selecione um devedor</mat-label>
+                        <mat-select formControlName="devedorId">
+                            <mat-option *ngFor="let devedor of listaDevedores" [value]="devedor.id">{{devedor.nome}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </mat-expansion-panel>
+    </div>
+
       <div class="linha">
         <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"></i> Salvar</button>
       </div>
       <div>
-         <!-- <p>{{form.value | json }}</p> -->
+         <p>{{form.value | json }}</p>
       </div>
   </form>
 </mat-card>

@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ListaEntradasComponent } from './lista-entradas/lista-entradas.component';
 import { NovaEntradaComponent } from './nova-entrada/nova-entrada.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -55,6 +57,8 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     MatDialogModule,
     MatRadioModule,
+    MatSlideToggleModule,
+    MatExpansionModule
   ]
 })
 export class EntradasModule { }

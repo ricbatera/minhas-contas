@@ -3,5 +3,8 @@ export interface PagarFaturaRequest {
     dataPagamento: string | undefined,
     valor:number | undefined,
     idConta: number | undefined | null,
-    gerarParcelaComDiferenca: boolean
+    gerarParcelaComDiferenca: boolean,
+    classificacaoId: number | undefined,
+    associaDevedor: boolean,
+
 }

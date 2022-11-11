@@ -88,8 +88,11 @@ export class DialogPagarCartaoComponent implements OnInit {
         dataPagamento: dataPagto,
         valor: valor,
         idConta: this.idConta,
-        gerarParcelaComDiferenca: this.gerarParcelaProximaFatura
+        gerarParcelaComDiferenca: this.gerarParcelaProximaFatura,
+        classificacaoId: this.fatura?.itensFatura[0]?.classificacao.id,
+        associaDevedor: false // aqui eu forço nõa associar um devedor se o valor pago da fatura for menor ou maior.
       }
+      console.log(request);
       this.db.pagarFatura(request).subscribe(res=>{
         this.dialogRef.close();
       })
