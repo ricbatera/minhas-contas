@@ -1,7 +1,73 @@
-.container{
+.container {
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.saida{
+.saida {
+    margin-top: 10px;
     display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* menu meses */
+
+.menu-meses>ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.1em;
+}
+
+.meses {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+}
+
+/* .meses:hover{
+    background-color: bisque;
+  } */
+
+.mes-selecionado {
+    background-color: #263238;
+    color: #fff;
+    border-bottom: 4px solid #fff;
+}
+
+.card-cartoes {
+    display: flex;
+    gap: 20px;
+}
+
+.valores {
+    color: #b61827;
+    font-weight: 500;
+    font-size: 1.3em;
+}
+.valores-entrada {
+    color: #005b4f;
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.datas {
+    font-weight: 500;
+    font-size: 1.2em;
+    color: #4d2c91;
+}
+
+.entre-cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.botoes-group{
+    display: flex;
+    gap: 10px;
 }

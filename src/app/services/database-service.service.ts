@@ -70,10 +70,12 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
-
-
   getitensSaida(mes: number): Observable<ItemListaSaidaApi[]> {
     return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}`);
+  }
+
+  getDashboardValues(mes: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}dashboard/indicadores?mes=${mes}`);
   }
 
 

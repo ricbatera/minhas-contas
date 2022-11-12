@@ -1,13 +1,72 @@
+<div class="menu-meses">
+    <ul>
+        <li class="meses" *ngFor="let mes of menu" (click)="escutaMenuMeses(mes.id)">{{mes.mes}}</li>
+    </ul>
+</div>
 <div class="container">
     <mat-card>
-        <span>Saídas</span>
+        <span style="font-size: 1.6em;">Saídas</span>
         <div class="saida">
-            <mat-card>
-                <span>Cartões</span>
+            <mat-card class="entre-cards">
+                <span>Total de Saídas</span>
+                <mat-card style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
+                    <h2>Total para o mês de {{mesSelecionadoString}}</h2>
+                    <p><span class="valores">{{indicadores?.totalSaidasDoMes | currency: "BRL"}}</span><i
+                            class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #b61827;"></i>
+                    </p>
+                </mat-card>
             </mat-card>
-            <mat-card>
+
+            <mat-card class="entre-cards">
                 <span>Bébito / Boleto</span>
+                <mat-card style="margin-top: 10px;">
+                    <h2>Boletos e Débitos</h2>
+                    <p>Total: <span class="valores">{{indicadores?.totalEmBoletos | currency: "BRL"}}</span><i
+                            class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i>
+                    </p>
+                </mat-card>
+            </mat-card>
+
+            <mat-card class="entre-cards">
+                <span style="margin-bottom: 10px;">Cartões de Crédito</span>
+                <div class="card-cartoes">
+                    <mat-card *ngFor="let item of indicadores?.cartoes">
+                        <h2>{{item.cartao.nome}}</h2>
+                        <p>Vencimento: <br> <span class="datas">{{item.vencimento | date: "shortDate"}}</span><i
+                                class="fad fa-calendar-alt"
+                                style="margin-left: 10px; font-size: 1.2em; color: #4d2c91;"></i></p>
+                        <p>Valor da Fatura: <br> <span class="valores">{{item.valor | currency: "BRL"}}</span><i
+                                class="fad fa-sack-dollar"
+                                style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+                        <div class="botoes-group">
+                            <button mat-stroked-button color="primary">Pagar</button>
+                            <button mat-stroked-button color="accent">Ver</button>
+                        </div>
+                    </mat-card>
+                </div>
+            </mat-card>
+
+        </div>
+    </mat-card>
+    <mat-card>
+        <span style="font-size: 1.6em;">Meus Devedores</span>
+        <div class="card-cartoes" style="margin-top: 10px;">
+            <mat-card *ngFor="let item of indicadores?.devedores">
+                <h2>{{item.devedor.nome}}</h2>
+                <p>Valor: <span class="valores">{{item.total | currency: "BRL"}}</span><i class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
             </mat-card>
         </div>
+    </mat-card>
+    <mat-card>
+        <span style="font-size: 1.6em;">Entradas</span>
+        <mat-card class="entre-cards">
+            <span>Total de Entradas</span>
+            <mat-card style="display: flex; flex-direction: column; align-items: center;">
+                <h2>Total para o mês de {{mesSelecionadoString}}</h2>
+                <p><span class="valores-entrada">{{indicadores?.totalEntradasDoMes | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #005b4f;"></i></p>
+            </mat-card>
+        </mat-card>
     </mat-card>
 </div>

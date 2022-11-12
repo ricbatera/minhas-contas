@@ -50,7 +50,9 @@ export class ListaEntradasComponent {
   }
 
   setaMesAtual() {
-    this.escutaMenuMeses(this.dataService.getMesAtual());
+    setTimeout(() => {
+      this.escutaMenuMeses(this.dataService.getMesAtual());      
+    }, 300);
   }
 
   escutaMenuMeses(mes: number) {
