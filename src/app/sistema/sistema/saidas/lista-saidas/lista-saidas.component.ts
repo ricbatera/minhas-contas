@@ -9,10 +9,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
-import { Meses } from 'src/assets/menudata/meses';
-import { DatasService } from 'src/app/services/datas.service';
 import { ContaBancaria } from 'src/app/model/conta-bancaria';
-import { anos } from 'src/assets/menudata/anos';
 
 @Component({
   selector: 'app-lista-saidas',

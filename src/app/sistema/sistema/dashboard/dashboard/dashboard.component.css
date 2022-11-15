@@ -9,8 +9,9 @@
     margin-top: 10px;
     display: flex;
     gap: 20px;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 
@@ -24,6 +25,7 @@
     font-weight: 500;
     font-size: 1.3em;
 }
+
 .valores-entrada {
     color: #005b4f;
     font-weight: 500;
@@ -36,13 +38,55 @@
     color: #4d2c91;
 }
 
-.entre-cards{
+.entre-cards {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.botoes-group{
+.botoes-group {
     display: flex;
     gap: 10px;
+}
+
+.total-boletos {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.totais-saida {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.total-pago {
+    color: #005b4f;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.total-pagar {
+    color: #b61827;
+    font-size: 1.2em;
+    font-weight: 500;
+
+}
+
+.entradas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-entrada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cards-entradas-geral{
+    display: flex;
+    gap: 20px;
 }

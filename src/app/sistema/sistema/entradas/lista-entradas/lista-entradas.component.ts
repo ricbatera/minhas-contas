@@ -10,7 +10,6 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatasService } from 'src/app/services/datas.service';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
-import { Meses } from 'src/assets/menudata/meses';
 import { ItemEntradaApi } from 'src/app/model/item-entrada-api';
 
 

@@ -66,7 +66,7 @@
                             <mat-card *ngIf="element.situacao == 'Pago'">
                                <p>Detalhes dos Pagamento</p>
                                 <ul>
-                                    <li><i class="fad fa-calendar-exclamation"></i> Vencimento: <i style="font-weight: 600;">{{element.dataPagamento | date:'shortDate'}}</i></li>
+                                    <li><i class="fad fa-calendar-exclamation"></i> Pago em: <i style="font-weight: 600;">{{element.dataPagamento | date:'shortDate'}}</i></li>
                                     <li><i class="fad fa-money-bill-alt"></i> Valor: <i style="font-weight: 600;">{{element.valorPago | currency:'BRL'}}</i></li>
                                     <li *ngIf="element.conta != null"><i class="fad fa-money-bill-alt"></i> Debitado da Conta: <i style="font-weight: 600;">{{element.conta.nome }}</i></li>
                                     <li *ngIf="element.conta == null"><i class="fad fa-money-bill-alt"></i> Pago com o Cartão: <i style="font-weight: 600;">{{element.fatura?.cartao?.nome}}</i></li>

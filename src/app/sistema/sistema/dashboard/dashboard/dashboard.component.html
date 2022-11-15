@@ -1,28 +1,73 @@
 <app-menu-meses-anos (enviaMes)="recebeEventMes($event)" (enviaAno)="recebeEventAno($event)"></app-menu-meses-anos>
 
 <div class="container">
+    <mat-card class="meu-espaco">
+        <span style="font-size: 1.6em;" class="">Meu Espaço</span>
+        <mat-card-subtitle style="margin-top: 5px;">Esse espaço leva em conta somente suas entradas e saídas, ignorando os valores associados a seus devedores. Assim você pode ver como estãos seus gastos em relação aos seus rendimentos</mat-card-subtitle>
+        <div class="cards-entradas-geral">
+            <mat-card class="card-entrada">
+                <h3>Meus gastos em  {{mesSelecionadoString}}</h3>
+                <p><span class="valores">{{indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+                    class="fad fa-sack-dollar"
+                    style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+            </mat-card>
+            <mat-card class="card-entrada">
+                <h3>Meus recebimentos em  {{mesSelecionadoString}}</h3>
+                <p><span class="valores-entrada">{{indicadores?.minhasEntradas | currency: "BRL"}}</span><i
+                    class="fad fa-sack-dollar"
+                    style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+            </mat-card>
+            <mat-card class="card-entrada">
+                <h3>Saldo em  {{mesSelecionadoString}}</h3>
+                <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas < 0 ">
+                    <p><span class="valores-entrada">{{ indicadores?.minhasEntradas - indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+                </div>
+                <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas > 0 ">
+                    <p><span class="valores">{{ indicadores?.minhasEntradas -indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+                </div>
+            </mat-card>
+        </div>
+    </mat-card>
     <mat-card>
         <span style="font-size: 1.6em;">Saídas</span>
         <div class="saida">
-            <mat-card class="entre-cards">
-                <span>Total de Saídas</span>
-                <mat-card style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
-                    <h2>Total para o mês de {{mesSelecionadoString}}</h2>
-                    <p><span class="valores">{{indicadores?.totalSaidasDoMes | currency: "BRL"}}</span><i
-                            class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #b61827;"></i>
-                    </p>
-                </mat-card>
-            </mat-card>
+            <div>
+                <div class="total-boletos">
+                    <mat-card class="entre-cards">
+                        <span>Total de Saídas</span>
+                        <mat-card style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
+                            <h2>Total em {{mesSelecionadoString}}</h2>
+                            <p><span class="valores">{{indicadores?.totalSaidasDoMes | currency: "BRL"}}</span><i
+                                    class="fad fa-sack-dollar"
+                                    style="margin-left: 10px; font-size: 1.5em; color: #b61827;"></i>
+                            </p>
+                        </mat-card>
+                    </mat-card>
 
-            <mat-card class="entre-cards">
-                <span>Bébito / Boleto</span>
-                <mat-card style="margin-top: 10px;">
-                    <h2>Boletos e Débitos</h2>
-                    <p>Total: <span class="valores">{{indicadores?.totalEmBoletos | currency: "BRL"}}</span><i
-                            class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i>
-                    </p>
-                </mat-card>
-            </mat-card>
+                    <mat-card class="entre-cards">
+                        <span>Bébito / Boleto</span>
+                        <mat-card style="margin-top: 10px;">
+                            <h2>Boletos e Débitos</h2>
+                            <p>Total: <span class="valores">{{indicadores?.totalEmBoletos | currency: "BRL"}}</span><i
+                                    class="fad fa-sack-dollar"
+                                    style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i>
+                            </p>
+                        </mat-card>
+                    </mat-card>
+                </div>
+                <div>
+                    <mat-card class="totais-saida">
+                        <p>Total pago: <span class="total-pago">{{indicadores?.totalPagoDoMes | currency:"BRL"}}</span>
+                        </p>
+                        <P>Total a pagar: <span class="total-pagar">{{indicadores?.totalSaidasDoMes -
+                                indicadores?.totalPagoDoMes | currency: "BRL"}}</span></P>
+                    </mat-card>
+                </div>
+            </div>
 
             <mat-card class="entre-cards">
                 <span style="margin-bottom: 10px;">Cartões de Crédito</span>
@@ -43,27 +88,39 @@
                 </div>
             </mat-card>
 
-        </div>
-    </mat-card>
-    <mat-card>
-        <span style="font-size: 1.6em;">Meus Devedores</span>
-        <div class="card-cartoes" style="margin-top: 10px;">
-            <mat-card *ngFor="let item of indicadores?.devedores">
-                <h2>{{item.devedor.nome}}</h2>
-                <p>Valor: <span class="valores">{{item.total | currency: "BRL"}}</span><i class="fad fa-sack-dollar"
-                        style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+            <mat-card style="width: 93%;">
+                <span style="font-size: 1.6em;">Meus Devedores</span>
+                <div class="card-cartoes" style="margin-top: 10px;">
+                    <mat-card *ngFor="let item of indicadores?.devedores">
+                        <h2>{{item.devedor.nome}}</h2>
+                        <p>Valor: <span class="valores">{{item.total | currency: "BRL"}}</span><i
+                                class="fad fa-sack-dollar"
+                                style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+                    </mat-card>
+                </div>
             </mat-card>
         </div>
     </mat-card>
-    <mat-card>
-        <span style="font-size: 1.6em;">Entradas</span>
-        <mat-card class="entre-cards">
-            <span>Total de Entradas</span>
-            <mat-card style="display: flex; flex-direction: column; align-items: center;">
-                <h2>Total para o mês de {{mesSelecionadoString}}</h2>
+    <mat-card class="entradas">
+        <span style="font-size: 1.6em;" class="">Entradas</span>
+        <div class="cards-entradas-geral">
+            <mat-card class="card-entrada">
+                <h2>Total em {{mesSelecionadoString}}</h2>
                 <p><span class="valores-entrada">{{indicadores?.totalEntradasDoMes | currency: "BRL"}}</span><i
                         class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #005b4f;"></i></p>
             </mat-card>
-        </mat-card>
+
+            <mat-card class="card-entrada">
+                <h2>Recebido</h2>
+                <p><span class="valores-entrada">{{indicadores?.totalRecebidoDoMes | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #005b4f;"></i></p>
+            </mat-card>
+            <mat-card class="card-entrada">
+                <h2>A Receber</h2>
+                <p><span class="valores-entrada">{{indicadores?.totalEntradasDoMes - indicadores?.totalRecebidoDoMes | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar" style="margin-left: 10px; font-size: 1.5em; color: #005b4f;"></i></p>
+            </mat-card>
+        </div>
     </mat-card>
+    
 </div>
