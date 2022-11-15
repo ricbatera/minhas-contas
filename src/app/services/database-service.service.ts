@@ -70,17 +70,17 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
-  getitensSaida(mes: number): Observable<ItemListaSaidaApi[]> {
-    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}`);
+  getitensSaida(mes: number, ano: number): Observable<ItemListaSaidaApi[]> {
+    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}&ano=${ano}`);
   }
 
-  getDashboardValues(mes: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.API_URL}dashboard/indicadores?mes=${mes}`);
+  getDashboardValues(mes: number, ano: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}dashboard/indicadores?mes=${mes}&ano=${ano}`);
   }
 
 
-  getitensEntrada(mes: number): Observable<ItemEntradaApi[]> {
-    return this.httpClient.get<ItemEntradaApi[]>(`${this.API_URL}entradas/listar-mensal?mes=${mes}`);
+  getitensEntrada(mes: number, ano: number): Observable<ItemEntradaApi[]> {
+    return this.httpClient.get<ItemEntradaApi[]>(`${this.API_URL}entradas/listar-mensal?mes=${mes}&ano=${ano}`);
   }
 
   getFaturaApi(id: number | undefined): Observable<FaturaApi> {

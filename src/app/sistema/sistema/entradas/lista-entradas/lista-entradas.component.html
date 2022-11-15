@@ -1,8 +1,4 @@
-<div class="menu-meses">
-    <ul>
-        <li class="meses" *ngFor="let mes of menu" (click)="escutaMenuMeses(mes.id)">{{mes.mes}}</li>
-    </ul>
-</div>
+<app-menu-meses-anos (enviaMes)="recebeEventMes($event)" (enviaAno)="recebeEventAno($event)"></app-menu-meses-anos>
 <div>
     <table mat-table [dataSource]="itensLista" multiTemplateDataRows class="mat-elevation-z8">
         <ng-container matColumnDef="descricao">
@@ -13,10 +9,10 @@
         </ng-container>
 
         <ng-container matColumnDef="Observação">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header  style="max-width: 300px;">
                 Detalhes
             </th>
-            <td mat-cell *matCellDef="let item"> {{item.entrada.obs}} </td>
+            <td mat-cell *matCellDef="let item" style="max-width: 300px;"> {{item.entrada.obs}} </td>
         </ng-container>
     
         <ng-container matColumnDef="Valor">

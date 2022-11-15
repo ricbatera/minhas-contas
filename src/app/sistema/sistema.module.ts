@@ -10,13 +10,15 @@ import { SaidasModule } from './sistema/saidas/saidas.module';
 import { EntradasModule } from './sistema/entradas/entradas.module';
 import { DashboardModule } from './sistema/dashboard/dashboard.module';
 import { SistemaRoutingModule } from './sistema-routing.module';
+// import { MenuMesesAnosComponent } from './sistema/components/menu-meses-anos/menu-meses-anos.component';
 
 
 
 
 @NgModule({
   declarations: [
-    SistemaComponent
+    SistemaComponent,
+    // MenuMesesAnosComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { SistemaRoutingModule } from './sistema-routing.module';
     SistemaRoutingModule
   ],
   exports: [
-    SistemaComponent
+    SistemaComponent,
+    // MenuMesesAnosComponent
   ]
 })
 export class SistemaModule { }

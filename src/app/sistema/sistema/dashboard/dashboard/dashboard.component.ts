@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { DatasService } from 'src/app/services/datas.service';
+import { anos } from 'src/assets/menudata/anos';
 import { Meses } from 'src/assets/menudata/meses';
 
 @Component({
@@ -12,9 +13,10 @@ export class DashboardComponent implements OnInit {
 
   indicadores: any = null;
   mesSelecionado = -1;
-  mesSelecionadoString = "Loading"
-  meses = document.getElementsByClassName("meses");
+  anoSelecionado = -1;
+  mesSelecionadoString = "Loading";
   menu = Meses;
+  anos = anos;
 
   constructor(
     private db: DatabaseServiceService,
@@ -22,34 +24,29 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   // this.setaMesAtual()
+    // this.setaMesAtual()
   }
 
   ngAfterViewInit() {
-    this.setaMesAtual();
   }
 
-  setaMesAtual() {
+  recebeEventMes(e: any) {
+    this.mesSelecionado = e.id + 1;
+    this.mesSelecionadoString = e.mes;
+    this.carregaDadosDashboard();
+  }
+
+  recebeEventAno(e: any) {
+    this.anoSelecionado = e.ano;
     setTimeout(() => {
-      let mesAtual = this.dataService.getMesAtual();
-      this.escutaMenuMeses(mesAtual);
-    }, 300);
-  }
-  
-  escutaMenuMeses(mes: number) {
-    for (let i = 0; i < this.meses.length; i++) {
-      this.meses[i].classList.remove("mes-selecionado");
-    }
-    this.menu.forEach(e => { if(e.id == mes) this.mesSelecionadoString = e.mes});
-    this.meses[mes].classList.add("mes-selecionado");
-    this. carregaDadosDashboard(mes + 1);
-    this.mesSelecionado = mes + 1;
+      this.carregaDadosDashboard();
+    }, 100);
   }
 
-  carregaDadosDashboard(mes: number) {
-    this.db.getDashboardValues(mes).subscribe(res => {
+  carregaDadosDashboard() {
+    this.db.getDashboardValues(this.mesSelecionado, this.anoSelecionado).subscribe(res => {
       this.indicadores = res;
-      console.log(res);
+      // console.log(res);
     })
 
   }

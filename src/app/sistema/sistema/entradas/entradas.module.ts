@@ -26,6 +26,8 @@ import { EntradaDetalheComponent } from './entrada-detalhe/entrada-detalhe.compo
 import { DailogReceberEntradaComponent } from './dailog-receber-entrada/dailog-receber-entrada.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MenuMesesAnosComponent } from '../components/menu-meses-anos/menu-meses-anos.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -35,7 +37,8 @@ import { MatRadioModule } from '@angular/material/radio';
     NovaEntradaComponent,
     ListaEntradasComponent,
     EntradaDetalheComponent,
-    DailogReceberEntradaComponent
+    DailogReceberEntradaComponent,
+    // MenuMesesAnosComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +61,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatRadioModule,
     MatSlideToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ComponentsModule
   ]
 })
 export class EntradasModule { }

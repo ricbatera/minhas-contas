@@ -1,6 +1,6 @@
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IAppState, indiceTab, indiceTabEntrada, setaIdEntrada, setaIdSaida } from 'src/app/store/app.reducer';
 import { itemListaEntrada } from 'src/app/model/item-lista-entrada';
@@ -27,14 +27,13 @@ import { ItemEntradaApi } from 'src/app/model/item-entrada-api';
   ],
 })
 export class ListaEntradasComponent {
-  // lista: itemListaEntrada[] = mockDados.getListaEntrada();
+  
   itensLista: ItemEntradaApi[] = [];
   colunasEntradas = [ 'descricao', 'Observação', 'Valor', 'status', 'data Recebida'];
   expandedElement!: itemListaEntrada | null;
   itemEntrada?: ItemEntradaApi;
-  menu = Meses;
-  meses = document.getElementsByClassName("meses");
   mesSelecionado: number = -1;
+  anoSelecionado: number = -1;
 
   constructor(
     public dialog: MatDialog,
@@ -46,29 +45,25 @@ export class ListaEntradasComponent {
   }
 
   ngAfterViewInit() {
-    this.setaMesAtual();
+   
   }
 
-  setaMesAtual() {
+  recebeEventMes(e: any){
+    this.mesSelecionado = e.id +1;
+    this.carregaLista();
+  }
+  recebeEventAno(e: any){
+    this.anoSelecionado = e.ano;
     setTimeout(() => {
-      this.escutaMenuMeses(this.dataService.getMesAtual());      
-    }, 300);
+      this.carregaLista();      
+    }, 100);
   }
 
-  escutaMenuMeses(mes: number) {
-    for (let i = 0; i < this.meses.length; i++) {
-      this.meses[i].classList.remove("mes-selecionado");
-    }
-    this.meses[mes].classList.add("mes-selecionado");
-    this.carregaLista(mes + 1);
-    this.mesSelecionado = mes;
-  }
-
-  carregaLista(mes: number) {
+  carregaLista() {
     merge().pipe(
       startWith({}),
       switchMap(() => {
-        return this.db.getitensEntrada(mes)
+        return this.db.getitensEntrada(this.mesSelecionado, this.anoSelecionado)
           .pipe(catchError(() => observableOf(null)))
       }
       ),
@@ -88,7 +83,6 @@ export class ListaEntradasComponent {
         return data;
       })
     ).subscribe(data => {
-      console.log("Carregando lista de Entradas")
       this.itensLista = data
     })
   }
@@ -108,7 +102,7 @@ export class ListaEntradasComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.escutaMenuMeses(this.mesSelecionado);
+      this.carregaLista();
     });
   }
 }

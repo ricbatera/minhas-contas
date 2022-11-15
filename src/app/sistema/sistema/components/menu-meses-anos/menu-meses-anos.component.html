@@ -1,0 +1,8 @@
+<div class="menu-meses-anos">
+    <ul>
+        <li class="meses-do-ano" *ngFor="let mes of menu" (click)="escutaMenuMeses(mes.id)">{{mes.mes}}</li>
+    </ul>
+    <ul>
+        <li class="anos" *ngFor="let ano of anos" (click)="escutaMenuAnos(ano.id)">{{ano.ano}}</li>
+    </ul>
+</div>

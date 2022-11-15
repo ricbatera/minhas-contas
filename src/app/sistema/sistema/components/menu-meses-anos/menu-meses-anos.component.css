@@ -1,0 +1,30 @@
+/* menu meses */
+
+.menu-meses-anos{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-meses-anos>ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 1.1em;
+}
+
+.meses-do-ano, .anos{
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+}
+
+/* .meses:hover{
+    background-color: bisque;
+  } */
+
+.mes-selecionado-1 {
+    background-color: #263238;
+    color: #fff;
+    border-bottom: 4px solid #fff;
+}

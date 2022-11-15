@@ -12,6 +12,7 @@ import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
 import { Meses } from 'src/assets/menudata/meses';
 import { DatasService } from 'src/app/services/datas.service';
 import { ContaBancaria } from 'src/app/model/conta-bancaria';
+import { anos } from 'src/assets/menudata/anos';
 
 @Component({
   selector: 'app-lista-saidas',
@@ -30,9 +31,8 @@ export class ListaSaidasComponent implements OnInit {
   itemLista?: ItemListaSaidaApi;
   colunasTabela = ['descricao', 'status', 'Valor', 'Meio de Pagamento', 'Data Pagamento'];
   expandedElement!: ItemListaSaidaApi | null;
-  menu = Meses;
-  meses = document.getElementsByClassName("meses");
   mesSelecionado: number = -1;
+  anoSelecionado = -1;
 
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,35 +41,27 @@ export class ListaSaidasComponent implements OnInit {
     private store: Store<{ app: IAppState }>,
     public dialog: MatDialog,
     private db: DatabaseServiceService,
-    private dataService: DatasService
   ) { }
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    this.setaMesAtual();
+  recebeEventMes(e: any) {
+    this.mesSelecionado = e.id + 1;
+    this.carregaLista();
   }
 
-  setaMesAtual() {
+  recebeEventAno(e: any) {
+    this.anoSelecionado = e.ano;
     setTimeout(() => {
-      this.escutaMenuMeses(this.dataService.getMesAtual());      
-    }, 300);
+      this.carregaLista();
+    }, 100);
   }
 
-  escutaMenuMeses(mes: number) {
-    for (let i = 0; i < this.meses.length; i++) {
-      this.meses[i].classList.remove("mes-selecionado");
-    }
-    this.meses[mes].classList.add("mes-selecionado");
-    this.carregaLista(mes + 1);
-    this.mesSelecionado = mes + 1;
-  }
-
-  carregaLista(mes: number) {
+  carregaLista() {
     merge().pipe(
       startWith({}),
       switchMap(() => {
-        return this.db.getitensSaida(mes)
+        return this.db.getitensSaida(this.mesSelecionado, this.anoSelecionado)
           .pipe(catchError(() => observableOf(null)))
       }
       ),
@@ -112,7 +104,7 @@ export class ListaSaidasComponent implements OnInit {
         console.log('The dialog was closed');
         this.itemLista = result;
         console.log(result);
-        this.carregaLista(this.mesSelecionado);
+        this.carregaLista();
       });
     } else {
       const dialogRef = this.dialog.open(DialogPagarCartaoComponent, {
@@ -122,7 +114,7 @@ export class ListaSaidasComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        this.carregaLista(this.mesSelecionado);
+        this.carregaLista();
       });
     }
   }
@@ -185,7 +177,7 @@ export class DialogPagaSaida {
         valor: this.data.valorPago,
         idConta: this.idConta
       }
-      this.db.pagarParcela(payload).subscribe(res=>{
+      this.db.pagarParcela(payload).subscribe(res => {
         this.dialogRef.close(this.data);
         console.log("Retorno da API pagar parcela: " + res);
       })

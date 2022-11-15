@@ -14,6 +14,10 @@ export class DatasService {
     let today = new Date();
     return today.getMonth();
   }
+  getAnoAtual(): number{
+    let today = new Date();
+    return today.getFullYear();
+  }
 
   getData(mes:number = -1){
     const d = new Date();

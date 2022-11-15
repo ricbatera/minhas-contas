@@ -27,6 +27,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DetalhesSaidaComponent } from './detalhes-saida/detalhes-saida.component';
 import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-cartao.component';
 import { TesteComponent } from './teste/teste.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -59,7 +60,8 @@ import { TesteComponent } from './teste/teste.component';
     FormsModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ComponentsModule
   ]
 })
 export class SaidasModule { }
