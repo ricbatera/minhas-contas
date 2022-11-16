@@ -15,7 +15,6 @@ export class MenuMesesAnosComponent implements OnInit {
   mesSelecionadoString = "Loading"
   menu = Meses;
   anos = anos;
-  teste: any;
   meses = document.getElementsByClassName("meses-do-ano");
   anosClass = document.getElementsByClassName("anos");
 
@@ -28,7 +27,6 @@ export class MenuMesesAnosComponent implements OnInit {
 
   ngOnInit(): void {
     this.setaMesAno();
-    this.teste = document.getElementsByClassName("meses-do-ano");
   }
 
   setaMesAno() {
@@ -44,7 +42,7 @@ export class MenuMesesAnosComponent implements OnInit {
           this.escutaMenuAnos(e.id);          
         }
       });
-    }, 300);
+    }, 500);
   }
 
   escutaMenuMeses(mes: number) {

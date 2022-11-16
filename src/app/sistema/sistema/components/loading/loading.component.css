@@ -1,0 +1,26 @@
+.fundo {
+    background: rgba(0, 0, 0, .82);
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.texto{
+    color: #fff;
+    font-size: 2em;
+}

@@ -15,12 +15,12 @@ export class DashboardComponent implements OnInit {
   mesSelecionado = -1;
   anoSelecionado = -1;
   mesSelecionadoString = "Loading";
+  loading: boolean = true;
   menu = Meses;
   anos = anos;
 
   constructor(
     private db: DatabaseServiceService,
-    private dataService: DatasService
   ) { }
 
   ngOnInit(): void {
@@ -44,9 +44,13 @@ export class DashboardComponent implements OnInit {
   }
 
   carregaDadosDashboard() {
+    this.loading = true;
     this.db.getDashboardValues(this.mesSelecionado, this.anoSelecionado).subscribe(res => {
       this.indicadores = res;
       // console.log(res);
+      setTimeout(() => {
+        this.loading = false;        
+      }, 300);
     })
 
   }

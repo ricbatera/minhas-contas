@@ -7,6 +7,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Classificacao } from 'src/app/model/classificacao';
 import { Devedor } from 'src/app/model/devedor';
+import { ContaBancaria } from 'src/app/model/conta-bancaria';
 
 @Component({
   selector: 'app-nova-saida',
@@ -19,10 +20,12 @@ export class NovaSaidaComponent implements OnInit {
   isCartao = true;
   listaCategorias: Classificacao [] = [];
   listaDevedores: Devedor [] = [];
+  listaContasBancarias: ContaBancaria [] = [];
   avancado: boolean = true;
   mostrarDevedor: boolean = true;
   gerarEntrada = "true";
   ric: boolean = false;
+  pago: boolean = true
 
   form: FormGroup;
 
@@ -40,10 +43,12 @@ export class NovaSaidaComponent implements OnInit {
       meioPagto: [null, Validators.required],
       cartaoSelecionado: [null],
       associaDevedor: [false],
+      pago: [false],
       devedorId:[null],
       criaEntrada:[false],
       valorEntrada:[null],
       classificacaoId:[null, Validators.required],
+      idConta:[null]
     })
   }
 
@@ -54,7 +59,11 @@ export class NovaSaidaComponent implements OnInit {
 
     this.db.getClassificacoesFull().subscribe(res=>{
       this.listaCategorias = res.filter(e=> e.status && e.tipo == 'Saída').sort(this.ordenar);
-    })
+    });
+
+    this.db.getContasAtivas().subscribe(res=>{
+      this.listaContasBancarias = res;
+    });
   }
 
   ordenar(a:Classificacao, b: Classificacao){
@@ -102,6 +111,7 @@ export class NovaSaidaComponent implements OnInit {
       this.isCartao = true;
       this.form.controls['cartaoSelecionado'].setValue(null);
     }
+    this.toogleMarcarPago();
   }
 
   validaDevedor(){
@@ -116,6 +126,16 @@ export class NovaSaidaComponent implements OnInit {
       this.form.controls['valorEntrada'].setValue(this.form.controls['valor'].value);
     } else{
       this.form.controls['valorEntrada'].setValue(null);
+    }
+  }
+
+  toogleMarcarPago(){
+    if(this.form.controls['meioPagto'].value == 'debito' && this.form.controls['qtdeParcelas'].value == 1){
+      this.pago = false;
+    }else{
+      this.pago = true;
+      this.form.controls['pago'].setValue(false);
+      this.form.controls['idConta'].setValue(null);
     }
   }
 }
