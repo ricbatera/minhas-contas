@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { Classificacao } from 'src/app/model/classificacao';
 import { Devedor } from 'src/app/model/devedor';
+import { ContaBancaria } from 'src/app/model/conta-bancaria';
 
 
 @Component({
@@ -17,8 +18,10 @@ export class NovaEntradaComponent implements OnInit {
   isCartao = true;
   listaCategorias: Classificacao [] = [];
   listaDevedores: Devedor [] = [];
+  listaContasBancarias: ContaBancaria [] = [];
   avancado: boolean = true;
   mostrarDevedor: boolean = true;
+  recebido = true;
 
   form: FormGroup;
 
@@ -48,7 +51,11 @@ export class NovaEntradaComponent implements OnInit {
 
     this.db.getClassificacoesFull().subscribe(res=>{
       this.listaCategorias = res.filter(e=> e.status && e.tipo == 'Entrada').sort(this.ordenar);
-    })
+    });
+
+    this.db.getContasAtivas().subscribe(res=>{
+      this.listaContasBancarias = res;
+    });
 
   }
 
@@ -86,6 +93,16 @@ export class NovaEntradaComponent implements OnInit {
     if(!this.form.controls['associaDevedor'].value){
       console.log('alterando');
       this.form.controls['devedorId'].setValue(null);
+    }
+  }
+
+  toogleMarcarPago(){
+    if(this.form.controls['qtdeParcelas'].value == 1){
+      this.recebido = false;
+    }else{
+      this.recebido = true;
+      this.form.controls['recebido'].setValue(false);
+      this.form.controls['idConta'].setValue(null);
     }
   }
 

@@ -14,7 +14,7 @@
 
           <mat-form-field appearance="outline">
               <mat-label>Quantidade de Parcelas</mat-label>
-              <input type="number" matInput formControlName="qtdeParcelas">
+              <input type="number" matInput formControlName="qtdeParcelas" (blur)="toogleMarcarPago()">
               <mat-error *ngIf="!form.controls['qtdeParcelas'].valid">
                   Campo <strong>obrigatório</strong>
               </mat-error>
@@ -52,6 +52,21 @@
               <mat-error *ngIf="!form.controls['obs'].valid">Campo <strong>obrigatório</strong></mat-error>
           </mat-form-field>
       </div>
+
+      <div class="linha">
+        <div class="botoes-selecao radio-label">
+            <mat-label>Marcar como recebido? </mat-label>
+            <mat-slide-toggle formControlName="recebido" [disabled]="recebido">
+            </mat-slide-toggle>
+        </div>
+        <mat-form-field appearance="outline" style="max-width:400px; margin-left: 20px;" *ngIf="form.controls['recebido'].value == true">
+            <mat-label>Escolha uma Conta Bancária</mat-label>
+            <mat-select formControlName="idConta">
+                <mat-option *ngFor="let item of listaContasBancarias" value="{{item.id}}">{{item.nome}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['idConta'].valid">Campo <strong>obrigatório</strong></mat-error>
+        </mat-form-field>
+    </div>
 
       <div>
         <mat-expansion-panel (opened)="avancado = true" (closed)="avancado = false">
