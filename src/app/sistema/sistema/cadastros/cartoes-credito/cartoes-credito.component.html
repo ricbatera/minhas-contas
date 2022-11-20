@@ -23,7 +23,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Dia de Vencimento</mat-label>
                         <input matInput formControlName="diaVencimento" type="number">
-                        <mat-error *ngIf="!form.controls['diaVencimento'].valid">Campo obrigatório</mat-error>
+                        <mat-error *ngIf="!form.controls['diaVencimento'].valid">Escolha um valor entre 1 e 31</mat-error>
                     </mat-form-field>
 
                 </div>

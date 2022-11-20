@@ -34,7 +34,7 @@ export class NovaEntradaComponent implements OnInit {
       nome: [null, Validators.required],
       obs: [null, Validators.required],
       dataPrevistaRecebimento: [null, Validators.required],
-      qtdeParcelas: [null, Validators.required],
+      qtdeParcelas: [null, [Validators.required]],
       idConta: [null],
       valor: [null, Validators.required],
       recebido: [false, Validators.required],
