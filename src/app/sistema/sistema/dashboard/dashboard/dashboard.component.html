@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <mat-card class="entre-cards">
+            <mat-card class="entre-cards" *ngIf="mostraCardCartao">
                 <span style="margin-bottom: 10px;">Cartões de Crédito</span>
                 <div class="card-cartoes">
                     <mat-card *ngFor="let item of indicadores?.cartoes">
@@ -89,7 +89,7 @@
                 </div>
             </mat-card>
 
-            <mat-card style="width: 93%;">
+            <mat-card style="width: 93%;" *ngIf="mostraCardDevedores">
                 <span style="font-size: 1.6em;">Meus Devedores</span>
                 <div class="card-cartoes" style="margin-top: 10px;">
                     <mat-card *ngFor="let item of indicadores?.devedores">

@@ -19,6 +19,10 @@ export class DashboardComponent implements OnInit {
   menu = Meses;
   anos = anos;
 
+  // itens da dashboard
+  mostraCardCartao = false;
+  mostraCardDevedores = false;
+
   constructor(
     private db: DatabaseServiceService,
   ) { }
@@ -48,10 +52,20 @@ export class DashboardComponent implements OnInit {
     this.db.getDashboardValues(this.mesSelecionado, this.anoSelecionado).subscribe(res => {
       this.indicadores = res;
       // console.log(res);
+      this.validaCards();
       setTimeout(() => {
         this.loading = false;        
       }, 300);
     })
 
+  }
+
+  validaCards(){
+    if(this.indicadores?.cartoes.length != 0){
+      this.mostraCardCartao = true;
+    }
+    if(this.indicadores?.devedores.length != 0){
+      this.mostraCardDevedores = true;
+    }
   }
 }
