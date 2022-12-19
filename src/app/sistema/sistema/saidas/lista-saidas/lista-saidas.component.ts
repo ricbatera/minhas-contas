@@ -78,7 +78,8 @@ export class ListaSaidasComponent implements OnInit {
         return data;
       })
     ).subscribe(data => {
-      console.log("Carregando lista de saídas")
+      console.log("Carregando lista de saídas");
+      console.log(data);
       this.itensLista = data
     })
   }

@@ -23,7 +23,7 @@
                 <mat-form-field appearance="outline" *ngIf="true">
                     <mat-label>Cartões de Crédito</mat-label>
                     <mat-select formControlName="cartaoSelecionado" [disabled]=true>
-                        <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.cartao}}
+                        <mat-option *ngFor="let cartao of listaCartoes" [value]="cartao.id">{{cartao.nome}}
                         </mat-option>
                     </mat-select>
                     <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->

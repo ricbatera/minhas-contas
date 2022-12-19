@@ -87,6 +87,10 @@ export class DatabaseServiceService {
     return this.httpClient.get<FaturaApi>(`${this.API_URL}saidas/busca-fatura?idFatura=${id}`);
   }
 
+  getSaidaById(id: any): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}saidas/busca-saida-id?idFatura=${id}`);
+  }
+
   pagarFatura(payload: PagarFaturaRequest): Observable<PagarFaturaRequest> {
     return this.httpClient.post<PagarFaturaRequest>(this.API_URL+"saidas/pagar-fatura", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))

@@ -5,7 +5,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 Descrição
             </th>
-            <td mat-cell *matCellDef="let item"> {{item.saida.nome}} </td>
+            <td mat-cell *matCellDef="let item"> {{item.saida.nome}} {{item.contagemParcelas}}</td>
         </ng-container>
     
         <ng-container matColumnDef="status">
@@ -46,7 +46,7 @@
                         <i class="fal fa-box-check" *ngIf="element.situacao === 'Pago'" style="color: #00b248;"></i>
                         <i class="fal fa-box-usd" *ngIf="element.situacao === 'Aberto'" style="color: #3f51b5;"></i>
                         <i class="fal fa-box-fragile" *ngIf="element.situacao === 'Atrasado'" style="color: #f44336;"></i>
-                        <span>Arrumar aqui</span>
+                        <span>{{element.contagemParcelas}}</span>
                     </div>
                     <div class="descricao-detalhes">
                         <div class="lado-a">
