@@ -38,7 +38,7 @@ export class NovaSaidaComponent implements OnInit {
       nome:[null, Validators.required],
       obs:[null, Validators.required],
       dataVencimento:[null, Validators.required],
-      dataCompra:[null, Validators.required],
+      dataCompra:[null],
       qtdeParcelas:[null, Validators.required],
       valor: [null, Validators.required],
       meioPagto: [null, Validators.required],
