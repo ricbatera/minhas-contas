@@ -10,6 +10,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
 import { ContaBancaria } from 'src/app/model/conta-bancaria';
+import { FiltrosService } from 'src/app/services/filtros.service';
 
 @Component({
   selector: 'app-lista-saidas',
@@ -25,7 +26,10 @@ import { ContaBancaria } from 'src/app/model/conta-bancaria';
 })
 export class ListaSaidasComponent implements OnInit {
   itensLista: ItemListaSaidaApi[] = [];
+  bkpItensLista: ItemListaSaidaApi[] = [];
   itemLista?: ItemListaSaidaApi;
+  devedores: string[] = [];
+  devSelecionado =  "";
   colunasTabela = ['descricao', 'status', 'Valor', 'Meio de Pagamento', 'Data Pagamento'];
   expandedElement!: ItemListaSaidaApi | null;
   mesSelecionado: number = -1;
@@ -38,6 +42,7 @@ export class ListaSaidasComponent implements OnInit {
     private store: Store<{ app: IAppState }>,
     public dialog: MatDialog,
     private db: DatabaseServiceService,
+    private filtro: FiltrosService,
   ) { }
   ngOnInit(): void {
   }
@@ -79,9 +84,22 @@ export class ListaSaidasComponent implements OnInit {
       })
     ).subscribe(data => {
       console.log("Carregando lista de saídas");
-      console.log(data);
+      // console.log(data);
       this.itensLista = data
+      this.devedores = this.filtro.filtraDevedores(data);
+      this.devedores.unshift('Todos');
     })
+  }
+
+  filtraDevedor(){
+    if(this.bkpItensLista.length == 0){
+      this.bkpItensLista = this.itensLista;
+    } else{
+      this.itensLista = this.bkpItensLista;
+    }
+    if(this.devSelecionado != "Todos"){
+      this.itensLista = this.filtro.filtaItensDevedor(this.devSelecionado, this.itensLista);
+    }
   }
 
   abreDetalhes(idSaida: number) {

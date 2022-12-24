@@ -94,3 +94,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+
+/* FILTROS */
+.filtros{
+  margin: 10px 0;
+}

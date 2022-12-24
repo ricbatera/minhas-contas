@@ -1,4 +1,15 @@
 <app-menu-meses-anos (enviaMes)="recebeEventMes($event)" (enviaAno)="recebeEventAno($event)"></app-menu-meses-anos>
+<div class="filtros">
+   <span>Filtros</span>
+   <mat-form-field appearance="outline">
+    <mat-label>Escolha um Devedor</mat-label>
+    <mat-select  [(ngModel)]="devSelecionado" (selectionChange)="filtraDevedor()">
+      <mat-option *ngFor="let e of devedores" [value]="e">
+        {{e}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 <div>
     <table mat-table [dataSource]="itensLista" multiTemplateDataRows class="mat-elevation-z8" matSort>
         <ng-container matColumnDef="descricao">
