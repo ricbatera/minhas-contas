@@ -49,14 +49,16 @@ export class ListaSaidasComponent implements OnInit {
 
   recebeEventMes(e: any) {
     this.mesSelecionado = e.id + 1;
-    this.carregaLista();
+    this.carregaLista();    
+    this.resetFiltros();
   }
-
+  
   recebeEventAno(e: any) {
     this.anoSelecionado = e.ano;
     setTimeout(() => {
       this.carregaLista();
     }, 100);
+    this.resetFiltros();
   }
 
   carregaLista() {
@@ -100,6 +102,10 @@ export class ListaSaidasComponent implements OnInit {
     if(this.devSelecionado != "Todos"){
       this.itensLista = this.filtro.filtaItensDevedor(this.devSelecionado, this.itensLista);
     }
+  }
+
+  resetFiltros(){
+    this.devSelecionado = "Todos";
   }
 
   abreDetalhes(idSaida: number) {
