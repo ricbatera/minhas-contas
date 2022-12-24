@@ -1,14 +1,37 @@
 <app-menu-meses-anos (enviaMes)="recebeEventMes($event)" (enviaAno)="recebeEventAno($event)"></app-menu-meses-anos>
 <div class="filtros">
-   <span>Filtros</span>
-   <mat-form-field appearance="outline">
-    <mat-label>Escolha um Devedor</mat-label>
-    <mat-select  [(ngModel)]="devSelecionado" (selectionChange)="filtraDevedor()">
-      <mat-option *ngFor="let e of devedores" [value]="e">
-        {{e}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+   <span class="filtro-titulo">Filtros</span>
+   <div>
+       <mat-form-field appearance="outline">
+        <mat-label>Escolha um Devedor</mat-label>
+        <mat-select  [(ngModel)]="filtros.devedor" (selectionChange)="filtrar()">
+          <mat-option *ngFor="let e of devedores" [value]="e">
+            {{e}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+   <div>
+       <mat-form-field appearance="outline">
+        <mat-label>Meios de Pagamento</mat-label>
+        <mat-select  [(ngModel)]="filtros.meioPagto" (selectionChange)="filtrar()">
+          <mat-option *ngFor="let e of meiosPagto" [value]="e">
+            {{e}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+   <div>
+       <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <mat-select  [(ngModel)]="filtros.classificacao" (selectionChange)="filtrar()">
+          <mat-option *ngFor="let e of classificacaoList" [value]="e">
+            {{e}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+   </div>
+  <span class="v-total">Total: {{valorTotal | currency: 'BRL'}}</span>
 </div>
 <div>
     <table mat-table [dataSource]="itensLista" multiTemplateDataRows class="mat-elevation-z8" matSort>

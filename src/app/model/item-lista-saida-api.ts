@@ -14,4 +14,5 @@ export interface ItemListaSaidaApi {
     conta: ContaBancaria | null,
     contagemParcelas: string,
     devedorNome: string | null
+    classificacaoNome: string
 }

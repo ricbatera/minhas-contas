@@ -12,6 +12,9 @@ import { ItemListaSaidaApi } from 'src/app/model/item-lista-saida-api';
 import { ContaBancaria } from 'src/app/model/conta-bancaria';
 import { FiltrosService } from 'src/app/services/filtros.service';
 
+export interface filtros { devedor: string, meioPagto: string, classificacao: string }
+
+
 @Component({
   selector: 'app-lista-saidas',
   templateUrl: './lista-saidas.component.html',
@@ -24,16 +27,20 @@ import { FiltrosService } from 'src/app/services/filtros.service';
     ]),
   ],
 })
+
 export class ListaSaidasComponent implements OnInit {
   itensLista: ItemListaSaidaApi[] = [];
   bkpItensLista: ItemListaSaidaApi[] = [];
   itemLista?: ItemListaSaidaApi;
   devedores: string[] = [];
-  devSelecionado =  "";
+  meiosPagto: string[] = [];
+  classificacaoList: string [] = [];
+  valorTotal = 0;
   colunasTabela = ['descricao', 'status', 'Valor', 'Meio de Pagamento', 'Data Pagamento'];
   expandedElement!: ItemListaSaidaApi | null;
   mesSelecionado: number = -1;
   anoSelecionado = -1;
+  filtros: filtros = { devedor: 'Todos', meioPagto: 'Todos', classificacao: "Todas" }
 
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -49,10 +56,10 @@ export class ListaSaidasComponent implements OnInit {
 
   recebeEventMes(e: any) {
     this.mesSelecionado = e.id + 1;
-    this.carregaLista();    
+    this.carregaLista();
     this.resetFiltros();
   }
-  
+
   recebeEventAno(e: any) {
     this.anoSelecionado = e.ano;
     setTimeout(() => {
@@ -90,22 +97,35 @@ export class ListaSaidasComponent implements OnInit {
       this.itensLista = data
       this.devedores = this.filtro.filtraDevedores(data);
       this.devedores.unshift('Todos');
+      this.meiosPagto = this.filtro.filtraMeioPagto(data);
+      this.meiosPagto.unshift('Todos');
+      this.classificacaoList = this.filtro.filtaClassificacao(data);
+      this.classificacaoList.unshift('Todas')
+      this.calculaTotal();
     })
   }
 
-  filtraDevedor(){
-    if(this.bkpItensLista.length == 0){
+  filtrar() {
+    if (this.bkpItensLista.length == 0) {
       this.bkpItensLista = this.itensLista;
-    } else{
+    } else {
       this.itensLista = this.bkpItensLista;
+      this.calculaTotal();
     }
-    if(this.devSelecionado != "Todos"){
-      this.itensLista = this.filtro.filtaItensDevedor(this.devSelecionado, this.itensLista);
-    }
+    this.itensLista = this.filtro.filtrar(this.filtros, this.itensLista);
+    this.calculaTotal();
+
   }
 
-  resetFiltros(){
-    this.devSelecionado = "Todos";
+  resetFiltros() {
+    this.filtros.devedor = "Todos";
+    this.filtros.meioPagto = "Todos";
+    this.filtros.classificacao = "Todas";
+    this.calculaTotal();
+  }
+
+  calculaTotal() {
+    this.valorTotal = this.itensLista.reduce((acc, i) => acc + i.valor, 0);
   }
 
   abreDetalhes(idSaida: number) {

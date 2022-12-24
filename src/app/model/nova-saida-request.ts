@@ -6,5 +6,6 @@ export interface NovaSaidaRequest {
     qtdeParcelas: number,
     valor: number,
     meioPagto: string,
-    cartaoSelecionado: number
+    cartaoSelecionado: number,
+    dataCompra: string,
 }
