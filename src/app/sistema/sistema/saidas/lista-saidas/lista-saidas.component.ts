@@ -100,11 +100,12 @@ export class ListaSaidasComponent implements OnInit {
       this.meiosPagto = this.filtro.filtraMeioPagto(data);
       this.meiosPagto.unshift('Todos');
       this.classificacaoList = this.filtro.filtaClassificacao(data);
-      this.classificacaoList.unshift('Todas')
+      this.classificacaoList.unshift('Todas');
+      this.bkpItensLista = [];
       this.calculaTotal();
     })
   }
-
+  
   filtrar() {
     if (this.bkpItensLista.length == 0) {
       this.bkpItensLista = this.itensLista;
@@ -114,6 +115,7 @@ export class ListaSaidasComponent implements OnInit {
     }
     this.itensLista = this.filtro.filtrar(this.filtros, this.itensLista);
     this.calculaTotal();
+    console.log(this.itensLista);
 
   }
 

@@ -5,32 +5,52 @@
     <mat-card class="meu-espaco">
         <span style="font-size: 1.6em;" class="">Meu Espaço</span>
         <mat-card-subtitle style="margin-top: 5px;">Esse espaço leva em conta somente suas entradas e saídas, ignorando os valores associados a seus devedores. Assim você pode ver como estãos seus gastos em relação aos seus rendimentos</mat-card-subtitle>
-        <div class="cards-entradas-geral">
-            <mat-card class="card-entrada">
-                <h3>Meus gastos em  {{mesSelecionadoString}}</h3>
-                <p><span class="valores">{{indicadores?.minhasSaidas | currency: "BRL"}}</span><i
-                    class="fad fa-sack-dollar"
-                    style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
-            </mat-card>
-            <mat-card class="card-entrada">
-                <h3>Meus recebimentos em  {{mesSelecionadoString}}</h3>
-                <p><span class="valores-entrada">{{indicadores?.minhasEntradas | currency: "BRL"}}</span><i
-                    class="fad fa-sack-dollar"
-                    style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
-            </mat-card>
-            <mat-card class="card-entrada">
-                <h3>Saldo em  {{mesSelecionadoString}}</h3>
-                <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas < 0 ">
-                    <p><span class="valores-entrada">{{ indicadores?.minhasEntradas - indicadores?.minhasSaidas | currency: "BRL"}}</span><i
-                        class="fad fa-sack-dollar"
-                        style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
-                </div>
-                <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas > 0 ">
-                    <p><span class="valores">{{ indicadores?.minhasEntradas -indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <div class="cards-entradas-geral">
+                <mat-card class="card-entrada">
+                    <h3>Meus gastos em  {{mesSelecionadoString}}</h3>
+                    <p><span class="valores">{{indicadores?.minhasSaidas | currency: "BRL"}}</span><i
                         class="fad fa-sack-dollar"
                         style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
-                </div>
-            </mat-card>
+                </mat-card>
+                <mat-card class="card-entrada">
+                    <h3>Meus recebimentos em  {{mesSelecionadoString}}</h3>
+                    <p><span class="valores-entrada">{{indicadores?.minhasEntradas | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+                </mat-card>
+                <mat-card class="card-entrada">
+                    <h3>Saldo em  {{mesSelecionadoString}}</h3>
+                    <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas < 0 ">
+                        <p><span class="valores-entrada">{{ indicadores?.minhasEntradas - indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+                            class="fad fa-sack-dollar"
+                            style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+                    </div>
+                    <div *ngIf="indicadores?.minhasSaidas - indicadores?.minhasEntradas > 0 ">
+                        <p><span class="valores">{{ indicadores?.minhasEntradas -indicadores?.minhasSaidas | currency: "BRL"}}</span><i
+                            class="fad fa-sack-dollar"
+                            style="margin-left: 10px; font-size: 1.2em; color: #b61827;"></i></p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="cards-entradas-geral">
+                <mat-card class="card-entrada">
+                    <h3>Saldo Acumulado</h3>
+                    <p><span class="valores-entrada">{{indicadores?.saldoAcumulado | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+                </mat-card>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div class="cards-entradas-geral">
+                <mat-card class="card-entrada" *ngFor="let conta of indicadores?.contas">
+                    <h3>{{conta.nome}}</h3>
+                    <p><span class="valores-entrada">{{conta.saldo | currency: "BRL"}}</span><i
+                        class="fad fa-sack-dollar"
+                        style="margin-left: 10px; font-size: 1.2em; color: #005b4f;"></i></p>
+                </mat-card>
+            </div>
         </div>
     </mat-card>
     <mat-card>

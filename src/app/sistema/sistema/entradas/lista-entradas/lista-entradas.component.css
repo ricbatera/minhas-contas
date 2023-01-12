@@ -86,3 +86,23 @@ tr.example-element-row:not(.example-expanded-row):active {
   display: flex;
   gap: 50px
 }
+
+/* FILTROS */
+.filtros{
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  justify-content: center;
+}
+
+.filtro-titulo{
+  font-size: 1.2em;
+  padding-bottom: 20px;
+}
+
+.v-total{
+  font-size: 1.4em;
+  color: red;
+  padding-bottom: 15px;
+}

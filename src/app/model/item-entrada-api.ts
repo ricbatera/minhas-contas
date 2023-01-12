@@ -1,4 +1,6 @@
+import { Classificacao } from "./classificacao";
 import { ContaBancaria } from "./conta-bancaria";
+import { Devedor } from "./devedor";
 import { EntradaApi } from "./entrada-api";
 
 export interface ItemEntradaApi {
@@ -10,5 +12,7 @@ export interface ItemEntradaApi {
     valorRecebido: number | null,
     entrada: EntradaApi,
     situacao: string,
-    conta: ContaBancaria
+    conta: ContaBancaria,
+    devedor: Devedor,
+    classificacao: Classificacao
 }

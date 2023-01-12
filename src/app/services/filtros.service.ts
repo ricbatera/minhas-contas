@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ItemEntradaApi } from '../model/item-entrada-api';
 import { ItemListaSaidaApi } from '../model/item-lista-saida-api';
+import { filtrosEntradas } from '../sistema/sistema/entradas/lista-entradas/lista-entradas.component';
 import { filtros } from '../sistema/sistema/saidas/lista-saidas/lista-saidas.component';
 
 @Injectable({
@@ -15,6 +17,12 @@ export class FiltrosService {
       .map(v => v.devedorNome)
       .filter((v, i, arr) => arr.indexOf(v) === i);
   }
+  filtraDevedoresEntrada(lista: ItemEntradaApi[]) {
+    return lista
+      .filter(v => v.devedor.nome != null)
+      .map(v => v.devedor.nome)
+      .filter((v, i, arr) => arr.indexOf(v) === i);
+  }
 
   filtraMeioPagto(lista: any[]) {
     let result: any[] = lista
@@ -23,9 +31,15 @@ export class FiltrosService {
       return result;
   }
 
-  filtaClassificacao(lista: ItemListaSaidaApi[]){
+  filtaClassificacao(lista: any[]){
     return lista
     .map(v=> v.classificacaoNome)
+    .filter((v, i, arr) => arr.indexOf(v) === i);
+  }
+
+  filtaClassificacaoEntrada(lista: ItemEntradaApi[]){
+    return lista
+    .map(v=> v.classificacao.nome)
     .filter((v, i, arr) => arr.indexOf(v) === i);
   }
 
@@ -46,6 +60,16 @@ export class FiltrosService {
       lista = lista.filter(v => v.classificacaoNome == p.classificacao)
     }
 
+    return lista;
+  }
+
+  filtarEntrada(p: filtrosEntradas, lista:ItemEntradaApi[]){
+    if(p.devedor != "Todos"){
+      lista = lista.filter(v => v.devedor.nome == p.devedor)
+    }
+    if (p.classificacao != 'Todas') {
+      lista = lista.filter(v => v.classificacao.nome == p.classificacao)
+    }
     return lista;
   }
 

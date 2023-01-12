@@ -11,7 +11,9 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DatasService } from 'src/app/services/datas.service';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ItemEntradaApi } from 'src/app/model/item-entrada-api';
+import { FiltrosService } from 'src/app/services/filtros.service';
 
+export interface filtrosEntradas { devedor: string, classificacao: string }
 
 @Component({
   selector: 'app-lista-entradas',
@@ -28,6 +30,11 @@ import { ItemEntradaApi } from 'src/app/model/item-entrada-api';
 export class ListaEntradasComponent {
   
   itensLista: ItemEntradaApi[] = [];
+  bkpItensLista: ItemEntradaApi[] = [];
+  devedores: string[] = [];
+  classificacaoList: string [] = [];
+  valorTotal = 0;
+  filtros: filtrosEntradas ={devedor: "Todos", classificacao: "Todas"}
   colunasEntradas = [ 'descricao', 'Observação', 'Valor', 'status', 'data Recebida'];
   expandedElement!: itemListaEntrada | null;
   itemEntrada?: ItemEntradaApi;
@@ -38,7 +45,8 @@ export class ListaEntradasComponent {
     public dialog: MatDialog,
     private store:Store<{app: IAppState}>,
     private db: DatabaseServiceService,
-    private dataService: DatasService
+    private dataService: DatasService,
+    private filtro: FiltrosService,
   ) { }
   ngOnInit(): void {
   }
@@ -50,11 +58,13 @@ export class ListaEntradasComponent {
   recebeEventMes(e: any){
     this.mesSelecionado = e.id +1;
     this.carregaLista();
+    this.resetFiltros();
   }
   recebeEventAno(e: any){
     this.anoSelecionado = e.ano;
     setTimeout(() => {
-      this.carregaLista();      
+      this.carregaLista();
+      this.resetFiltros();      
     }, 100);
   }
 
@@ -82,8 +92,35 @@ export class ListaEntradasComponent {
         return data;
       })
     ).subscribe(data => {
-      this.itensLista = data
+      this.itensLista = data;
+      this.devedores = this.filtro.filtraDevedoresEntrada(data);
+      this.devedores.unshift('Todos');
+      this.classificacaoList = this.filtro.filtaClassificacaoEntrada(data);
+      this.classificacaoList.unshift('Todas')
+      this.calculaTotal();
     })
+  }
+
+  calculaTotal() {
+    this.valorTotal = this.itensLista.reduce((acc, i) => acc + i.valor, 0);
+  }
+
+  filtrar() {
+    if (this.bkpItensLista.length == 0) {
+      this.bkpItensLista = this.itensLista;
+    } else {
+      this.itensLista = this.bkpItensLista;
+      this.calculaTotal();
+    }
+    this.itensLista = this.filtro.filtarEntrada(this.filtros, this.itensLista);
+    this.calculaTotal();
+
+  }
+
+  resetFiltros() {
+    this.filtros.devedor = "Todos";
+    this.filtros.classificacao = "Todas";
+    this.calculaTotal();
   }
 
   abreDetalhes(idEntrada: number){
