@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  URLSERVIDOR: 'http://minhascontas.rdrtech.com.br:8081/'
 };
