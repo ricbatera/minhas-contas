@@ -93,7 +93,7 @@ export class ListaSaidasComponent implements OnInit {
       })
     ).subscribe(data => {
       console.log("Carregando lista de saídas");
-      // console.log(data);
+      console.log(data);
       this.itensLista = data
       this.devedores = this.filtro.filtraDevedores(data);
       this.devedores.unshift('Todos');
