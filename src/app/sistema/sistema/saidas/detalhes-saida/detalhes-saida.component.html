@@ -3,7 +3,7 @@
         <mat-card-title>Detalhes da Saída: <span class="titulo">Conta de Luz</span></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="salvar()">
+        <form [formGroup]="form" >
             <div class="linha">
                 <mat-form-field appearance="outline">
                     <mat-label>Descrição</mat-label>
@@ -28,6 +28,9 @@
                     </mat-select>
                     <!-- <mat-error *ngIf="!form.controls['cartaoSelecionado'].valid">Campo <strong>obrigatório</strong></mat-error> -->
                 </mat-form-field>
+                <div>
+                    <button mat-raised-button color="primary" (click)="salvar()">Salvar Alterações</button>
+                </div>
             </div>
             <div class="linha">
                 <mat-form-field appearance="outline">
@@ -42,11 +45,12 @@
             <div class="linha">
                 <div class="content-detalhes">
                     <ul>
-                        <li><i class="fad fa-sack-dollar"></i> Valor Total R$ 1.150,02*</li>
-                        <li><i class="fad fa-calendar-alt"></i> Vence todo dia: 15*</li>
-                        <li><i class="fad fa-layer-plus"></i> Parcelas: 1 de 3*</li>
-                        <li><i class="fad fa-file-invoice-dollar"></i> Forma de Pagamento: Cartão de Crédito*</li>
-                        <li><i class="fad fa-credit-card"></i> Cartão: Itau Card*</li>
+                        <li><i class="fad fa-sack-dollar"></i> Valor Total {{saidaApi?.total | currency:'BRL'}}</li>
+                        <li><i class="fad fa-calendar-alt"></i> Vence todo dia: {{saidaApi?.diaVencimento}}</li>
+                        <li><i class="fad fa-layer-plus"></i> Parcelas:{{ saidaApi?.xdeParcelas }}</li>
+                        <li *ngIf="saidaApi?.meioPagto=='cartao'"><i class="fad fa-file-invoice-dollar"></i> Forma de Pagamento: Cartão de Crédito</li>
+                        <li *ngIf="saidaApi?.meioPagto!='cartao'"><i class="fad fa-file-invoice-dollar"></i> Forma de Pagamento: Débito / Boleto</li>
+                        <li *ngIf="saidaApi?.meioPagto=='cartao'"><i class="fad fa-credit-card"></i> Cartão: {{saidaApi?.cartao?.nome}}</li>
                     </ul>
                 </div>
             </div>
@@ -64,7 +68,7 @@
     valorPago: number | null,
     contaBancaria?: contaBancaria | null
 } -->
-        <table mat-table [dataSource]="listaParcelas" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="parcelas" matSort class="mat-elevation-z8">
             
             <ng-container matColumnDef="Valor">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor</th>
@@ -93,7 +97,7 @@
 
             <ng-container matColumnDef="Ação">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ação</th>
-                <td mat-cell *matCellDef="let row"><i class="fal fa-pencil-alt"></i></td>
+                <td mat-cell *matCellDef="let row"><i class="fal fa-pencil-alt" *ngIf="row.situacao == 'Aberto'" style="cursor: pointer; padding: 5px;" (click)="dialogEditar(row.id)"></i></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>

@@ -18,6 +18,8 @@ import { ReceberEntradaRequest } from '../model/receber-entrada-request';
 import { PagarParcelaRequest } from '../model/pagar-parcela-request';
 import { Devedor } from '../model/devedor';
 import { Classificacao } from '../model/classificacao';
+import { EditaConta } from '../model/edita-conta';
+import { url } from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -88,7 +90,7 @@ export class DatabaseServiceService {
   }
 
   getSaidaById(id: any): Observable<any> {
-    return this.httpClient.get<any>(`${this.API_URL}saidas/busca-saida-id?idFatura=${id}`);
+    return this.httpClient.get<any>(`${this.API_URL}saidas/busca-saida-id?idSaida=${id}`);
   }
 
   pagarFatura(payload: PagarFaturaRequest): Observable<PagarFaturaRequest> {
@@ -121,6 +123,11 @@ export class DatabaseServiceService {
 
   novoDevedor(payload: Devedor): Observable<Devedor> {
     return this.httpClient.post<Devedor>(this.API_URL+"cadastros/devedor/novo-devedor", JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
+  editaConta(payload: EditaConta): Observable<EditaConta>{
+    return this.httpClient.put<EditaConta>(this.API_URL+'saidas/edita-saida', JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))
   }
 

@@ -2,6 +2,6 @@ export interface CartaoCredito {
     id: number,
     nome: string,
     descricao: string,
-    vencimentoDia: number,
+    diaVencimento: number,
     status: boolean
 }

@@ -8,35 +8,53 @@ import { mockDados } from 'src/app/MOCK/mock-dados';
 import { parcela } from 'src/app/model/model';
 import { SaidaDetalhes } from 'src/app/model/saida-detalhes';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
-import { IAppState } from 'src/app/store/app.reducer';
+import { ISaidasState } from 'src/app/store/app.reducer';
 import { CartaoCredito } from 'src/app/model/cartao-credito';
+import { parcelaSaida } from 'src/app/model/parcelaSaida';
+import { saidaDetalhesApi } from 'src/app/model/saida-detalhe-api';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { EditaConta } from 'src/app/model/edita-conta';
 
 @Component({
   selector: 'app-detalhes-saida',
   templateUrl: './detalhes-saida.component.html',
-  styleUrls: ['./detalhes-saida.component.css']
+  styleUrls: ['./detalhes-saida.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DetalhesSaidaComponent implements OnInit {
-
-  idSaida$ = this.store.select('app').pipe(map(dado => {
-    dado.idSaida
-    this.carregaSaida();
-  }));
+  idSaida$ = this.store.select('saidaReducer').pipe(map((dado) => dado.idSaida));
   form: FormGroup;
-  listaCartoes: CartaoCredito[] = []
+  listaCartoes: CartaoCredito[] = [];
   saidaDetalhe: SaidaDetalhes = mockDados.getSaidaDetalhes();
-  listaParcelas = new MatTableDataSource<parcela>(this.saidaDetalhe.parcela);
-  colunasTabela = ['Valor', 'Vencimento', 'Valor Pago', 'Pago em', 'Situação', 'Ação']
-  saidaApi: any = null;
+  parcelas: parcelaSaida[] = []
+  listaParcelas = new MatTableDataSource<parcelaSaida>(this.parcelas);
+  colunasTabela = [
+    'Valor',
+    'Vencimento',
+    'Valor Pago',
+    'Pago em',
+    'Situação',
+    'Ação',
+  ];
+  saidaApi?: saidaDetalhesApi;
+
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private store: Store<{ app: IAppState }>,
+    private store: Store<{ saidaReducer: ISaidasState }>,
     private fb: FormBuilder,
-    private db: DatabaseServiceService
+    private db: DatabaseServiceService,
+    public dialog: MatDialog,
   ) {
     this.form = this.fb.group({
-      id: [this.idSaida$],
+      id: [],
       nome: [null, Validators.required],
       obs: [null, Validators.required],
       dataVencimento: [null, Validators.required],
@@ -44,24 +62,27 @@ export class DetalhesSaidaComponent implements OnInit {
       valor: [null, Validators.required],
       meioPagto: [null],
       cartaoSelecionado: [null],
-    })
+    });
   }
 
   ngOnInit(): void {
-    this.db.getCartoesAtivos().subscribe(res => {
+    this.db.getCartoesAtivos().subscribe((res) => {
       this.listaCartoes = res;
-    })
-    
+    });
+    this.idSaida$.subscribe(v=>{
+      if(v!= 0) this.carregaSaida(v);
+  });
   }
 
-  carregaSaida(){
-    this.db.getSaidaById(this.idSaida$).subscribe(res => {
+  carregaSaida(valor: number | void) {
+    this.db.getSaidaById(valor).subscribe((res) => {
       this.saidaApi = res;
       this.form.controls['nome'].setValue(this.saidaApi?.nome);
-      this.form.controls['obs'].setValue(this.saidaApi.obs);
-      this.form.controls['meioPagto'].setValue(this.saidaApi.meioPagto);
+      this.form.controls['obs'].setValue(this.saidaApi?.obs);
+      this.form.controls['meioPagto'].setValue(this.saidaApi?.meioPagto);
       this.form.controls['cartaoSelecionado'].setValue(this.saidaApi?.cartao?.id);
-    })
+      this.parcelas = res.parcelas;
+    });
   }
 
   ngAfterViewInit() {
@@ -69,7 +90,30 @@ export class DetalhesSaidaComponent implements OnInit {
   }
 
   salvar() {
-
+    this.idSaida$.subscribe(res=> this.form.controls['id'].setValue(res));
+    console.log(this.form.controls['id'].value);
+    let payload: EditaConta = {
+      id: this.form.controls['id'].value,
+      nome: this.form.controls['nome'].value,
+      obs: this.form.controls['obs'].value
+    }
+    this.db.editaConta(payload).subscribe(res => {
+      console.log(res)
+      alert("Salvo com sucesso!");
+      this.carregaSaida(this.form.controls['id'].value);
+    })
   }
+
+  dialogEditar(id: number){
+    alert(id)
+  }
+}
+
+@Component({
+  selector: 'app-editar-parcela',
+  templateUrl: './dialog-editar-parcela.html',
+  styleUrls: ['./detalhes-saida.component.css'],
+})
+export class DialogEditarParcela{
 
 }
