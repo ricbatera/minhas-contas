@@ -50,7 +50,7 @@ export class FiltrosService {
 
     if (p.meioPagto != 'Todos') {
       if (p.meioPagto == 'Débito / Boleto') {
-        lista = lista.filter(v => v.saida.nome == 'debito')
+        lista = lista.filter(v => v.saida.meioPagto == 'debito')
       } else {
         lista = lista.filter(v => v.fatura?.cartao?.nome == p.meioPagto)
       }
