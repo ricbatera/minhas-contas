@@ -156,7 +156,7 @@ export class DialogEditarParcela implements OnInit {
   salvar() {
     let novaLista: parcelaSaida[] = [];
 
-    if (this.novoValor > 0) {
+    if (this.novoValor > -1) {
       if (this.atualizaTodas) {
         novaLista = this.data.parcelas.map((el: parcelaSaida) => {
           if (el.situacao == 'Aberto') el.valor = this.novoValor;
