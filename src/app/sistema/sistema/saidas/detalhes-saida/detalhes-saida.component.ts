@@ -131,7 +131,11 @@ export class DetalhesSaidaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.saidaApi!.parcelas = result;
-      console.log(this.saidaApi);
+      //console.log(result);
+      this.db.editaParcelas({idSaida: this.saidaApi?.id, parcelas: result}).subscribe(res=>{
+        alert("Parcela(s) atualizada(s) com sucesso!");
+      });
+      
     });
   }
   dialogApagar(id: number) {

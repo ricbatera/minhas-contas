@@ -135,6 +135,11 @@ export class DatabaseServiceService {
       .pipe(retry(2), catchError(this.handleError))
   }
 
+  editaParcelas(payload: any): Observable<any>{
+    return this.httpClient.put<any>(this.API_URL+'saidas/edita-parcelas', JSON.stringify(payload), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
+
   // Manipulação de erros
   handleError(error: HttpErrorResponse) {
     console.log(error)
