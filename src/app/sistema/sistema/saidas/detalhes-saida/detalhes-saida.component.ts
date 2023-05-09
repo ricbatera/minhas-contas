@@ -4,9 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { mockDados } from 'src/app/MOCK/mock-dados';
-import { parcela } from 'src/app/model/model';
-import { SaidaDetalhes } from 'src/app/model/saida-detalhes';
 import { DatabaseServiceService } from 'src/app/services/database-service.service';
 import { ISaidasState } from 'src/app/store/app.reducer';
 import { CartaoCredito } from 'src/app/model/cartao-credito';
@@ -25,6 +22,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { EditaConta } from 'src/app/model/edita-conta';
+import { DeletarModel } from 'src/app/model/deletarModel';
 
 @Component({
   selector: 'app-detalhes-saida',
@@ -50,7 +48,14 @@ export class DetalhesSaidaComponent implements OnInit {
   // saidaDetalhe: SaidaDetalhes = mockDados.getSaidaDetalhes();
   parcelas: parcelaSaida[] = [];
   listaParcelas = new MatTableDataSource<parcelaSaida>(this.parcelas);
-  colunasTabela = ['Valor', 'Vencimento', 'Valor Pago', 'Pago em', 'Situação', 'Ação'];
+  colunasTabela = [
+    'Valor',
+    'Vencimento',
+    'Valor Pago',
+    'Pago em',
+    'Situação',
+    'Ação',
+  ];
   saidaApi?: saidaDetalhesApi;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,6 +82,10 @@ export class DetalhesSaidaComponent implements OnInit {
     this.db.getCartoesAtivos().subscribe((res) => {
       this.listaCartoes = res;
     });
+    this.startLoadSaida();
+  }
+
+  startLoadSaida(){
     this.idSaida$.subscribe((v) => {
       if (v != 0) this.carregaSaida(v);
     });
@@ -125,8 +134,39 @@ export class DetalhesSaidaComponent implements OnInit {
       console.log(this.saidaApi);
     });
   }
+  dialogApagar(id: number) {
+    const dialogRef = this.dialog.open(DialogDeletarParcela, {
+      width: '500px',
+      data: { idSelecionado: id },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      let payload: DeletarModel = {
+        idParcela: 0,
+        deletarTudo: false,
+        deletarRestante: false
+      }
+      if (result != 'cancelar') {
+        if (result) {
+          payload.idParcela = id;   
+          payload.deletarRestante = true       
+          this.db.deletarParcelaSaida(payload).subscribe(res=>{
+            this.startLoadSaida();
+            alert('Todas parcelas abertas deletadas com sucesso');
+          });
+        } else {
+          payload.idParcela = id;          
+          this.db.deletarParcelaSaida(payload).subscribe(res=>{
+            this.startLoadSaida();
+            alert('Parcela deletada com sucesso');
+          });
+        }
+      }
+    });
+  }
 }
 
+// DIALOG EDITAR
 @Component({
   selector: 'app-editar-parcela',
   templateUrl: './dialog-editar-parcela.html',
@@ -170,5 +210,30 @@ export class DialogEditarParcela implements OnInit {
       }
     }
     this.dialogRef.close(this.data.parcelas);
+  }
+}
+
+// DIALOG EXCLUIR
+@Component({
+  selector: 'app-deletar-parcela',
+  templateUrl: './dialog-deletar-parcela.html',
+  styleUrls: ['./detalhes-saida.component.css'],
+})
+export class DialogDeletarParcela implements OnInit {
+  atualizaTodas: boolean = false;
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogDeletarParcela>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  ngOnInit(): void {}
+
+  onNoClick(): void {
+    this.dialogRef.close('cancelar');
+  }
+
+  salvar() {
+    this.dialogRef.close(this.atualizaTodas);
   }
 }

@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   logRequest: true,
   traceRequest: true,
-  //URLSERVIDOR: 'http://localhost:8080/',
-  URLSERVIDOR: 'http://minhascontas.rdrtech.com.br:8081/'
+  URLSERVIDOR: 'http://localhost:8080/',
+  // URLSERVIDOR: 'http://minhascontas.rdrtech.com.br:8081/'
 };
 
 /*

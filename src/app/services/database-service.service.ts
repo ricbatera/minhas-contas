@@ -20,6 +20,7 @@ import { Devedor } from '../model/devedor';
 import { Classificacao } from '../model/classificacao';
 import { EditaConta } from '../model/edita-conta';
 import { url } from 'inspector';
+import { DeletarModel } from '../model/deletarModel';
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,9 @@ export class DatabaseServiceService {
   novoDevedor(payload: Devedor): Observable<Devedor> {
     return this.httpClient.post<Devedor>(this.API_URL+"cadastros/devedor/novo-devedor", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))
+  }
+  deletarParcelaSaida(payload: DeletarModel): Observable<any> {
+    return this.httpClient.delete<DeletarModel>(this.API_URL+"saidas/deletar", {headers: { 'Content-Type': 'application/json' }, body:JSON.stringify(payload)})
   }
 
   editaConta(payload: EditaConta): Observable<EditaConta>{

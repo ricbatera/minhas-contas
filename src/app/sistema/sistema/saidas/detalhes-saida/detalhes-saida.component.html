@@ -97,7 +97,10 @@
 
             <ng-container matColumnDef="Ação">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ação</th>
-                <td mat-cell *matCellDef="let row"><i class="fal fa-pencil-alt" *ngIf="row.situacao == 'Aberto'" style="cursor: pointer; padding: 5px;" (click)="dialogEditar(row.id)"></i></td>
+                <td mat-cell *matCellDef="let row">
+                    <i class="fal fa-pencil-alt" *ngIf="row.situacao == 'Aberto'" style="cursor: pointer; padding: 5px;" (click)="dialogEditar(row.id)"></i>
+                    <i class="fal fa-trash-alt" *ngIf="row.situacao == 'Aberto'" style="cursor: pointer; padding: 5px;" (click)="dialogApagar(row.id)"></i>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
