@@ -21,6 +21,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 // outras libs
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -63,6 +66,9 @@ import { ComponentsModule } from '../components/components.module';
     MatCheckboxModule,
     MatExpansionModule,
     MatSlideToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
     ComponentsModule
   ]
 })

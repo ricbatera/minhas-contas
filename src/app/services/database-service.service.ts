@@ -21,6 +21,7 @@ import { Classificacao } from '../model/classificacao';
 import { EditaConta } from '../model/edita-conta';
 import { url } from 'inspector';
 import { DeletarModel } from '../model/deletarModel';
+import { Tag } from '../model/tag';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class DatabaseServiceService {
 
   getCartoesFull(): Observable<CartaoCredito[]> {
     return this.httpClient.get<CartaoCredito[]>(`${this.API_URL}cadastros/cartao-credito/listar-cartoes`);
+  }
+
+  getAllTags(): Observable<Tag[]> {
+    return this.httpClient.get<Tag[]>(`${this.API_URL}recursos/listar-todas/tags`);
   }
 
   getCartoesAtivos(): Observable<CartaoCredito[]> {
@@ -74,7 +79,7 @@ export class DatabaseServiceService {
   }
 
   getitensSaida(mes: number, ano: number): Observable<ItemListaSaidaApi[]> {
-    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}&ano=${ano}`);
+    return this.httpClient.get<ItemListaSaidaApi[]>(`${this.API_URL}saidas/listar-mensal?mes=${mes}&ano=${ano}&tags=All`);
   }
 
   getDashboardValues(mes: number, ano: number): Observable<any> {

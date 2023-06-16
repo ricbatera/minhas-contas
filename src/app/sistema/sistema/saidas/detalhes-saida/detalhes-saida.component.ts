@@ -23,6 +23,7 @@ import {
 } from '@angular/material/dialog';
 import { EditaConta } from 'src/app/model/edita-conta';
 import { DeletarModel } from 'src/app/model/deletarModel';
+import { Tag } from 'src/app/model/tag';
 
 @Component({
   selector: 'app-detalhes-saida',
@@ -45,7 +46,7 @@ export class DetalhesSaidaComponent implements OnInit {
     .pipe(map((dado) => dado.idSaida));
   form: FormGroup;
   listaCartoes: CartaoCredito[] = [];
-  // saidaDetalhe: SaidaDetalhes = mockDados.getSaidaDetalhes();
+  tags:Tag[] = [];
   parcelas: parcelaSaida[] = [];
   listaParcelas = new MatTableDataSource<parcelaSaida>(this.parcelas);
   colunasTabela = [
@@ -82,6 +83,7 @@ export class DetalhesSaidaComponent implements OnInit {
     this.db.getCartoesAtivos().subscribe((res) => {
       this.listaCartoes = res;
     });
+    this.db.getAllTags().subscribe(res=> this.tags = res);
     this.startLoadSaida();
   }
 

@@ -37,15 +37,18 @@
                 </mat-error>
             </mat-form-field>
         </div>
+        
         <div class="linha">
 
             <mat-form-field appearance="outline" style="flex: 1;">
-                <mat-label>Categoria</mat-label>
+                <mat-label>Categoria Principal</mat-label>
                 <mat-select formControlName="classificacaoId">
                     <mat-option *ngFor="let item of listaCategorias" value="{{item.id}}">{{item.nome}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="!form.controls['classificacaoId'].valid">Campo <strong>obrigatório</strong></mat-error>
             </mat-form-field>
+
+            
 
             <mat-form-field appearance="outline" style="flex: 1;">
                 <mat-label>Data Compra</mat-label>
@@ -77,12 +80,37 @@
             </mat-form-field>
         </div>
         <div class="linha">
+            <mat-form-field appearance="outline" style="flex: 1;">
+                <mat-label>Tags</mat-label>
+                <mat-chip-list #chipList aria-label="Seleção de Tag">
+                    <mat-chip *ngFor="let tag of categorias" (removed)="removeItemTag(tag)">{{tag.nome}}
+                        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                    </mat-chip>
+                    <input
+                        placeholder="Nova tag..."
+                        #tagInput
+                        matInput
+                        [formControl]="tagss"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addNewTag($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag.nome">
+                      {{tag.nome}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="linha">
             <div class="botoes-selecao radio-label">
                 <mat-label>Marcar como pago? </mat-label>
                 <mat-slide-toggle formControlName="pago" [disabled]="pago">
                 </mat-slide-toggle>
             </div>
-            <mat-form-field appearance="outline" style="max-width:400px; margin-left: 20px;" *ngIf="form.controls['pago'].value == true">
+            <mat-form-field appearance="outline" style="max-width:400px; margin-left: 20px;"
+                *ngIf="form.controls['pago'].value == true">
                 <mat-label>Escolha uma Conta Bancária</mat-label>
                 <mat-select formControlName="idConta">
                     <mat-option *ngFor="let item of listaContasBancarias" value="{{item.id}}">{{item.nome}}</mat-option>
@@ -135,9 +163,11 @@
 
             </mat-expansion-panel>
         </div>
+        
         <div class="linha">
             <button mat-raised-button type="submit" color="primary"><i class="fal fa-save"></i> Salvar</button>
         </div>
         <p>{{form.value | json }}</p>
     </form>
+    
 </mat-card>
