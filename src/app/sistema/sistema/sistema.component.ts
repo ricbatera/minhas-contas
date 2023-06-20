@@ -1,6 +1,8 @@
 import { style, trigger, animate, transition, keyframes } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { menu } from 'src/assets/menudata/menu';
+import { carregaTagsLoading } from '../store/sistema.actions';
 
 @Component({
   selector: 'app-sistema',
@@ -21,10 +23,11 @@ export class SistemaComponent implements OnInit {
 
   menu = menu
   menuCollapsed = false;
-
-  constructor() { }
+  //nesse componente vamos carregar todas os dados globais da aplicação
+  constructor(private store:Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(carregaTagsLoading());
   }
 
   toogleNav(): void{

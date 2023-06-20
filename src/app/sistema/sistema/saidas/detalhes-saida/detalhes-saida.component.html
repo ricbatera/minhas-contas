@@ -39,6 +39,9 @@
                     <mat-error *ngIf="!form.controls['obs'].valid">Campo <strong>obrigatório</strong></mat-error>
                 </mat-form-field>
             </div>
+            <div class="linha">
+                <app-tags-chip></app-tags-chip>
+            </div>
             <div class="">
                 <mat-card-subtitle>Detalhes da Saída</mat-card-subtitle>
             </div>
@@ -58,16 +61,7 @@
                 <mat-card-subtitle>Lista de Saídas</mat-card-subtitle>
             </div>
         </form>
-        <!-- ['Valor', 'Vencimento', 'Valor Pago', 'Pago em', 'Situação', 'Ação'] -->
-        <!-- {
-    id: number,
-    dataPagamento: Date | null,
-    dataVencimento: Date,
-    situacao: string,
-    valor: number,
-    valorPago: number | null,
-    contaBancaria?: contaBancaria | null
-} -->
+
         <table mat-table [dataSource]="parcelas" matSort class="mat-elevation-z8">
             
             <ng-container matColumnDef="Valor">

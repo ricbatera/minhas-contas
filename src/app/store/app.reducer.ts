@@ -41,10 +41,10 @@ export const appReducer = createReducer(
     };
     return state;
   }),
-  on(indiceTabEntrada, (state, action) => {
+  on(indiceTabEntrada, (state, {payload}) => {
     state = {
       ...state,
-      indiceEntradas: action.payload,
+      indiceEntradas: payload,
     };
     return state;
   })

@@ -46,3 +46,7 @@ mat-card-subtitle{
 table{
     width: 60%;
 }
+
+app-tags-chip{
+    width: 100%;
+}

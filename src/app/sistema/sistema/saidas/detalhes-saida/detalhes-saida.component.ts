@@ -24,6 +24,9 @@ import {
 import { EditaConta } from 'src/app/model/edita-conta';
 import { DeletarModel } from 'src/app/model/deletarModel';
 import { Tag } from 'src/app/model/tag';
+import { updateTagList } from 'src/app/sistema/store/sistema.actions';
+import { Classificacao } from 'src/app/model/classificacao';
+import { getListaIdTagSelecionada, getListaTagsSelecionadas } from 'src/app/sistema/store/sistema.selectors';
 
 @Component({
   selector: 'app-detalhes-saida',
@@ -46,7 +49,6 @@ export class DetalhesSaidaComponent implements OnInit {
     .pipe(map((dado) => dado.idSaida));
   form: FormGroup;
   listaCartoes: CartaoCredito[] = [];
-  tags:Tag[] = [];
   parcelas: parcelaSaida[] = [];
   listaParcelas = new MatTableDataSource<parcelaSaida>(this.parcelas);
   colunasTabela = [
@@ -83,7 +85,6 @@ export class DetalhesSaidaComponent implements OnInit {
     this.db.getCartoesAtivos().subscribe((res) => {
       this.listaCartoes = res;
     });
-    this.db.getAllTags().subscribe(res=> this.tags = res);
     this.startLoadSaida();
   }
 
@@ -103,6 +104,8 @@ export class DetalhesSaidaComponent implements OnInit {
         this.saidaApi?.cartao?.id
       );
       this.parcelas = res.parcelas;
+      let listagem: Classificacao[] = res.tags;
+      this.store.dispatch(updateTagList({tagsSelecionadas: listagem}));
     });
   }
 
@@ -113,10 +116,13 @@ export class DetalhesSaidaComponent implements OnInit {
   salvar() {
     this.idSaida$.subscribe((res) => this.form.controls['id'].setValue(res));
     console.log(this.form.controls['id'].value);
+    let listagem!: number[];
+    this.store.select(getListaIdTagSelecionada).subscribe(res => listagem = res);
     let payload: EditaConta = {
       id: this.form.controls['id'].value,
       nome: this.form.controls['nome'].value,
       obs: this.form.controls['obs'].value,
+      tags: listagem
     };
     this.db.editaConta(payload).subscribe((res) => {
       console.log(res);
@@ -132,9 +138,8 @@ export class DetalhesSaidaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.saidaApi!.parcelas = result;
-      //console.log(result);
-      this.db.editaParcelas({idSaida: this.saidaApi?.id, parcelas: result}).subscribe(res=>{
+      this.saidaApi!.parcelas = result;      
+      this.db.editaParcelas({idSaida: this.saidaApi?.id, parcelas: result, }).subscribe(res=>{
         alert("Parcela(s) atualizada(s) com sucesso!");
       });
       

@@ -32,6 +32,10 @@ import { DialogPagarCartaoComponent } from './dialog-pagar-cartao/dialog-pagar-c
 import { TesteComponent } from './teste/teste.component';
 import { ComponentsModule } from '../components/components.module';
 
+// MEUS COMPMENTES
+import {FormItensModule} from '../components/form-itens/form-itens.module'
+//import { StoreModule } from '@ngrx/store';
+
 
 
 @NgModule({
@@ -69,7 +73,9 @@ import { ComponentsModule } from '../components/components.module';
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    ComponentsModule
+    ComponentsModule,
+    FormItensModule,
+    //StoreModule.forFeature()
   ]
 })
 export class SaidasModule { }

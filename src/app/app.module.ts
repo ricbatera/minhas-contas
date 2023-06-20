@@ -10,6 +10,11 @@ import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { appReducer, saidasReducer } from './store/app.reducer';
+import { sistemaReducer } from './sistema/store/sistema.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { SistemaEffects } from './sistema/store/sistema.effects';
+import * as fromSistemaReducer from './sistema/store/sistema.reducer';
 
 registerLocaleData(ptBr);
 
@@ -22,7 +27,10 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     BrowserAnimationsModule,
     SistemaModule,
-    StoreModule.forRoot({app: appReducer, saidaReducer: saidasReducer}, {}),
+    StoreModule.forRoot({app: appReducer, saidaReducer: saidasReducer }, {}),
+    StoreModule.forFeature(fromSistemaReducer.productsFeatureKey, fromSistemaReducer.sistemaReducer),
+    StoreDevtoolsModule.instrument({maxAge: 25}),
+    EffectsModule.forRoot([SistemaEffects])
 
   ],
   providers: [
