@@ -1,6 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { ITagsState } from "./sistema.state";
-import { addTagListaSelecionadas, carregaTagsErro, carregaTagsLoading, carregaTagsSuccess, getIdListaTagSelecionada, removeTagListaSelecionadas, resetTagListaSelecionadas, updateTagList } from "./sistema.actions";
+import { addTagListaSelecionadas, carregaTagsErro, carregaTagsLoading, carregaTagsSuccess, filtrosPesquisaMesAno, getIdListaTagSelecionada, removeTagListaSelecionadas, resetTagListaSelecionadas, updateTagList } from "./sistema.actions";
+import { ParamMesAno } from "src/app/model/filtroMesAno";
 
 export const estadoInical: ITagsState = {
     tags: [],
@@ -37,4 +38,18 @@ export const sistemaReducer = createReducer(estadoInical,
     }),
     on(resetTagListaSelecionadas, state=> ({...state, tagsSelecionadas: []})),
     
+)
+
+// dados iniciais para pesquisa
+export const filtroAnoMesFeatureKey = 'filtroMesAnoState';
+export const estadoInicialFiltrosDePesquisa: ParamMesAno = {
+    mesStart: 1,
+    anoStart: 2023,
+    mesEnd: 12,
+    anoEnd: 2023,
+    idDevedor: 0
+}
+export const FiltrosDePesquisaReducer = createReducer(
+    estadoInicialFiltrosDePesquisa,
+    on(filtrosPesquisaMesAno,(state, {payload})=>({...payload}))
 )

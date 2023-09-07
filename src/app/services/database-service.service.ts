@@ -22,6 +22,7 @@ import { EditaConta } from '../model/edita-conta';
 import { url } from 'inspector';
 import { DeletarModel } from '../model/deletarModel';
 import { Tag } from '../model/tag';
+import { GraficoMensal } from '../model/grafico-mensal';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,13 @@ export class DatabaseServiceService {
 
   getDashboardValues(mes: number, ano: number): Observable<any> {
     return this.httpClient.get<any>(`${this.API_URL}dashboard/indicadores?mes=${mes}&ano=${ano}`);
+  }
+
+  getCategoriasPeriod(mesIn: number, anoIn: number, mesOut: number, anoOut: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}dashboard/graficos?mesIn=${mesIn}&anoIn=${anoIn}&mesOut=${mesOut}&anoOut=${anoOut}`);
+  }
+  getGraficoMensal(mesIn: number, anoIn: number, mesOut: number, anoOut: number, idDevedor: number|null): Observable<GraficoMensal[]> {
+    return this.httpClient.get<any>(`${this.API_URL}dashboard/graf-geral?mesStart=${mesIn}&anoStart=${anoIn}&mesEnd=${mesOut}&anoEnd=${anoOut}&idDevedor=${idDevedor}`);
   }
 
 

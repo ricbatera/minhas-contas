@@ -10,6 +10,11 @@ import { SaidasModule } from './sistema/saidas/saidas.module';
 import { EntradasModule } from './sistema/entradas/entradas.module';
 import { DashboardModule } from './sistema/dashboard/dashboard.module';
 import { SistemaRoutingModule } from './sistema-routing.module';
+import { GraficosModule } from './sistema/graficos/graficos.module';
+import * as sistemaReducer from './store/sistema.reducer'
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { SistemaEffects } from './store/sistema.effects';
 // import { MenuMesesAnosComponent } from './sistema/components/menu-meses-anos/menu-meses-anos.component';
 
 
@@ -28,8 +33,10 @@ import { SistemaRoutingModule } from './sistema-routing.module';
     SaidasModule,
     EntradasModule,
     DashboardModule,
-
-    SistemaRoutingModule
+    GraficosModule,
+    SistemaRoutingModule,
+    StoreModule.forFeature(sistemaReducer.filtroAnoMesFeatureKey, sistemaReducer.FiltrosDePesquisaReducer),
+    EffectsModule.forFeature([SistemaEffects])
   ],
   exports: [
     SistemaComponent,

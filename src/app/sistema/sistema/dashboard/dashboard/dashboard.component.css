@@ -90,3 +90,11 @@
     display: flex;
     gap: 20px;
 }
+
+
+
+.graf > div{
+    display: block;
+    max-width: 70%;
+    margin: 0 auto;
+}

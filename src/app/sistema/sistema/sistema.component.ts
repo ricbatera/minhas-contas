@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { menu } from 'src/assets/menudata/menu';
 import { carregaTagsLoading } from '../store/sistema.actions';
+import { loadDashboardData, loadSaidasPeriodData } from './graficos/sotore/graficos.actions';
+import { FiltrosService } from 'src/app/services/filtros.service';
+import { getfiltrosAnoMes } from '../store/sistema.selectors';
 
 @Component({
   selector: 'app-sistema',
@@ -24,10 +27,16 @@ export class SistemaComponent implements OnInit {
   menu = menu
   menuCollapsed = false;
   //nesse componente vamos carregar todas os dados globais da aplicação
-  constructor(private store:Store) { }
+  constructor(private store:Store, private filtoService:FiltrosService) {
+    
+    store.dispatch(loadDashboardData());
+    store.dispatch(loadSaidasPeriodData());
+    filtoService.defineFiltroMesAnoInicial();
+   }
 
   ngOnInit(): void {
     this.store.dispatch(carregaTagsLoading());
+    
   }
 
   toogleNav(): void{
@@ -38,3 +47,5 @@ export class SistemaComponent implements OnInit {
   }
 
 }
+
+

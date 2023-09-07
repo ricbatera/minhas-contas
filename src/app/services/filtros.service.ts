@@ -3,13 +3,16 @@ import { ItemEntradaApi } from '../model/item-entrada-api';
 import { ItemListaSaidaApi } from '../model/item-lista-saida-api';
 import { filtrosEntradas } from '../sistema/sistema/entradas/lista-entradas/lista-entradas.component';
 import { filtros } from '../sistema/sistema/saidas/lista-saidas/lista-saidas.component';
+import { Store } from '@ngrx/store';
+import { filtrosPesquisaMesAno } from '../sistema/store/sistema.actions';
+import { ParamMesAno } from '../model/filtroMesAno';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FiltrosService {
 
-  constructor() { }
+  constructor(private store:Store) { }
 
   filtraDevedores(lista: any[]) {
     return lista
@@ -71,6 +74,26 @@ export class FiltrosService {
       lista = lista.filter(v => v.classificacao.nome == p.classificacao)
     }
     return lista;
+  }
+
+  defineFiltroMesAnoInicial(){
+    //aqui vou definir a data inicial como hoje e data final daqui um ano
+    let hoje = new Date();
+    let anoInicial = hoje.getFullYear()
+    let mesInicial = hoje.getMonth()+1;
+
+    let payload: ParamMesAno = {
+      mesStart: hoje.getMonth()+1,
+      anoStart: hoje.getFullYear(),
+      mesEnd: hoje.getMonth()+1,
+      anoEnd: hoje.getFullYear()+1,
+      idDevedor: 0
+    }
+    this.store.dispatch(filtrosPesquisaMesAno({payload}));
+  }
+
+  capitalize(word: String){
+    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
   private debitoOrCartao(item: ItemListaSaidaApi) {

@@ -1,6 +1,10 @@
 <app-loading *ngIf="loading"></app-loading>
 <app-menu-meses-anos (enviaMes)="recebeEventMes($event)" (enviaAno)="recebeEventAno($event)"></app-menu-meses-anos>
-
+<div class="graf">
+    <div><app-filtros></app-filtros></div>
+    <div><app-graf-categorias></app-graf-categorias></div>   
+    
+</div>
 <div class="container">
     <mat-card class="meu-espaco">
         <span style="font-size: 1.6em;" class="">Meu Espaço</span>

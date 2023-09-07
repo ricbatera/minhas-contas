@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MenuMesesAnosComponent } from '../components/menu-meses-anos/menu-meses-anos.component';
 import { compileNgModule } from '@angular/compiler';
 import { ComponentsModule } from '../components/components.module';
+import { GraficosModule } from '../graficos/graficos.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ComponentsModule } from '../components/components.module';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    ComponentsModule
+    ComponentsModule,
+    GraficosModule
   ]
 })
 export class DashboardModule { }
