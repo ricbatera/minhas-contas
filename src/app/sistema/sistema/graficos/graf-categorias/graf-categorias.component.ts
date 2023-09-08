@@ -35,11 +35,13 @@ export class GrafCategoriasComponent implements OnInit {
     //   this.updateChartData();
     // })
 
-    this.store.select(getfiltrosAnoMes).subscribe(payload=>{
-      this.store.dispatch(loadGraficoMensal({payload}))
-    });
+    // this.store.select(getfiltrosAnoMes).subscribe(payload=>{
+    //   this.store.dispatch(loadGraficoMensal({payload}))
+    // });
     this.store.select(getGraficoMensal).subscribe(res=>{
       if(res.loading){
+        this.nomesCategorias = [];
+        this.valores = [];
         res.data.forEach(e=>{
           e.meses.forEach(f=>{
             this.nomesCategorias.push(`${this.utils.capitalize(f.nomeMes)} ${e.ano}`)

@@ -6,6 +6,7 @@ import { carregaTagsLoading } from '../store/sistema.actions';
 import { loadDashboardData, loadSaidasPeriodData } from './graficos/sotore/graficos.actions';
 import { FiltrosService } from 'src/app/services/filtros.service';
 import { getfiltrosAnoMes } from '../store/sistema.selectors';
+import { loadingListarDevedores } from 'src/app/store/estadoGeral.actions';
 
 @Component({
   selector: 'app-sistema',
@@ -36,7 +37,8 @@ export class SistemaComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(carregaTagsLoading());
-    
+    //carregando a lista de devedores
+    this.store.dispatch(loadingListarDevedores())
   }
 
   toogleNav(): void{

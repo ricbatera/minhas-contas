@@ -1,1 +1,7 @@
-<p>filtros works!</p>
+<mat-form-field appearance="outline" style="width: 300px; margin-left: 50px;">
+    <mat-label>Filtrar por Pessoa</mat-label>
+    <mat-select [formControl]="devedorSelecionadoControl">
+        <mat-option *ngFor="let devedor of listaDevedores$ | async" value="{{devedor.id}}">{{devedor.nome}}</mat-option>
+    </mat-select>
+</mat-form-field>
+

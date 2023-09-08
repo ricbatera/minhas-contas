@@ -15,6 +15,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { SistemaEffects } from './sistema/store/sistema.effects';
 import * as fromSistemaReducer from './sistema/store/sistema.reducer';
+import * as estadoGeralRedecuer from './store/estadogeral.reducer'
+import { EstadoGeralEffects } from './store/estadogeral.effects';
 
 registerLocaleData(ptBr);
 
@@ -30,8 +32,10 @@ registerLocaleData(ptBr);
     SistemaModule,
     StoreModule.forRoot({app: appReducer, saidaReducer: saidasReducer }, {}),
     StoreModule.forFeature(fromSistemaReducer.productsFeatureKey, fromSistemaReducer.sistemaReducer),
+    StoreModule.forFeature(estadoGeralRedecuer.estadoGeralDevedoresFeatureKey, estadoGeralRedecuer.listaDevedoresReducer),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    EffectsModule.forRoot([SistemaEffects])
+    EffectsModule.forRoot([SistemaEffects]),
+    EffectsModule.forFeature([EstadoGeralEffects])
 
   ],
   providers: [
