@@ -1,7 +1,32 @@
-<mat-form-field appearance="outline" style="width: 300px; margin-left: 50px;">
+<mat-form-field appearance="outline" style="width: 300px; margin-left: 30px;">
     <mat-label>Filtrar por Pessoa</mat-label>
     <mat-select [formControl]="devedorSelecionadoControl">
         <mat-option *ngFor="let devedor of listaDevedores$ | async" value="{{devedor.id}}">{{devedor.nome}}</mat-option>
     </mat-select>
 </mat-form-field>
+<mat-form-field appearance="outline" style="width: 130px; margin-left: 30px;">
+    <mat-label>Mes Inicial</mat-label>
+    <mat-select [formControl]="mesInicial">
+        <mat-option *ngFor="let item of meses$ | async" value="{{item.id}}">{{item.mes}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" style="width: 130px; margin-left: 30px;">
+    <mat-label>Ano Inicial</mat-label>
+    <mat-select [formControl]="anoInicial">
+        <mat-option *ngFor="let item of anos$ | async" value="{{item}}">{{item}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" style="width: 130px; margin-left: 30px;">
+    <mat-label>Mes Final</mat-label>
+    <mat-select [formControl]="mesFinal">
+        <mat-option *ngFor="let item of meses$ | async" value="{{item.id}}">{{item.mes}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" style="width: 130px; margin-left: 30px;">
+    <mat-label>Ano Final</mat-label>
+    <mat-select [formControl]="anoFinal">
+        <mat-option *ngFor="let item of anos$ | async" value="{{item}}">{{item}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
 
