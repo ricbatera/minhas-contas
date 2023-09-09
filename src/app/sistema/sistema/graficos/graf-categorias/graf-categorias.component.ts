@@ -28,16 +28,6 @@ export class GrafCategoriasComponent implements OnInit {
   
 
   ngOnInit(): void {
-    // this.store.select(getCategoriasAndValues).subscribe(res => {
-    //   console.table(res);
-    //   this.nomesCategorias = res.categorias;
-    //   this.valores = res.valores;
-    //   this.updateChartData();
-    // })
-
-    // this.store.select(getfiltrosAnoMes).subscribe(payload=>{
-    //   this.store.dispatch(loadGraficoMensal({payload}))
-    // });
     this.store.select(getGraficoMensal).subscribe(res=>{
       if(res.loading){
         this.nomesCategorias = [];
