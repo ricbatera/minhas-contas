@@ -10,6 +10,9 @@ export const getListaDevedores = createSelector(estadoTags, state =>{
     lista.unshift({id:0, nome: "Eu", status: true})
     return lista;
 });
+export const getListaDevedoresFull = createSelector(estadoTags, state =>state.data);
+export const getListaDevedoresAtivos = createSelector(estadoTags, state =>state.data.filter(e=> e.status));
+export const getListaDevedoresInativos = createSelector(estadoTags, state =>state.data.filter(e=> !e.status));
 export const getListaDevedoresLoadingStatus = createSelector(estadoTags, state => state.loading);
 
 /*

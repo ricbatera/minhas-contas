@@ -60,3 +60,11 @@ table{
 .delete i{
   color: #e35e6b;
 }
+
+.botoes-selecao{
+  margin: 20px 0;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

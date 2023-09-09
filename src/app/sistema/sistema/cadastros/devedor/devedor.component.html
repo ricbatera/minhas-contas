@@ -1,9 +1,7 @@
 <div class="container">
     <mat-card class="lado-a">
         <mat-card-header>
-            <div class="icone">
-                <i class="fal fa-wallet"></i>
-            </div>
+            
             <mat-card-title>Novo Devedor</mat-card-title>
             <mat-card-subtitle>Cadastre aqui os devedores que serão associados as entradas com devedor associado</mat-card-subtitle>
         </mat-card-header>
@@ -25,10 +23,19 @@
         </mat-card-content>
     </mat-card>
     <mat-card class="lado-b">
+        
         <mat-card-header>
             <mat-card-title>Lista de Devedores Cadastrados</mat-card-title>
             <mat-card-subtitle>Aqui estão todos os devedores cadstrados no sistema</mat-card-subtitle>
         </mat-card-header>
+
+        <div class="botoes-selecao">
+            <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="selecaoLista" (change)="filtraLista()">
+                <mat-radio-button value="0">Ativos</mat-radio-button>
+                <mat-radio-button value="1">Inativos</mat-radio-button>
+                <mat-radio-button value="2">Todos</mat-radio-button>
+            </mat-radio-group>
+        </div>
 
         <!-- <div class="botoes-selecao">
             <mat-radio-group aria-label="Selecione uma opção" [(ngModel)]="selecaoLista" (change)="filtraCartao()">
@@ -65,7 +72,7 @@
                                     edit
                                 </i>
                             </a>
-                            <a routerLink="" class="delete">
+                            <a class="delete" (click)="inativaDevedor(item.id)" style="cursor: pointer;">
                                 <i class="material-icons ">
                                     delete
                                 </i> 

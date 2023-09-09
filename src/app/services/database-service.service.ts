@@ -139,6 +139,10 @@ export class DatabaseServiceService {
     return this.httpClient.post<Devedor>(this.API_URL+"cadastros/devedor/novo-devedor", JSON.stringify(payload), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError))
   }
+  inativaDevedor(idDevedor: number): Observable<Devedor> {
+    return this.httpClient.delete<Devedor>(this.API_URL+"cadastros/devedor/inativa-devedor?idDevedor="+idDevedor, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError))
+  }
   deletarParcelaSaida(payload: DeletarModel): Observable<any> {
     return this.httpClient.delete<DeletarModel>(this.API_URL+"saidas/deletar", {headers: { 'Content-Type': 'application/json' }, body:JSON.stringify(payload)})
   }
