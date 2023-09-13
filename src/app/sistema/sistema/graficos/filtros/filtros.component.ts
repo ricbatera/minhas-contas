@@ -9,9 +9,13 @@ import {
   getListaDevedores,
   getListaDevedoresLoadingStatus,
 } from 'src/app/store/estadogeral.selectors';
-import { loadGraficoMensal } from '../sotore/graficos.actions';
+import {
+  loadGraficoMensal,
+  loadGraficoParcelada,
+} from '../sotore/graficos.actions';
 import { UtilsService } from 'src/app/services/utils.service';
 import { meses } from 'src/app/model/meses';
+import { filtrosPesquisaMesAno } from 'src/app/sistema/store/sistema.actions';
 
 @Component({
   selector: 'app-filtros',
@@ -27,17 +31,21 @@ export class FiltrosComponent implements OnInit {
   anoInicial = new FormControl();
   anoFinal = new FormControl();
   paramFiltros!: ParamMesAno;
-  meses$:Observable<meses[]>;
-  anos$:Observable<number[]>;
+  meses$: Observable<meses[]>;
+  anos$: Observable<number[]>;
 
-  constructor(private store: Store, private fb: FormBuilder, private util: UtilsService) {
+  constructor(
+    private store: Store,
+    private fb: FormBuilder,
+    private util: UtilsService
+  ) {
     this.loading$ = store.select(getListaDevedoresLoadingStatus);
     this.listaDevedores$ = store.select(getListaDevedores);
-    store.select(getfiltrosAnoMes).subscribe(res=>{
-      let a = {... res}
+    store.select(getfiltrosAnoMes).subscribe((res) => {
+      let a = { ...res };
       this.paramFiltros = a;
-      this.setaMesAnoDefault();       
-    })
+      this.setaMesAnoDefault();
+    });
     this.meses$ = util.getMeses;
     this.anos$ = util.getAnos;
   }
@@ -46,39 +54,44 @@ export class FiltrosComponent implements OnInit {
     this.listaDevedores$.subscribe(() => {
       this.selecionarPrimeiroItem();
     });
-    
   }
 
-  ngAfterViewInit():void{
+  ngAfterViewInit(): void {
+    this.mesInicial.valueChanges.subscribe((valor) => {
+      let pay: ParamMesAno = {...this.paramFiltros}
+      pay.mesStart= valor;
+      this.paramFiltros = pay;
+      this.paramFiltros.mesStart = valor;
+      this.filtrar(this.paramFiltros);
+    });
+    this.devedorSelecionadoControl.valueChanges.subscribe((id) => {
+      let pay: ParamMesAno = {...this.paramFiltros}
+      pay.idDevedor = id;
+      this.paramFiltros = pay;
+      this.filtrar(this.paramFiltros);
+    });
+    this.mesFinal.valueChanges.subscribe((valor) => {
+      let pay: ParamMesAno = {...this.paramFiltros}
+      pay.mesEnd = valor
+      this.paramFiltros = pay;
+      this.filtrar(this.paramFiltros);
+    });
+    this.anoInicial.valueChanges.subscribe((valor) => {
+      let pay: ParamMesAno = {...this.paramFiltros}
+      pay.anoStart = valor;
+      this.paramFiltros = pay;
+      this.filtrar(this.paramFiltros);
+    });
 
-    this.mesInicial.valueChanges.subscribe(valor =>{
-      let pay = {...this.paramFiltros}
-      pay.mesStart = valor.valueOf(valor);
-      this.filtrar(pay);
-    });
-    this.devedorSelecionadoControl.valueChanges.subscribe(id =>{
-      let pay = {...this.paramFiltros}
-      pay.idDevedor = id.valueOf(id);
-      this.filtrar(pay);      
-    });  
-    this.mesFinal.valueChanges.subscribe(valor =>{
-      let pay = {...this.paramFiltros}
-      pay.mesEnd = valor.valueOf(valor);
-      this.filtrar(pay);
-    });
-    this.anoInicial.valueChanges.subscribe(valor =>{
-      let pay = {...this.paramFiltros}
-      pay.anoStart = valor.valueOf(valor);
-      this.filtrar(pay);
-    });
-    this.anoFinal.valueChanges.subscribe(valor =>{
-      let pay = {...this.paramFiltros}
-      pay.anoEnd = valor.valueOf(valor);
-      this.filtrar(pay);
+    this.anoFinal.valueChanges.subscribe((valor) => {
+      let pay: ParamMesAno = {...this.paramFiltros}
+      pay.anoEnd = valor;
+      this.paramFiltros = pay;
+      this.filtrar(this.paramFiltros);
     });
   }
 
-  setaMesAnoDefault(){
+  setaMesAnoDefault() {
     this.mesInicial.setValue(`${this.paramFiltros.mesStart}`);
     this.mesFinal.setValue(`${this.paramFiltros.mesEnd}`);
     this.anoInicial.setValue(`${this.paramFiltros.anoStart}`);
@@ -87,14 +100,17 @@ export class FiltrosComponent implements OnInit {
 
   selecionarPrimeiroItem() {
     this.listaDevedores$.pipe(take(1)).subscribe((devedores) => {
-        if (devedores.length > 0) {        
-          this.devedorSelecionadoControl.setValue(`${devedores[0].id}`);
-        }
+      if (devedores.length > 0) {
+        this.devedorSelecionadoControl.setValue(`${devedores[0].id}`);
+      }
     });
   }
 
-  filtrar(pay: ParamMesAno){
-    this.store.dispatch(loadGraficoMensal({payload: pay}))      
+  filtrar(pay: ParamMesAno) {
+    console.log("filtrando")
+    // cada novo grafico criado adicione o carregamento dele aqui
+    this.store.dispatch(loadGraficoMensal({ payload: pay }));
+    // this.store.dispatch(filtrosPesquisaMesAno({payload: pay})); //
+    //this.store.dispatch(loadGraficoParcelada({payload: pay}));
   }
-
 }

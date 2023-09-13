@@ -49,5 +49,12 @@ export class UtilsService {
     }
     return lista;
   }
+
+  public getMesByNumero (num: number): string{
+    let meses = this.mesesFull();
+    let result = "Janeiro"
+    meses.forEach(e=> {if(e.id == num)result = e.mes})
+    return result;
+  }
   
 }

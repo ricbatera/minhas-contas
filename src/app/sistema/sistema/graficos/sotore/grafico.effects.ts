@@ -32,7 +32,14 @@ export class GraficosEffects {
   carregaGraficoMensal = createEffect(()=> this.actions$.pipe(
     ofType(actionGraficos.loadGraficoMensal),
     switchMap((p)=> this.db.getGraficoMensal(p.payload.mesStart, p.payload.anoStart, p.payload.mesEnd, p.payload.anoEnd, p.payload.idDevedor).pipe(
-      map((res) => actionGraficos.successGraficoMensal({payload: {loading: true, data: res }}))
+      map((res) => actionGraficos.successGraficoMensal({payload: {loading: false, data: res }}))
+  ))
+  ));
+
+  carregaGraficoParceladas = createEffect(()=> this.actions$.pipe(
+    ofType(actionGraficos.loadGraficoParcelada),
+    switchMap((p)=> this.db.getGraficoParceladas(p.payload.mesStart, p.payload.anoStart, p.payload.mesEnd, p.payload.anoEnd, p.payload.idDevedor).pipe(
+      map((res) => actionGraficos.successGraficoParcelas({payload: {loading: false, data: res }}))
   ))
   ));
 }

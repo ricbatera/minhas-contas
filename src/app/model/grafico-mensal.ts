@@ -8,4 +8,5 @@ interface Mese {
     nomeMesAbreviado: string;
     mesNumero:        number;
     valor:            number;
+    nomeSaida: string;
 }

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { ICategoriaPeriod, IGraficoMensal, IdashboardState, Isaidas } from "./graficos.state";
-import { successDashboardData, successGraficoMensal, successSaidasPeriodData } from "./graficos.actions";
+import { ICategoriaPeriod, IGraficoMensal, IGraficoParceladas, IdashboardState, Isaidas } from "./graficos.state";
+import { successDashboardData, successGraficoMensal, successGraficoParcelas, successSaidasPeriodData } from "./graficos.actions";
 import { ItemListaSaidaApi } from "src/app/model/item-lista-saida-api";
 
 export const estadoInical: IdashboardState = {
@@ -51,6 +51,18 @@ export const estadoInicialGraficoMensal:IGraficoMensal =  {
 export const graficoMensalReducer = createReducer(
     estadoInicialGraficoMensal,
     on(successGraficoMensal, (state, {payload})=>({...payload}))
+)
+
+//grafico parceladas
+export const graficoParceladasFeatureKey = 'graficoParceladaState';
+export const estadoInicialGraficoParceladas:IGraficoParceladas =  {
+    loading: true,
+    data: []
+}
+
+export const graficoMParceladaReducer = createReducer(
+    estadoInicialGraficoParceladas,
+    on(successGraficoParcelas, (state, {payload})=>({...payload}))
 )
 
 

@@ -23,6 +23,7 @@ import { url } from 'inspector';
 import { DeletarModel } from '../model/deletarModel';
 import { Tag } from '../model/tag';
 import { GraficoMensal } from '../model/grafico-mensal';
+import { GrafParceladas } from '../model/graf-parceladas';
 
 @Injectable({
   providedIn: 'root'
@@ -92,6 +93,9 @@ export class DatabaseServiceService {
   }
   getGraficoMensal(mesIn: number, anoIn: number, mesOut: number, anoOut: number, idDevedor: number|null): Observable<GraficoMensal[]> {
     return this.httpClient.get<any>(`${this.API_URL}dashboard/graf-geral?mesStart=${mesIn}&anoStart=${anoIn}&mesEnd=${mesOut}&anoEnd=${anoOut}&idDevedor=${idDevedor}`);
+  }
+  getGraficoParceladas(mesIn: number, anoIn: number, mesOut: number, anoOut: number, idDevedor: number|null): Observable<GrafParceladas[]> {
+    return this.httpClient.get<GrafParceladas[]>(`${this.API_URL}dashboard/graf-parceladas?mesStart=${mesIn}&anoStart=${anoIn}&mesEnd=${mesOut}&anoEnd=${anoOut}&idDevedor=${idDevedor}`);
   }
 
 
